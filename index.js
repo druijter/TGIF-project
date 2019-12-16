@@ -18,12 +18,46 @@ window.onload = function (){
          tr.innerHTML += "ajax" 
          
         
-        for(j=0; j<6; j++){
+        for(j=0; j<5; j++){
+           
             var b = "b"
-            var td = document.createElement("td")
-            tr.appendChild(td)
-            td.id = b + j
-            document.getElementById(td.id).innerHTML="test"
+                var td = document.createElement("td")
+                tr.appendChild(td)
+                td.id = b + j
+                console.log("hi")
+            function tdCreator (){
+                // document.getElementById('b0').innerHTML = "test"
+                // b0.innerHTML = "hi" 
+
+            if (td.id === "b0") {
+                console.log (td.id)
+                b0.innerHTML += "hi"
+                
+            }
+            if (td.id === "b1") {
+                console.log (td.id)
+                b1.innerHTML += "hi2"
+                
+            }
+            if (td.id === "b2") {
+                console.log (td.id)
+                b2.innerHTML += "hi3"
+                
+            }
+            if (td.id === "b3") {
+                console.log (td.id)
+                b3.innerHTML += "hi4"
+                
+            }
+            if (td.id === "b4") {
+                console.log (td.id)
+                b4.innerHTML += "hi5"
+                
+            }
+            
+            
+            }
+            tdCreator ()
         }
     
 
