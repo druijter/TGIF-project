@@ -15,9 +15,14 @@ window.onload = function (){
         console.log(tr.id)
         
          document.getElementById("senate-data").appendChild(tr)
-         tr.innerHTML += "ajax" 
-         
+
         
+         tr.innerHTML += " testt"
+        
+         
+        // Logic is working, but this loop gets only executed once. I want it to produce the values of the variables per person. 
+        //I got my 5 td's on the tr's, but the problem is to set each INNERhtml to its value//
+       
         for(j=0; j<5; j++){
            
             var b = "b"
@@ -58,10 +63,11 @@ window.onload = function (){
             
             }
             tdCreator ()
+            
+        
         }
-    
 
-        var row = document.getElementsByTagName(tr)
+        // var row = document.getElementsByTagName(tr)
         // document.getElementById("senate-data").appendChild(row)
         //     console.log("hi")
 
