@@ -19,7 +19,7 @@ window.onload = function () {
 
         for (j = 0; j < 5; j++) {
 
-            var thstijl = document.getElementById("thstijl1") 
+            
       
 
             var td = document.createElement("td")
@@ -51,10 +51,10 @@ window.onload = function () {
     }
 
 
-  
+    
     var first = document.getElementsByTagName("thead");
     var second = document.getElementsByTagName("tr")[1];
-    
+    console.log(second)    
     first.appendChild(second)
 
 
