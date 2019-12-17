@@ -20,12 +20,7 @@ window.onload = function () {
         for (j = 0; j < 5; j++) {
 
             var thstijl = document.getElementById("thstijl1") 
-            console.log(thstijl) 
-              
-            // var thstijl2 = document.getElementById('thstijl2')
-            // var thstijl3 = document.getElementById('thstijl3')
-            // var thstijl4 = document.getElementById('thstijl4')
-            // var thstijl5 = document.getElementById('thstijl5')
+      
 
             var td = document.createElement("td")
             tr.appendChild(td)
@@ -56,10 +51,10 @@ window.onload = function () {
     }
 
 
-    console.log("hidahafklfhj")
+  
     var first = document.getElementsByTagName("thead");
     var second = document.getElementsByTagName("tr")[1];
-    console.log(first)
+    
     first.appendChild(second)
 
 
@@ -71,14 +66,3 @@ window.onload = function () {
 
 
 
-
-// var fullname = membercollection[i].first_name + " " + (membercollection[i].middle_name || "")+ "" + membercollection[i].last_name;
-// var party = membercollection[i].party
-// var state = membercollection[i].state
-// var seniority = membercollection[i].seniority
-// var votes = membercollection[i].votes_with_party_pct
-
-//  document.getElementById("senate-data").innerHTML += membercollection[i].first_name + " " + (membercollection[i].middle_name || "")+ "" + membercollection[i].last_name +
-//  " " + membercollection[i].party + " " + membercollection[i].state + " " + membercollection[i].seniority + " " + membercollection[i].votes_against_party_pct + " " 
-
-// document.getElementById("senate-data").innerHTML = td.innerHTML
