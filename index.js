@@ -10,6 +10,8 @@ window.onload = function () {
 
     for (i = 0; i < membercollection.length; i++) {
 
+
+        
         var tr = document.createElement("TR")
 
 
@@ -20,20 +22,19 @@ window.onload = function () {
 
         for (j = 0; j < 5; j++) {
 
-            var thstijl1 = document.getElementById("thstijl1") 
-            var thstijl2 = document.getElementById('thstijl2')
-            var thstijl3 = document.getElementById('thstijl3')
-            var thstijl4 = document.getElementById('thstijl4')
-            var thstijl5 = document.getElementById('thstijl5')
-
-
+            var thstijl = document.getElementById("thstijl1") 
+            console.log(thstijl) 
+              
+            // var thstijl2 = document.getElementById('thstijl2')
+            // var thstijl3 = document.getElementById('thstijl3')
+            // var thstijl4 = document.getElementById('thstijl4')
+            // var thstijl5 = document.getElementById('thstijl5')
 
             var td = document.createElement("td")
             tr.appendChild(td)
-            
             if (j == 0) {
                 td.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
-                    
+                
             }
             if (j == 1) {
                 td.innerHTML = membercollection[i].party
@@ -56,6 +57,13 @@ window.onload = function () {
         }
 
     }
+
+
+    console.log("hidahafklfhj")
+    var first = document.getElementsByTagName("thead");
+    var second = document.getElementsByTagName("tr")[1];
+    console.log(first)
+    first.appendChild(second)
 
 
 }
