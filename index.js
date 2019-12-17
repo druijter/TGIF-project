@@ -1,4 +1,4 @@
-window.onload = function (){
+function x (){
     console.log(JSON.stringify(data,null,2))
     
      
@@ -11,8 +11,8 @@ window.onload = function (){
     for(i=0; i<membercollection.length; i++){
         var a = "a"
         var tr = document.createElement("TR")
-        tr.id = a + i
-        console.log(tr.id)
+        tr.className = a + i
+        console.log(tr.className)
         
          document.getElementById("senate-data").appendChild(tr)
 
@@ -20,45 +20,44 @@ window.onload = function (){
          tr.innerHTML += " testt"
         
          
-        // Logic is working, but this loop gets only executed once. I want it to produce the values of the variables per person. 
-        //I got my 5 td's on the tr's, but the problem is to set each INNERhtml to its value//
+
        
         for(j=0; j<5; j++){
            
             var b = "b"
                 var td = document.createElement("td")
                 tr.appendChild(td)
-                td.id = b + j
+                td.className = b + j
                 console.log("hi")
             function tdCreator (){
                 // document.getElementById('b0').innerHTML = "test"
                 // b0.innerHTML = "hi" 
 
-            if (td.id === "b0") {
-                console.log (td.id)
-                b0.innerHTML += "hi"
+            // if (td.id === "b0") {
+            //     console.log (td.id)
+            //     b0.innerHTML += "hi"
                 
-            }
-            if (td.id === "b1") {
-                console.log (td.id)
-                b1.innerHTML += "hi2"
+            // // }
+            // if (td.className === "b1") {
+            //     console.log (td.id)
+            //     b1.innerHTML += "hi2"
                 
-            }
-            if (td.id === "b2") {
-                console.log (td.id)
-                b2.innerHTML += "hi3"
+            // }
+            // if (td.className === "b2") {
+            //     console.log (td.id)
+            //     b2.innerHTML += "hi3"
                 
-            }
-            if (td.id === "b3") {
-                console.log (td.id)
-                b3.innerHTML += "hi4"
+            // }
+            // if (td.className === "b3") {
+            //     console.log (td.id)
+            //     b3.innerHTML += "hi4"
                 
-            }
-            if (td.id === "b4") {
-                console.log (td.id)
-                b4.innerHTML += "hi5"
+            // }
+            // if (td.className === "b4") {
+            //     console.log (td.id)
+            //     b4.innerHTML += "hi5"
                 
-            }
+            // }
             
             
             }
@@ -66,6 +65,9 @@ window.onload = function (){
             
         
         }
+
+
+
 
         // var row = document.getElementsByTagName(tr)
         // document.getElementById("senate-data").appendChild(row)
@@ -98,6 +100,19 @@ window.onload = function (){
 
         // document.getElementById("senate-data").innerHTML = td.innerHTML
 
+
+    
+// for (k=0 k<r.length)
     }
+
+    
+    var r = document.getElementsByClassName('a0')
+    console.log(r)
+
 }
+
+x();
+
+
+
 
