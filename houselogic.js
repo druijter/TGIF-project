@@ -1,6 +1,6 @@
 window.onload = function () {
 
-  
+
 
     var membercollection = data.results[0].members;
 
@@ -11,20 +11,17 @@ window.onload = function () {
     for (i = 0; i < membercollection.length; i++) {
 
 
-        
         var tr = document.createElement("TR")
 
-
-
-        document.getElementById("senate-data").appendChild(tr)
+        document.getElementById("house-data").appendChild(tr)
 
 
 
         for (j = 0; j < 5; j++) {
 
-            var thstijl = document.getElementById("thstijl1") 
-            console.log(thstijl) 
-              
+            var thstijl = document.getElementById("thstijl1")
+            console.log(thstijl)
+
             // var thstijl2 = document.getElementById('thstijl2')
             // var thstijl3 = document.getElementById('thstijl3')
             // var thstijl4 = document.getElementById('thstijl4')
@@ -34,7 +31,7 @@ window.onload = function () {
             tr.appendChild(td)
             if (j == 0) {
                 td.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
-                
+
             }
             if (j == 1) {
                 td.innerHTML = membercollection[i].party
@@ -65,7 +62,7 @@ window.onload = function () {
     console.log(first)
     first.appendChild(second)
 
-
+   
 }
 
 
