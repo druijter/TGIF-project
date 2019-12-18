@@ -1,34 +1,34 @@
 window.onload = function () {
 
-    var membercollection = data.results[0].members;
+    var memberCollection = data.results[0].members;
 
 
-    this.createTable(membercollection)
+    this.createTable(memberCollection)
 
 
 }
 
-function createTable (membercollection) {
+function createTable (memberCollection) {
 
-    
+    const tbody = document.getElementById("table-data");
 
-    for (i = 0; i < membercollection.length; i++) {
+    for (i = 0; i < memberCollection.length; i++) {
 
 
         var tr = document.createElement("TR")
 
-        document.getElementById("table-data").appendChild(tr)
+        tbody.appendChild(tr)
 
         var a = document.createElement("a")
-        a.href = membercollection[i].url
-        a.innerHTML = `${membercollection[i].first_name} ${(membercollection[i].middle_name || " ")}  ${membercollection[i].last_name}`
+        a.href = memberCollection[i].url
+        a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
         // td.appendChild(a)
 
         tr.insertCell().appendChild(a) 
-        tr.insertCell().innerHTML = membercollection[i].party
-        tr.insertCell().innerHTML = membercollection[i].state
-        tr.insertCell().innerHTML = membercollection[i].seniority
-        tr.insertCell().innerHTML = membercollection[i].votes_with_party_pct
+        tr.insertCell().innerHTML = memberCollection[i].party
+        tr.insertCell().innerHTML = memberCollection[i].state
+        tr.insertCell().innerHTML = memberCollection[i].seniority
+        tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
 
 
         // for (j = 0; j < 5; j++) {
@@ -39,21 +39,21 @@ function createTable (membercollection) {
         //     tr.appendChild(td)
         //     if (j == 0) {
         //         var a = document.createElement("a")
-        //         a.href = membercollection[i].url
-        //         a.innerHTML = `${membercollection[i].first_name} ${(membercollection[i].middle_name || " ")}  ${membercollection[i].last_name}`
+        //         a.href = memberCollection[i].url
+        //         a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
         //         td.appendChild(a)
         //     }
         //     if (j == 1) {
-        //         td.innerHTML = membercollection[i].party
+        //         td.innerHTML = memberCollection[i].party
         //     }
         //     if (j == 2) {
-        //         td.innerHTML = membercollection[i].state
+        //         td.innerHTML = memberCollection[i].state
         //     }
         //     if (j == 3) {
-        //         td.innerHTML = membercollection[i].seniority
+        //         td.innerHTML = memberCollection[i].seniority
         //     }
         //     if (j == 4) {
-        //         td.innerHTML = membercollection[i].votes_with_party_pct
+        //         td.innerHTML = memberCollection[i].votes_with_party_pct
         //     } 
         // }
 
