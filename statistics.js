@@ -3,7 +3,7 @@ let democrats = []
 let independents = []
 
 //extract data in array in variables//
-var senatemembers = data.results[0].members
+let senatemembers = data.results[0].members
 for (i=0; i<senatemembers.length; i++){
 
   
@@ -72,12 +72,28 @@ let statistics = {
 
 }
 
-
 console.log(statistics)
 
+console.log(statistics.overall.democrats[0].democratsnum)
+console.log(statistics.overall.republicans[0].republicansnum)
+console.log(statistics.overall.independents[0].independentsnum)
+console.log(statistics.overall.democrats[0].demvotepartypct)
+console.log(statistics.overall.republicans[0].repvotepartypct)
+console.log(statistics.overall.independents[0].indepvotepartypct)
 
 
 
+//create the Senate at a glance table//
+let tablebody = document.getElementById("senate-attendance-table")
+// console.log(tablebody)
+
+for (m=0; m<3; m++){
+let tr = document.createElement('tr')
+tablebody.appendChild(tr)
+}
+// tr.insertCells()
+
+// need to organize data otherwise (arrays on column header)
 
 
 
