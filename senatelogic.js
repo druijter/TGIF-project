@@ -1,64 +1,36 @@
 window.onload = function () {
 
+   
+
+    let memberCollection = data.results[0].members;
+    this.createTable(memberCollection)
+}
+
+    function createTable (memberCollection) {
 
 
-    var membercollection = data.results[0].members;
+    for (i = 0; i < memberCollection.length; i++) {
+        let tr = document.createElement("TR")
+        let a = document.createElement("a")
+            a.href = memberCollection[i].url
+            
+          
 
+        
+         
 
+        document.getElementById("table-data").appendChild(tr)
 
+       
 
+        tr.insertCell().appendChild(a)
+        a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || "")} ${memberCollection[i].last_name}`
 
-    for (i = 0; i < membercollection.length; i++) {
+        tr.insertCell().innerHTML = memberCollection[i].party
+        tr.insertCell().innerHTML = memberCollection[i].state
+        tr.insertCell().innerHTML = memberCollection[i].seniority
+        tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
 
-
-        var tr = document.createElement("TR")
-
-        document.getElementById("senate-data").appendChild(tr)
-
-
-
-        for (j = 0; j < 5; j++) {
-
-
-
-
-            var td = document.createElement("td")
-            tr.appendChild(td)
-            if (j == 0) {
-                var a = document.createElement("a")
-                a.href = membercollection[i].url
-                a.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
-                td.appendChild(a)
-
-            }
-            if (j == 1) {
-                td.innerHTML = membercollection[i].party
-            }
-            if (j == 2) {
-                td.innerHTML = membercollection[i].state
-            }
-            if (j == 3) {
-                td.innerHTML = membercollection[i].seniority
-            }
-            if (j == 4) {
-                td.innerHTML = membercollection[i].votes_with_party_pct
-            } else {
-                null
-            }
-
-
-
-
-        }
-
+    }  
     }
 
-
-
-    var first = document.getElementsByTagName("thead");
-    var second = document.getElementsByTagName("tr")[1];
-
-    first.appendChild(second)
-
-
-}
