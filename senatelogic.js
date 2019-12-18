@@ -1,6 +1,6 @@
 window.onload = function () {
 
-  
+
 
     var membercollection = data.results[0].members;
 
@@ -19,8 +19,8 @@ window.onload = function () {
 
         for (j = 0; j < 5; j++) {
 
-            
-      
+
+
 
             var td = document.createElement("td")
             tr.appendChild(td)
@@ -29,7 +29,7 @@ window.onload = function () {
                 a.href = membercollection[i].url
                 a.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
                 td.appendChild(a)
-                
+
             }
             if (j == 1) {
                 td.innerHTML = membercollection[i].party
@@ -54,18 +54,11 @@ window.onload = function () {
     }
 
 
-    
+
     var first = document.getElementsByTagName("thead");
     var second = document.getElementsByTagName("tr")[1];
-    console.log(second)    
+
     first.appendChild(second)
 
 
 }
-
-
-
-
-
-
-
