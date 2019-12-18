@@ -18,23 +18,28 @@ for (i=0; i<senatemembers.length; i++){
   // console.log( senatemembers[i])
 }
 
-//calculate average votes with party for republicans//
-let totalvotepctreppro = 0
+//calculate average votes with party with a function//
+let totalvotepctpro = 0
 function calculatevoteswithparty (partytypearray){
   for(j=0; j<partytypearray.length; j++){
   
-    totalvotepctreppro += partytypearray[j].votes_with_party_pct
+    totalvotepctpro += partytypearray[j].votes_with_party_pct
     
   }
   
-  let averagevotepctreppro = totalvotepctreppro/(partytypearray.length)
-  return averagevotepctreppro
+  let averagevotepctpro = totalvotepctpro/(partytypearray.length)
+  totalvotepctpro = null
+  return averagevotepctpro
 
 }
 
 
 console.log(calculatevoteswithparty(republicans))
+console.log(calculatevoteswithparty(democrats))
+console.log(calculatevoteswithparty(independents))
 
+
+// calculate the average vote percentage without a function works
 // let totalvotepctreppro = 0
 // for(j=0; j<republicans.length; j++){
   
@@ -42,7 +47,32 @@ console.log(calculatevoteswithparty(republicans))
   
 // }
 
+
+
+
+// let totalvotepctdempro = 0
+// for(k=0; k<democrats.length; k++){
+  
+//   totalvotepctdempro += democrats[k].votes_with_party_pct
+  
+// }
+
+
+
+
+// let totalvotepctindpro = 0
+// for(l=0; l<independents.length; l++){
+  
+//   totalvotepctindpro += independents[l].votes_with_party_pct
+  
+// }
+
+
 // let averagevotepctreppro = totalvotepctreppro/(republicans.length)
+// let averagevotepctdempro = totalvotepctdempro/(democrats.length)
+// let averagevotepctindpro = totalvotepctindpro/(independents.length)
+
+// console.log(averagevotepctreppro, averagevotepctdempro, averagevotepctindpro)
 
 
 
@@ -50,19 +80,19 @@ let statistics = {
   "overall": {
     democrats: [{
         "democratsnum": democrats.length,
-        "demvotepartypct": 0
+        "demvotepartypct": "" //calculatevoteswithparty(democrats)
       }
 
     ],
     republicans: [{
       "republicansnum": republicans.length,
-      "repvotepartypct": 0
+      "repvotepartypct": "" //calculatevoteswithparty(republicans)
     }
 
   ],
   independents: [{
     "independentsnum": independents.length,
-    "indepvotepartypct": 0
+    "indepvotepartypct": "" //calculatevoteswithparty(independents)
   }
 
 ],
