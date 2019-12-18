@@ -25,7 +25,10 @@ window.onload = function () {
             var td = document.createElement("td")
             tr.appendChild(td)
             if (j == 0) {
-                td.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
+                var a = document.createElement("a")
+                a.href = membercollection[i].url
+                a.innerHTML = membercollection[i].first_name + " " + (membercollection[i].middle_name || "") + "" + membercollection[i].last_name
+                td.appendChild(a)
                 
             }
             if (j == 1) {
