@@ -70,12 +70,24 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
   })
 }
 
-var sortedOnMissedVotes = overallVoteStatistics.sort(function (a, b) {
-  return parseFloat(b.missedvotesnum) - parseFloat(a.missedvotesnum);
+var sortedOnMissedVotesDescending = overallVoteStatistics.sort(function (a, b) {
+  return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })
 
-var leastEngaged = sortedOnMissedVotes.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
+console.log(sortedOnMissedVotesDescending)
+
+var leastEngaged = sortedOnMissedVotesDescending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
 console.log(leastEngaged)
+
+//create most engaged object//
+
+var sortedOnMissedVotesAscending = overallVoteStatistics.sort(function (a, b) {
+  return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
+})
+
+
+var mostEngaged = sortedOnMissedVotesAscending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
+console.log(mostEngaged)
 
 
 
@@ -102,15 +114,12 @@ let statistics = {
 
   },
 
-  
+
   "leastEngaged": leastEngaged,
 
-  "mostEngaged": {
-    "name": 0,
-    "missedVotesNum": 0,
-    "missedPct": 0
-  }
-  
+  "mostEngaged": mostEngaged
+
+
 }
 
 
@@ -167,15 +176,15 @@ if (tableBody2 !== null) {
 console.log(statistics.leastEngaged[0])
 
 //set the party statistics function to create the tables//
-function createPartyStatisticsTable (tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
+function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
   for (m = 0; m < statistics[engagement].length; m++) {
 
 
 
     let tr = document.createElement('tr')
 
- 
-    
+
+
     tableVariable.appendChild(tr)
     tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn1]
     tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn2]
@@ -194,6 +203,14 @@ let tableBody3 = document.getElementById("least-attendance-table")
 if (tableBody3 !== null) {
 
 
-  createPartyStatisticsTable(tableBody3, "leastEngaged", "name", "missedVotesNum","missedPct")
+  createPartyStatisticsTable(tableBody3, "leastEngaged", "name", "missedVotesNum", "missedPct")
 }
 
+
+let tableBody4 = document.getElementById("most-attendance-table")
+
+if (tableBody4 !== null) {
+
+
+  createPartyStatisticsTable(tableBody4, "mostEngaged", "name", "missedVotesNum", "missedPct")
+}
