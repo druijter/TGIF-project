@@ -70,24 +70,43 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
   })
 }
 
-var sortedOnMissedVotesDescending = overallVoteStatistics.sort(function (a, b) {
+let sortedOnMissedVotesDescending = overallVoteStatistics.sort(function (a, b) {
   return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })
 
 console.log(sortedOnMissedVotesDescending)
 
-var leastEngaged = sortedOnMissedVotesDescending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
+let leastEngaged = sortedOnMissedVotesDescending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
 console.log(leastEngaged)
 
 //create most engaged object//
 
-var sortedOnMissedVotesAscending = overallVoteStatistics.sort(function (a, b) {
+let sortedOnMissedVotesAscending = overallVoteStatistics.sort(function (a, b) {
   return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
 })
 
 
-var mostEngaged = sortedOnMissedVotesAscending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
+let mostEngaged = sortedOnMissedVotesAscending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
 console.log(mostEngaged)
+
+let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senateMembersStatistics.length)].missedVotesNum
+let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senateMembersStatistics.length + 1)].missedVotesNum
+
+
+//look whether values are the same//
+if (lastPersonMissedVotes !== firstPersonOutMissedVotes) {
+  console.log("hihihih")
+  console.log(lastPersonMissedVotes)
+  console.log(firstPersonOutMissedVotes)
+
+}
+
+if (lastPersonMissedVotes === firstPersonOutMissedVotes) {
+  console.log("hihihih")
+  console.log(lastPersonMissedVotes)
+  console.log(firstPersonOutMissedVotes)
+
+}
 
 
 
