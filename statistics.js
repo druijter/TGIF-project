@@ -3,116 +3,151 @@ let democrats = []
 let independents = []
 
 //extract data in array in variables//
-let senatemembers = data.results[0].members
-for (i=0; i<senatemembers.length; i++){
+let senateMembers = data.results[0].members
+for (i = 0; i < senateMembers.length; i++) {
 
-  
-  if(senatemembers[i].party==="R")
-  republicans.push(senatemembers[i])
 
-  if(senatemembers[i].party==="D")
-  democrats.push(senatemembers[i])
- 
-  if(senatemembers[i].party==="I")
-  independents.push(senatemembers[i])
-  
+  if (senateMembers[i].party === "R")
+    republicans.push(senateMembers[i])
+
+  if (senateMembers[i].party === "D")
+    democrats.push(senateMembers[i])
+
+  if (senateMembers[i].party === "I")
+    independents.push(senateMembers[i])
+
 }
 
 //calculate average votes with party with a function//
-let totalvotepctpro = 0
-function calculatevoteswithparty (partytypearray){
-  for(j=0; j<partytypearray.length; j++){
-  
-    totalvotepctpro += partytypearray[j].votes_with_party_pct
-    
+let totalVotePctPro = 0
+
+function calculateVotesWithParty(partyTypeArray) {
+  for (j = 0; j < partyTypeArray.length; j++) {
+
+    totalVotePctPro += partyTypeArray[j].votes_with_party_pct
+
   }
-  
-  let averagevotepctpro = totalvotepctpro/(partytypearray.length)
-  totalvotepctpro = null
-  return averagevotepctpro
+
+  let averageVotePctPro = totalVotePctPro / (partyTypeArray.length)
+  totalVotePctPro = null
+  return averageVotePctPro
+
+}
+
+//calculate average missed votes with party with a function//
+let totalMissedVotePct = 0
+
+function calculateMissedVotesWithParty(partyTypeArray) {
+  for (j = 0; j < partyTypeArray.length; j++) {
+
+    totalMissedVotePct += partyTypeArray[j].missed_votes_pct
+
+  }
+
+  let averageMissedVotePct = totalMissedVotePct / (partyTypeArray.length)
+  totalMissedVotePct = null
+  return averageMissedVotePct
 
 }
 
 let statistics = {
   "overall": {
-    democrats: [{
-        "democratsnum": democrats.length,
-        "demvotepartypct": calculatevoteswithparty(democrats)
-      }
 
+    numberOfRepresentatives: [
+      democrats.length,
+      republicans.length,
+      independents.length
     ],
-    republicans: [{
-      "republicansnum": republicans.length,
-      "repvotepartypct": calculatevoteswithparty(republicans)
-    }
 
-  ],
-  independents: [{
-    "independentsnum": independents.length,
-    "indepvotepartypct": calculatevoteswithparty(independents)
-  }
+    votedWithParty: [
+      calculateVotesWithParty(democrats),
+      calculateVotesWithParty(republicans),
+      calculateVotesWithParty(independents)
+    ],
 
-],
-
-
+    missedVotePerParty: [
+      calculateMissedVotesWithParty(democrats),
+      calculateMissedVotesWithParty(republicans),
+      calculateMissedVotesWithParty(independents)
+    ],
   },
 
 
-  "leastengaged": [{
+  "leastengaged": {
     "name": 0,
     "missedvotesnum": 0,
     "missedpct": 0
-  }],
+  },
 
-  "mostengaged": [{
+  "mostengaged": {
     "name": 0,
     "missedvotesnum": 0,
     "missedpct": 0
-  }]
+  }
 
 }
 
-console.log(statistics)
 
-console.log(statistics.overall.democrats[0].democratsnum)
-console.log(statistics.overall.republicans[0].republicansnum)
-console.log(statistics.overall.independents[0].independentsnum)
-console.log(statistics.overall.democrats[0].demvotepartypct)
-console.log(statistics.overall.republicans[0].repvotepartypct)
-console.log(statistics.overall.independents[0].indepvotepartypct)
 
 
 
 //create the Senate at a glance table//
-let tablebody = document.getElementById("senate-attendance-table")
-// console.log(tablebody)
+let tableBody = document.getElementById("senate-attendance-table")
 
-for (m=0; m<3; m++){
-let tr = document.createElement('tr')
-tablebody.appendChild(tr)
+
+for (m = 0; m < 3; m++) {
+
+
+
+  let tr = document.createElement('tr')
+
+  if (m == 0) {
+    tr.innerHTML = "Republican"
+  }
+  if (m == 1) {
+
+    tr.innerHTML = "Democrat"
+  }
+  if (m == 2) {
+
+    tr.innerHTML = "Independent"
+  }
+  tableBody.appendChild(tr)
+  tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[m]
+  tr.insertCell().innerHTML = statistics.overall.votedWithParty[m]
+
+
+  
 }
-// tr.insertCells()
-
-// need to organize data otherwise (arrays on column header)
 
 
+//create the Senate at a glance missed votes table//
+let tableBody2 = document.getElementById("senate-attendance-table2")
+console.log("hi")
 
-
-
-
+for (n = 0; n < 3; n++) {
 
 
 
+  let tr = document.createElement('tr')
+
+  if (n == 0) {
+    tr.innerHTML = "Republican"
+  }
+  if (n == 1) {
+
+    tr.innerHTML = "Democrat"
+  }
+  if (n == 2) {
+
+    tr.innerHTML = "Independent"
+  }
+  tableBody2.appendChild(tr)
+  tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[n]
+  tr.insertCell().innerHTML = statistics.overall.votedWithParty[n]
 
 
+  
+}
 
-
-
-
-
-
-
-
-
-
-
+console.log(statistics)
