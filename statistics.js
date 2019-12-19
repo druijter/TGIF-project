@@ -78,7 +78,7 @@ let statistics = {
 }
 
 
-function createGlanceTable(tableVariable) {
+function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) {
   for (m = 0; m < 3; m++) {
 
 
@@ -97,8 +97,8 @@ function createGlanceTable(tableVariable) {
       tr.innerHTML = "Independent"
     }
     tableVariable.appendChild(tr)
-    tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[m]
-    tr.insertCell().innerHTML = statistics.overall.votedWithParty[m]
+    tr.insertCell().innerHTML = statistics.overall[dataToShowcolumn2][m]
+    tr.insertCell().innerHTML = statistics.overall[dataToShowcolumn3][m]
 
 
 
@@ -116,7 +116,7 @@ let tableBody = document.getElementById("senate-attendance-table")
 
 if (tableBody !== null) {
 
-  createGlanceTable(tableBody)
+  createGlanceTable(tableBody, "numberOfRepresentatives", "votedWithParty")
 
 
 }
@@ -126,6 +126,6 @@ let tableBody2 = document.getElementById("senate-party-loyalty-table")
 if (tableBody2 !== null) {
 
 
-  createGlanceTable(tableBody2)
+  createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty")
 }
 console.log(statistics)
