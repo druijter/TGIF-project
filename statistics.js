@@ -50,6 +50,27 @@ function calculateMissedVotesWithParty(partyTypeArray) {
 
 }
 
+let total = 0
+// making a general function
+function calculateAveragePerParty(partyTypeArray, datatype) {
+  for (j = 0; j < partyTypeArray.length; j++) {
+
+    
+    total += partyTypeArray[j][datatype]
+    
+    
+
+  }
+
+  let average = total / (partyTypeArray.length)
+  total = null
+  return average
+
+}
+
+console.log(calculateAveragePerParty(democrats, "dw_nominate"))
+
+
 let statistics = {
   "overall": {
 
