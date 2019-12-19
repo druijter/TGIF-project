@@ -92,62 +92,69 @@ let statistics = {
 
 
 //create the Senate at a glance table//
+
 let tableBody = document.getElementById("senate-attendance-table")
 
+console.log(tableBody === null)
 
-for (m = 0; m < 3; m++) {
+if (tableBody !== null) {
+
+  for (m = 0; m < 3; m++) {
 
 
 
-  let tr = document.createElement('tr')
+    let tr = document.createElement('tr')
 
-  if (m == 0) {
-    tr.innerHTML = "Republican"
+    if (m == 0) {
+      tr.innerHTML = "Republican"
+    }
+    if (m == 1) {
+
+      tr.innerHTML = "Democrat"
+    }
+    if (m == 2) {
+
+      tr.innerHTML = "Independent"
+    }
+    tableBody.appendChild(tr)
+    tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[m]
+    tr.insertCell().innerHTML = statistics.overall.votedWithParty[m]
+
+    console.log("hihlh")
+
   }
-  if (m == 1) {
-
-    tr.innerHTML = "Democrat"
-  }
-  if (m == 2) {
-
-    tr.innerHTML = "Independent"
-  }
-  tableBody.appendChild(tr)
-  tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[m]
-  tr.insertCell().innerHTML = statistics.overall.votedWithParty[m]
-
-
-  
 }
 
+let tableBody2 = document.getElementById("senate-party-loyalty-table")
+if (tableBody2 !== null) {
 
-//create the Senate at a glance missed votes table//
-let tableBody2 = document.getElementById("senate-attendance-table2")
-console.log("hi")
-
-for (n = 0; n < 3; n++) {
-
-
-
-  let tr = document.createElement('tr')
-
-  if (n == 0) {
-    tr.innerHTML = "Republican"
-  }
-  if (n == 1) {
-
-    tr.innerHTML = "Democrat"
-  }
-  if (n == 2) {
-
-    tr.innerHTML = "Independent"
-  }
-  tableBody2.appendChild(tr)
-  tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[n]
-  tr.insertCell().innerHTML = statistics.overall.votedWithParty[n]
-
-
+  //create the Senate at a glance missed votes table//
   
-}
 
+
+  for (n = 0; n < 3; n++) {
+
+
+
+    let tr = document.createElement('tr')
+
+    if (n == 0) {
+      tr.innerHTML = "Republican"
+    }
+    if (n == 1) {
+
+      tr.innerHTML = "Democrat"
+    }
+    if (n == 2) {
+
+      tr.innerHTML = "Independent"
+    }
+    tableBody2.appendChild(tr)
+    tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[n]
+    tr.insertCell().innerHTML = statistics.overall.votedWithParty[n]
+
+
+
+  }
+}
 console.log(statistics)
