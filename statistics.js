@@ -18,47 +18,17 @@ for (i = 0; i < senateMembers.length; i++) {
 
 }
 
-//calculate average votes with party with a function//
-let totalVotePctPro = 0
 
-function calculateVotesWithParty(partyTypeArray) {
-  for (j = 0; j < partyTypeArray.length; j++) {
-
-    totalVotePctPro += partyTypeArray[j].votes_with_party_pct
-
-  }
-
-  let averageVotePctPro = totalVotePctPro / (partyTypeArray.length)
-  totalVotePctPro = null
-  return averageVotePctPro
-
-}
-
-//calculate average missed votes with party with a function//
-let totalMissedVotePct = 0
-
-function calculateMissedVotesWithParty(partyTypeArray) {
-  for (j = 0; j < partyTypeArray.length; j++) {
-
-    totalMissedVotePct += partyTypeArray[j].missed_votes_pct
-
-  }
-
-  let averageMissedVotePct = totalMissedVotePct / (partyTypeArray.length)
-  totalMissedVotePct = null
-  return averageMissedVotePct
-
-}
 
 let total = 0
-// making a general function
+// making a general function to calculate the average per party
 function calculateAveragePerParty(partyTypeArray, datatype) {
   for (j = 0; j < partyTypeArray.length; j++) {
 
-    
+
     total += partyTypeArray[j][datatype]
-    
-    
+
+
 
   }
 
@@ -68,7 +38,6 @@ function calculateAveragePerParty(partyTypeArray, datatype) {
 
 }
 
-console.log(calculateAveragePerParty(democrats, "dw_nominate"))
 
 
 let statistics = {
@@ -81,15 +50,15 @@ let statistics = {
     ],
 
     votedWithParty: [
-      calculateVotesWithParty(democrats),
-      calculateVotesWithParty(republicans),
-      calculateVotesWithParty(independents)
+      calculateAveragePerParty(democrats, "votes_with_party_pct"),
+      calculateAveragePerParty(republicans, "votes_with_party_pct"),
+      calculateAveragePerParty(independents, "votes_with_party_pct")
     ],
 
     missedVotePerParty: [
-      calculateMissedVotesWithParty(democrats),
-      calculateMissedVotesWithParty(republicans),
-      calculateMissedVotesWithParty(independents)
+      calculateAveragePerParty(democrats, "missed_votes_pct"),
+      calculateAveragePerParty(republicans, "missed_votes_pct"),
+      calculateAveragePerParty(independents, "missed_votes_pct")
     ],
   },
 
@@ -109,17 +78,7 @@ let statistics = {
 }
 
 
-
-
-
-//create the Senate at a glance table//
-
-let tableBody = document.getElementById("senate-attendance-table")
-
-console.log(tableBody === null)
-
-if (tableBody !== null) {
-
+function createGlanceTable(tableVariable) {
   for (m = 0; m < 3; m++) {
 
 
@@ -137,45 +96,36 @@ if (tableBody !== null) {
 
       tr.innerHTML = "Independent"
     }
-    tableBody.appendChild(tr)
+    tableVariable.appendChild(tr)
     tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[m]
     tr.insertCell().innerHTML = statistics.overall.votedWithParty[m]
 
-    console.log("hihlh")
+
 
   }
 }
 
+
+
+
+//create the Senate at a glance table//
+
+let tableBody = document.getElementById("senate-attendance-table")
+
+
+
+if (tableBody !== null) {
+
+  createGlanceTable(tableBody)
+
+
+}
+
+//create the Senate at a glance missed votes table//
 let tableBody2 = document.getElementById("senate-party-loyalty-table")
 if (tableBody2 !== null) {
 
-  //create the Senate at a glance missed votes table//
-  
 
-
-  for (n = 0; n < 3; n++) {
-
-
-
-    let tr = document.createElement('tr')
-
-    if (n == 0) {
-      tr.innerHTML = "Republican"
-    }
-    if (n == 1) {
-
-      tr.innerHTML = "Democrat"
-    }
-    if (n == 2) {
-
-      tr.innerHTML = "Independent"
-    }
-    tableBody2.appendChild(tr)
-    tr.insertCell().innerHTML = statistics.overall.numberOfRepresentatives[n]
-    tr.insertCell().innerHTML = statistics.overall.votedWithParty[n]
-
-
-
-  }
+  createGlanceTable(tableBody2)
 }
 console.log(statistics)
