@@ -62,19 +62,20 @@ let senateMembersStatistics = data.results[0].members
 
 //get overall vote statistics//
 let overallVoteStatistics = []
-for(i=0; i<senateMembersStatistics.length; i++){
+for (i = 0; i < senateMembersStatistics.length; i++) {
   overallVoteStatistics.push({
     "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-    "missedvotesnum": senateMembersStatistics[i].missed_votes,
-    "missedpct": senateMembersStatistics[i].missed_votes_pct
+    "missedVotesNum": senateMembersStatistics[i].missed_votes,
+    "missedPct": senateMembersStatistics[i].missed_votes_pct
   })
 }
 
-var sortedOnMissedVotes = overallVoteStatistics.sort(function(a, b) {
+var sortedOnMissedVotes = overallVoteStatistics.sort(function (a, b) {
   return parseFloat(b.missedvotesnum) - parseFloat(a.missedvotesnum);
 })
 
-console.log(sortedOnMissedVotes.slice(0,(Math.round(0.1*senateMembersStatistics.length+1))))
+var leastEngaged = sortedOnMissedVotes.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
+console.log(leastEngaged)
 
 
 
@@ -97,19 +98,19 @@ let statistics = {
       calculateAveragePerParty(democrats, "missed_votes_pct"),
       calculateAveragePerParty(republicans, "missed_votes_pct"),
       calculateAveragePerParty(independents, "missed_votes_pct")
-    ],
-    
+    ]
+
   },
 
+  
+  "leastEngaged": leastEngaged,
 
-  "leastengaged":  overallVoteStatistics,
-
-  "mostengaged": {
+  "mostEngaged": {
     "name": 0,
-    "missedvotesnum": 0,
-    "missedpct": 0
+    "missedVotesNum": 0,
+    "missedPct": 0
   }
-
+  
 }
 
 
@@ -142,7 +143,6 @@ function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) 
 
 
 
-
 //create the Senate at a glance table//
 
 let tableBody = document.getElementById("senate-attendance-table")
@@ -163,4 +163,37 @@ if (tableBody2 !== null) {
 
   createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty")
 }
-console.log(statistics)
+
+console.log(statistics.leastEngaged[0])
+
+//set the party statistics function to create the tables//
+function createPartyStatisticsTable (tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
+  for (m = 0; m < statistics[engagement].length; m++) {
+
+
+
+    let tr = document.createElement('tr')
+
+ 
+    
+    tableVariable.appendChild(tr)
+    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn1]
+    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn2]
+    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn3]
+
+
+
+  }
+
+}
+
+
+
+let tableBody3 = document.getElementById("least-attendance-table")
+
+if (tableBody3 !== null) {
+
+
+  createPartyStatisticsTable(tableBody3, "leastEngaged", "name", "missedVotesNum","missedPct")
+}
+
