@@ -84,7 +84,7 @@ let sortedOnMissedVotesAscending = [...overallVoteStatistics].sort(function (a, 
   return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
 })
 
-console.log(sortedOnMissedVotesAscending)  
+console.log(sortedOnMissedVotesAscending)
 
 const percentage = 0.10 * senateMembersStatistics.length
 
@@ -119,35 +119,55 @@ let sortedOnVotesNumDescending = [...overallLoyaltyStatistics].sort(function (a,
 console.log(sortedOnVotesNumDescending)
 
 
-function returnEngagement (){
+function returnEngagement() {
 
-  let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round( percentage+ 1)))
+  let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
   let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
 
   //variables for party loyalty//
-  let mostLoyal = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
-  let leastLoyal = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
+  let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
+  let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
 
-  console.log(leastEngaged,mostEngaged)
+  console.log(leastEngaged, mostEngaged)
 
-for(i=(Math.round(percentage)+1); i<senateMembersStatistics.length-(Math.round(percentage)); i++){
-  if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
-    
-    leastEngaged.push({
-      "name": `${sortedOnMissedVotesDescending[i].name}`,
-      "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
-      "missedPct": sortedOnMissedVotesDescending[i].missedPct
-    })
-    mostEngaged.push({
-      "name": `${sortedOnMissedVotesAscending[i].name}`,
-      "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
-      "missedPct": sortedOnMissedVotesAscending[i].missedPct
-    })
-  } else {
-    break
+  for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
+    if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
+
+      leastEngaged.push({
+        "name": `${sortedOnMissedVotesDescending[i].name}`,
+        "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
+        "missedPct": sortedOnMissedVotesDescending[i].missedPct
+      })
+      mostEngaged.push({
+        "name": `${sortedOnMissedVotesAscending[i].name}`,
+        "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
+        "missedPct": sortedOnMissedVotesAscending[i].missedPct
+      })
+      mostLoyal.push({
+        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+      })
+      leastLoyal.push({
+        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+      })
+
+    } else {
+      break
+    }
   }
-}
-return {engagement: {leastEngaged: leastEngaged, mostEngaged: mostEngaged}}
+  return {
+    engagement: {
+      leastEngaged: leastEngaged,
+      mostEngaged: mostEngaged
+    },
+    loyalty: {
+      leastLoyal: leastLoyal,
+      mostLoyal: mostLoyal
+    }
+  }
 }
 console.log(returnEngagement())
 
@@ -182,6 +202,9 @@ let statistics = {
 
   "mostEngaged": test.engagement.mostEngaged,
 
+  "leastLoyal": test.loyalty.leastLoyal,
+
+  "mostLoyal": test.loyalty.mostLoyal,
 
 }
 
@@ -280,4 +303,23 @@ if (tableBody4 !== null) {
   createPartyStatisticsTable(tableBody4, "mostEngaged", "name", "missedVotesNum", "missedPct")
 }
 
-console.log(overallVoteStatistics)
+
+let tableBody5 = document.getElementById("senate-party-leastloyal-table")
+
+if (tableBody5 !== null) {
+
+
+  createPartyStatisticsTable(tableBody5, "leastLoyal", "name", "partyVotesNum", "partyVotesPct")
+}
+
+
+
+let tableBody6 = document.getElementById("senate-party-mostloyal-table")
+
+if (tableBody6 !== null) {
+
+
+  createPartyStatisticsTable(tableBody6, "mostLoyal", "name", "partyVotesNum", "partyVotesPct")
+}
+
+console.log(statistics)
