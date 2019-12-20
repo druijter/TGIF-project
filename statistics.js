@@ -1,6 +1,3 @@
-//LOGIC FOR THE SENATE!!!//
-//LOGIC FOR THE SENATE!!!//
-//LOGIC FOR THE SENATE!!!//
 
 
 let republicans = []
@@ -71,7 +68,7 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
   overallVoteStatistics.push({
     "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
     "missedVotesNum": senateMembersStatistics[i].missed_votes,
-    "missedPct": senateMembersStatistics[i].missed_votes_pct
+    "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
   })
 }
 
@@ -96,15 +93,15 @@ const percentage = 0.10 * senateMembersStatistics.length
 let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
 console.log(lastPersonMissedVotes)
 let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
-
+// let partyVotesNum2 = `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`
 
 //get overall loyalty statistics
 let overallLoyaltyStatistics = []
 for (i = 0; i < senateMembersStatistics.length; i++) {
   overallLoyaltyStatistics.push({
     "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-    "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-    "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+    "partyVotesNum": `${senateMembersStatistics[i].total_votes}`,
+    "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
   })
 }
 
@@ -151,7 +148,7 @@ function returnEngagement() {
       mostLoyal.push({
         "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
         "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
       })
       leastLoyal.push({
         "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
@@ -189,9 +186,9 @@ let statistics = {
     ],
 
     votedWithParty: [
-      calculateAveragePerParty(democrats, "votes_with_party_pct"),
-      calculateAveragePerParty(republicans, "votes_with_party_pct"),
-      calculateAveragePerParty(independents, "votes_with_party_pct")
+      calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1),
+      calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1),
+      calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
     ],
 
     missedVotePerParty: [
