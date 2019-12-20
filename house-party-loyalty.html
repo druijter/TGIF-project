@@ -11,6 +11,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        
+        .table :first-child
+{
+    width:37%;
+}
+.table {
+    width:70%;
+}
+        
+    </style>
 </head>
 
 
@@ -132,14 +143,14 @@
     <main>
 
         <!--Table container-->
-        <div>
+        <div class="table table-responsive table-striped">
             <h2>Party Loyalty</h2>
             <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans
                 respectively, tend to be the most faithful in voting for their party's nominee for office and
                 legislation that backs their party's agenda. </p>
 
-            <h2>Senate at a glance</h2>
-            <table>
+            <h2>House at a glance</h2>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Party</th>
@@ -153,7 +164,7 @@
             </table>
 
             <h2>Least Loyal (Bottom 10% of Party)</h2>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -167,7 +178,7 @@
             </table>
 
             <h2>Most Loyal (Top 10% of Party)</h2>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
