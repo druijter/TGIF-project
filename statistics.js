@@ -69,10 +69,10 @@ function calculateOverallAverage(datatype) {
 let senateMembersStatistics = data.results[0].members
 
 //get overall vote statistics//
-
-
-
 let overallVoteStatistics = []
+function getOverallVoteStatistics(){
+
+
 for (i = 0; i < senateMembersStatistics.length; i++) {
   overallVoteStatistics.push({
     "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
@@ -80,8 +80,14 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
     "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
   })
 }
+return overallVoteStatistics
+}
 
-let sortedOnMissedVotesDescending = [...overallVoteStatistics].sort(function (a, b) {
+
+const overallVoteStatisticsObject =  getOverallVoteStatistics()
+
+
+let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
   return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })
 
@@ -91,7 +97,7 @@ console.log(sortedOnMissedVotesDescending)
 
 //create most engaged object//
 
-let sortedOnMissedVotesAscending = [...overallVoteStatistics].sort(function (a, b) {
+let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(function (a, b) {
   return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
 })
 
@@ -105,6 +111,8 @@ let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percenta
 // let partyVotesNum2 = `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`
 
 //get overall loyalty statistics
+
+function getOverallLoyaltyStatistics(){
 let overallLoyaltyStatistics = []
 for (i = 0; i < senateMembersStatistics.length; i++) {
   overallLoyaltyStatistics.push({
@@ -113,17 +121,20 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
     "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
   })
 }
+return overallLoyaltyStatistics
+}
 
-console.log(overallLoyaltyStatistics)
+let overallLoyaltyStatisticsObject = getOverallLoyaltyStatistics()
+
 
 //now sort the array ascending and descending//
-let sortedOnVotesNumAscending = [...overallLoyaltyStatistics].sort(function (a, b) {
+let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
   return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
 })
 
 console.log(sortedOnVotesNumAscending)
 
-let sortedOnVotesNumDescending = [...overallLoyaltyStatistics].sort(function (a, b) {
+let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
   return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
 })
 
