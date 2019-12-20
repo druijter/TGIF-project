@@ -1,6 +1,6 @@
 window.onload = function () {
 
-    let memberCollection = data.results[0].members;
+    let memberCollection = senateData.results[0].members;
 
 
     this.createTable(memberCollection)

@@ -1,4 +1,4 @@
-var data =
+var senateData =
 
 {
    "status":"OK",

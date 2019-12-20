@@ -1,9 +1,14 @@
+//LOGIC FOR THE SENATE!!!//
+//LOGIC FOR THE SENATE!!!//
+//LOGIC FOR THE SENATE!!!//
+
+
 let republicans = []
 let democrats = []
 let independents = []
 
 //extract data in array in variables//
-let senateMembers = data.results[0].members
+let senateMembers = senateData.results[0].members
 for (i = 0; i < senateMembers.length; i++) {
 
 
@@ -38,7 +43,7 @@ function calculateAveragePerParty(partyTypeArray, datatype) {
 
 }
 
-console.log(data.results[0].members)
+
 
 let overallTotal = 0
 // making a general function to calculate the overall average 
@@ -46,7 +51,7 @@ function calculateOverallAverage(datatype) {
   for (j = 0; j < datatype.length; j++) {
 
 
-    overallTotal += data.results[0].members[j][datatype]
+    overallTotal += senateData.results[0].members[j][datatype]
 
 
 
@@ -58,7 +63,7 @@ function calculateOverallAverage(datatype) {
 
 }
 
-let senateMembersStatistics = data.results[0].members
+let senateMembersStatistics = senateData.results[0].members
 
 //get overall vote statistics//
 let overallVoteStatistics = []
@@ -202,9 +207,9 @@ let statistics = {
 
   "mostEngaged": test.engagement.mostEngaged,
 
-  "leastLoyal": test.loyalty.leastLoyal,
+  "leastLoyalSenate": test.loyalty.leastLoyal,
 
-  "mostLoyal": test.loyalty.mostLoyal,
+  "mostLoyalSenate": test.loyalty.mostLoyal,
 
 }
 
@@ -261,7 +266,7 @@ if (tableBody2 !== null) {
   createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty")
 }
 
-console.log(statistics.leastEngaged[0])
+ 
 
 //set the party statistics function to create the tables//
 function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
@@ -309,7 +314,7 @@ let tableBody5 = document.getElementById("senate-party-leastloyal-table")
 if (tableBody5 !== null) {
 
 
-  createPartyStatisticsTable(tableBody5, "leastLoyal", "name", "partyVotesNum", "partyVotesPct")
+  createPartyStatisticsTable(tableBody5, "leastLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
 }
 
 
@@ -319,7 +324,24 @@ let tableBody6 = document.getElementById("senate-party-mostloyal-table")
 if (tableBody6 !== null) {
 
 
-  createPartyStatisticsTable(tableBody6, "mostLoyal", "name", "partyVotesNum", "partyVotesPct")
+  createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
 }
 
 console.log(statistics)
+
+
+
+
+
+
+//LOGIC FOR THE HOUSE!!!//
+//LOGIC FOR THE HOUSE!!!//
+//LOGIC FOR THE HOUSE!!!//
+
+
+
+
+
+
+
+
