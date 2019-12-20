@@ -93,7 +93,9 @@ let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senate
 let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senateMembersStatistics.length + 1)].missedVotesNum
 
 
-//look whether values are the same//
+//look whether values in the top10% list are the same as the first values outside of that top 10%//
+var counter = 0
+
 if (lastPersonMissedVotes !== firstPersonOutMissedVotes) {
   console.log("hihihih")
   console.log(lastPersonMissedVotes)
@@ -101,10 +103,13 @@ if (lastPersonMissedVotes !== firstPersonOutMissedVotes) {
 
 }
 
-if (lastPersonMissedVotes === firstPersonOutMissedVotes) {
+for(i=(Math.round(0.1 * senateMembersStatistics.length)+1); i<senateMembersStatistics.length-(Math.round(0.1 * senateMembersStatistics.length)); i++)
+if (lastPersonMissedVotes !== sortedOnMissedVotesAscending[i].missedVotesNum) {
   console.log("hihihih")
   console.log(lastPersonMissedVotes)
   console.log(firstPersonOutMissedVotes)
+  counter ++
+  console.log(counter)
 
 }
 
