@@ -5,6 +5,8 @@ let democrats = []
 let independents = []
 
 //extract data in array in variables//
+function extractPartyMembers(){
+
 let senateMembers = data.results[0].members
 for (i = 0; i < senateMembers.length; i++) {
 
@@ -18,6 +20,10 @@ for (i = 0; i < senateMembers.length; i++) {
   if (senateMembers[i].party === "I")
     independents.push(senateMembers[i])
 
+}
+return {republicans, democrats, independents
+
+}
 }
 
 
@@ -63,6 +69,9 @@ function calculateOverallAverage(datatype) {
 let senateMembersStatistics = data.results[0].members
 
 //get overall vote statistics//
+
+
+
 let overallVoteStatistics = []
 for (i = 0; i < senateMembersStatistics.length; i++) {
   overallVoteStatistics.push({
@@ -175,14 +184,16 @@ console.log(returnEngagement())
 
 
 var test = returnEngagement()
+var partyMembersObject = extractPartyMembers()
+console.log(partyMembersObject)
 
 let statistics = {
   "overall": {
 
     numberOfRepresentatives: [
-      democrats.length,
-      republicans.length,
-      independents.length
+      partyMembersObject.democrats.length,
+      partyMembersObject.republicans.length,
+      partyMembersObject.independents.length
     ],
 
     votedWithParty: [
@@ -329,11 +340,6 @@ console.log(statistics)
 
 
 
-
-
-//LOGIC FOR THE HOUSE!!!//
-//LOGIC FOR THE HOUSE!!!//
-//LOGIC FOR THE HOUSE!!!//
 
 
 
