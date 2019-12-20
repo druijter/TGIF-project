@@ -8,7 +8,7 @@ let democrats = []
 let independents = []
 
 //extract data in array in variables//
-let senateMembers = senateData.results[0].members
+let senateMembers = data.results[0].members
 for (i = 0; i < senateMembers.length; i++) {
 
 
@@ -51,7 +51,7 @@ function calculateOverallAverage(datatype) {
   for (j = 0; j < datatype.length; j++) {
 
 
-    overallTotal += senateData.results[0].members[j][datatype]
+    overallTotal += data.results[0].members[j][datatype]
 
 
 
@@ -63,7 +63,7 @@ function calculateOverallAverage(datatype) {
 
 }
 
-let senateMembersStatistics = senateData.results[0].members
+let senateMembersStatistics = data.results[0].members
 
 //get overall vote statistics//
 let overallVoteStatistics = []
@@ -247,7 +247,7 @@ function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) 
 
 //create the Senate at a glance table//
 
-let tableBody = document.getElementById("senate-attendance-table")
+let tableBody = document.getElementById("attendance-table")
 
 
 
@@ -259,7 +259,7 @@ if (tableBody !== null) {
 }
 
 //create the Senate at a glance missed votes table//
-let tableBody2 = document.getElementById("senate-party-loyalty-table")
+let tableBody2 = document.getElementById("loyalty-table")
 if (tableBody2 !== null) {
 
 
@@ -309,7 +309,7 @@ if (tableBody4 !== null) {
 }
 
 
-let tableBody5 = document.getElementById("senate-party-leastloyal-table")
+let tableBody5 = document.getElementById("least-loyal-table")
 
 if (tableBody5 !== null) {
 
@@ -319,7 +319,7 @@ if (tableBody5 !== null) {
 
 
 
-let tableBody6 = document.getElementById("senate-party-mostloyal-table")
+let tableBody6 = document.getElementById("most-loyal-table")
 
 if (tableBody6 !== null) {
 
