@@ -348,6 +348,14 @@ if (tableBody6 !== null) {
 
 
 
+// checkbox logic
+
+if(document.getElementById("checkbox1")){
+
+document.getElementById("checkbox1").onclick = function(){
+console.log("hi")
+}
+}
 
 
 
