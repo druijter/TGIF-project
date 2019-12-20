@@ -91,7 +91,7 @@ let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(functi
   return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })
 
-console.log(sortedOnMissedVotesDescending)
+
 
 
 
@@ -101,14 +101,14 @@ let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(functio
   return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
 })
 
-console.log(sortedOnMissedVotesAscending)
+
 
 const percentage = 0.10 * senateMembersStatistics.length
 
 let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
-console.log(lastPersonMissedVotes)
+
 let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
-// let partyVotesNum2 = `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`
+
 
 //get overall loyalty statistics
 
@@ -132,13 +132,13 @@ let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(functio
   return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
 })
 
-console.log(sortedOnVotesNumAscending)
+
 
 let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
   return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
 })
 
-console.log(sortedOnVotesNumDescending)
+
 
 
 function returnEngagement() {
@@ -150,7 +150,7 @@ function returnEngagement() {
   let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
   let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
 
-  console.log(leastEngaged, mostEngaged)
+  
 
   for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
     if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
@@ -191,12 +191,12 @@ function returnEngagement() {
     }
   }
 }
-console.log(returnEngagement())
+
 
 
 var test = returnEngagement()
 var partyMembersObject = extractPartyMembers()
-console.log(partyMembersObject)
+
 
 let statistics = {
   "overall": {
@@ -346,7 +346,6 @@ if (tableBody6 !== null) {
   createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
 }
 
-console.log(statistics)
 
 
 
