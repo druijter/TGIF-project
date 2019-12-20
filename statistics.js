@@ -70,49 +70,60 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
   })
 }
 
-let sortedOnMissedVotesDescending = overallVoteStatistics.sort(function (a, b) {
+let sortedOnMissedVotesDescending = [...overallVoteStatistics].sort(function (a, b) {
   return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })
 
 console.log(sortedOnMissedVotesDescending)
 
-let leastEngaged = sortedOnMissedVotesDescending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
-console.log(leastEngaged)
+
 
 //create most engaged object//
 
-let sortedOnMissedVotesAscending = overallVoteStatistics.sort(function (a, b) {
+let sortedOnMissedVotesAscending = [...overallVoteStatistics].sort(function (a, b) {
   return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
 })
 
+console.log(sortedOnMissedVotesAscending)  
 
-let mostEngaged = sortedOnMissedVotesAscending.slice(0, (Math.round(0.1 * senateMembersStatistics.length + 1)))
-console.log(mostEngaged)
+const percentage = 0.10 * senateMembersStatistics.length
 
-let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senateMembersStatistics.length)].missedVotesNum
-let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(0.1 * senateMembersStatistics.length + 1)].missedVotesNum
+let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
+console.log(lastPersonMissedVotes)
+let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
 
 
 //look whether values in the top10% list are the same as the first values outside of that top 10%//
-var counter = 0
+// var counter = 0
 
-if (lastPersonMissedVotes !== firstPersonOutMissedVotes) {
-  console.log("hihihih")
-  console.log(lastPersonMissedVotes)
-  console.log(firstPersonOutMissedVotes)
 
+function returnEngagement (){
+
+  let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round( percentage+ 1)))
+  let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
+
+  console.log(leastEngaged,mostEngaged)
+
+for(i=(Math.round(percentage)+1); i<senateMembersStatistics.length-(Math.round(percentage)); i++){
+  if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
+    
+    leastEngaged.push({
+      "name": `${sortedOnMissedVotesDescending[i].name}`,
+      "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
+      "missedPct": sortedOnMissedVotesDescending[i].missedPct
+    })
+    mostEngaged.push({
+      "name": `${sortedOnMissedVotesAscending[i].name}`,
+      "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
+      "missedPct": sortedOnMissedVotesAscending[i].missedPct
+    })
+  } else {
+    break
+  }
 }
-
-for(i=(Math.round(0.1 * senateMembersStatistics.length)+1); i<senateMembersStatistics.length-(Math.round(0.1 * senateMembersStatistics.length)); i++)
-if (lastPersonMissedVotes !== sortedOnMissedVotesAscending[i].missedVotesNum) {
-  console.log("hihihih")
-  console.log(lastPersonMissedVotes)
-  console.log(firstPersonOutMissedVotes)
-  counter ++
-  console.log(counter)
-
+return {engagement: {leastEngaged: leastEngaged, mostEngaged: mostEngaged}}
 }
-
+console.log(returnEngagement())
 
 
 let statistics = {
@@ -145,6 +156,8 @@ let statistics = {
 
 
 }
+
+
 
 
 function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) {
@@ -238,3 +251,5 @@ if (tableBody4 !== null) {
 
   createPartyStatisticsTable(tableBody4, "mostEngaged", "name", "missedVotesNum", "missedPct")
 }
+
+console.log(overallVoteStatistics)
