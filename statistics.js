@@ -126,6 +126,8 @@ return {engagement: {leastEngaged: leastEngaged, mostEngaged: mostEngaged}}
 console.log(returnEngagement())
 
 
+var test = returnEngagement()
+
 let statistics = {
   "overall": {
 
@@ -150,9 +152,9 @@ let statistics = {
   },
 
 
-  "leastEngaged": leastEngaged,
+  "leastEngaged": test.engagement.leastEngaged,
 
-  "mostEngaged": mostEngaged
+  "mostEngaged": test.engagement.mostEngaged,
 
 
 }
