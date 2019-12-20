@@ -105,6 +105,20 @@ for (i = 0; i < senateMembersStatistics.length; i++) {
 
 console.log(overallLoyaltyStatistics)
 
+//now sort the array ascending and descending//
+let sortedOnVotesNumAscending = [...overallLoyaltyStatistics].sort(function (a, b) {
+  return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
+})
+
+console.log(sortedOnVotesNumAscending)
+
+let sortedOnVotesNumDescending = [...overallLoyaltyStatistics].sort(function (a, b) {
+  return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
+})
+
+console.log(sortedOnVotesNumDescending)
+
+
 function returnEngagement (){
 
   let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round( percentage+ 1)))
