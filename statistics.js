@@ -93,14 +93,26 @@ console.log(lastPersonMissedVotes)
 let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
 
 
-//look whether values in the top10% list are the same as the first values outside of that top 10%//
-// var counter = 0
+//get overall loyalty statistics
+let overallLoyaltyStatistics = []
+for (i = 0; i < senateMembersStatistics.length; i++) {
+  overallLoyaltyStatistics.push({
+    "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+    "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+    "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+  })
+}
 
+console.log(overallLoyaltyStatistics)
 
 function returnEngagement (){
 
   let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round( percentage+ 1)))
   let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
+
+  //variables for party loyalty//
+  let mostLoyal = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
+  let leastLoyal = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
 
   console.log(leastEngaged,mostEngaged)
 
