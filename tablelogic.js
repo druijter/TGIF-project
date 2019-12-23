@@ -82,7 +82,7 @@ window.onload = function () {
     republicans = extractedPartyMembersObject.republicans
     democrats = extractedPartyMembersObject.democrats
     independents = extractedPartyMembersObject.independents
-    
+
 
     //default table: no checkbox is checked//
     function createTablePerParty(memberCollection) {
@@ -120,27 +120,40 @@ window.onload = function () {
 
     //filter for democrats when the democrat checkbox is checked//
     let democratsClicked = document.getElementById("democratFilter")
+    let republicansClicked = document.getElementById("republicanFilter")
+    let independentsClicked = document.getElementById("independentFilter")
 
     democratsClicked.onclick = function (e) {
 
         if (e.target.checked === true) {
-            console.log("hij is gechecked")
-            for (i = 0; i < memberCollection.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
+            independentsClicked.checked = false
+            republicansClicked.checked = false
 
-
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
             }
-            console.log("create the table")
+
+            // for (i = 0; i < memberCollection.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
+
+
+            // }
 
             createTablePerParty(democrats)
 
 
         }
         if (e.target.checked !== true) {
-            console.log("hij is niet gechecked")
-            for (i = 0; i < democrats.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
+            independentsClicked.checked = false
+            republicansClicked.checked = false
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
             }
+            // for (i = 0; i < democrats.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
+            // }
 
             createTable(memberCollection)
 
@@ -150,29 +163,42 @@ window.onload = function () {
 
 
     //filter for republicans when the republican checkbox is checked//
-    let republicansClicked = document.getElementById("republicanFilter")
+
 
     republicansClicked.onclick = function (e) {
 
+
         if (e.target.checked === true) {
-            console.log("hij is gechecked")
-            for (i = 0; i < memberCollection.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
+
+            democratsClicked.checked = false
+            independentsClicked.checked = false
+
+            // for (i = 0; i < memberCollection.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
 
 
+            // }
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
             }
-            console.log("create the table")
 
             createTablePerParty(republicans)
 
 
         }
         if (e.target.checked !== true) {
-            console.log("hij is niet gechecked")
-            for (i = 0; i < republicans.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
-            }
+            democratsClicked.checked = false
+            independentsClicked.checked = false
 
+
+            // for (i = 0; i < republicans.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
+            // }
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
             createTable(memberCollection)
 
 
@@ -181,28 +207,44 @@ window.onload = function () {
 
     //filter for independents when the independent checkbox is checked//
 
-    let independentsClicked = document.getElementById("independentFilter")
+
 
     independentsClicked.onclick = function (e) {
 
 
+
         if (e.target.checked === true) {
-            console.log("hij is gechecked")
-            for (i = 0; i < memberCollection.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
+
+            democratsClicked.checked = false
+            republicansClicked.checked = false
 
 
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
             }
-            console.log("create the table")
+
+            // for (i = 0; i < memberCollection.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
+
+
+            // }
 
             createTablePerParty(independents)
 
 
         }
         if (e.target.checked !== true) {
-            console.log("hij is niet gechecked")
-            for (i = 0; i < independents.length; i++) {
-                document.getElementById("table-data").deleteRow(0);
+
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            // for (i = 0; i < independents.length; i++) {
+            //     document.getElementById("table-data").deleteRow(0);
+            // }
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
             }
 
             createTable(memberCollection)
@@ -212,5 +254,7 @@ window.onload = function () {
 
 
     }
+
+
 
 }
