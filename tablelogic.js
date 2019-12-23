@@ -141,6 +141,21 @@ window.onload = function () {
     let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
     let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
 
+    // function to show the default table
+
+    function showDefaultTable() {
+
+
+
+
+
+
+        showDefaultTable()
+
+
+
+    }
+
     //when checkboxes are checked//
 
 
@@ -166,18 +181,8 @@ window.onload = function () {
 
         }
         if (e.target.checked !== true) {
-            independentsClicked.checked = false
-            republicansClicked.checked = false
-            democratsRepublicansClicked.checked = false
-            democratsIndependentsClicked.checked = false
-            republicansIndependentsClicked.checked = false
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
 
-
-            createTable(memberCollection)
+            showDefaultTable()
 
 
         }
@@ -209,18 +214,10 @@ window.onload = function () {
 
         }
         if (e.target.checked !== true) {
-            democratsClicked.checked = false
-            independentsClicked.checked = false
-            democratsRepublicansClicked.checked = false
-            democratsIndependentsClicked.checked = false
-            republicansIndependentsClicked.checked = false
 
 
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
-            createTable(memberCollection)
+
+            showDefaultTable()
 
 
         }
@@ -256,21 +253,11 @@ window.onload = function () {
         }
         if (e.target.checked !== true) {
 
-            democratsClicked.checked = false
-            republicansClicked.checked = false
-
-            democratsRepublicansClicked.checked = false
-            democratsIndependentsClicked.checked = false
-            republicansIndependentsClicked.checked = false
 
 
 
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
 
-            createTable(memberCollection)
+            showDefaultTable()
 
 
         }
@@ -308,20 +295,11 @@ window.onload = function () {
 
         }
         if (e.target.checked !== true) {
-            democratsClicked.checked = false
-            republicansClicked.checked = false
-            independentsClicked.checked = false
-
-            democratsIndependentsClicked.checked = false
-            republicansIndependentsClicked.checked = false
 
 
 
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
-            createTable(memberCollection)
+
+            showDefaultTable()
 
 
         }
@@ -352,20 +330,10 @@ window.onload = function () {
 
         }
         if (e.target.checked !== true) {
-            democratsClicked.checked = false
-            republicansClicked.checked = false
-            independentsClicked.checked = false
-
-            democratsRepublicansClicked.checked = false
-            republicansIndependentsClicked.checked = false
 
 
 
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
-            createTable(memberCollection)
+            showDefaultTable()
 
 
         }
@@ -397,24 +365,12 @@ window.onload = function () {
 
         }
         if (e.target.checked !== true) {
-            democratsClicked.checked = false
-            republicansClicked.checked = false
-            independentsClicked.checked = false
-
-            democratsRepublicansClicked.checked = false
-            democratsIndependentsClicked.checked = false
 
 
 
 
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
-            createTable(memberCollection)
-
+            showDefaultTable()
 
         }
     }
-
 }
