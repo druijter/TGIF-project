@@ -134,11 +134,7 @@ window.onload = function () {
                 myNode.removeChild(myNode.firstChild);
             }
 
-            // for (i = 0; i < memberCollection.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
 
-
-            // }
 
             createTablePerParty(democrats)
 
@@ -151,9 +147,7 @@ window.onload = function () {
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.firstChild);
             }
-            // for (i = 0; i < democrats.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
-            // }
+
 
             createTable(memberCollection)
 
@@ -173,11 +167,7 @@ window.onload = function () {
             democratsClicked.checked = false
             independentsClicked.checked = false
 
-            // for (i = 0; i < memberCollection.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
 
-
-            // }
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.firstChild);
@@ -192,9 +182,7 @@ window.onload = function () {
             independentsClicked.checked = false
 
 
-            // for (i = 0; i < republicans.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
-            // }
+
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.firstChild);
@@ -224,11 +212,7 @@ window.onload = function () {
                 myNode.removeChild(myNode.firstChild);
             }
 
-            // for (i = 0; i < memberCollection.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
 
-
-            // }
 
             createTablePerParty(independents)
 
@@ -238,9 +222,7 @@ window.onload = function () {
 
             democratsClicked.checked = false
             republicansClicked.checked = false
-            // for (i = 0; i < independents.length; i++) {
-            //     document.getElementById("table-data").deleteRow(0);
-            // }
+
 
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
