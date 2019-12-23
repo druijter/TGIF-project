@@ -346,3 +346,5 @@ if (tableBody6 !== null) {
   createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
 }
 
+
+

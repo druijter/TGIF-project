@@ -46,6 +46,9 @@ window.onload = function () {
     let republicans = []
     let democrats = []
     let independents = []
+    let democratsAndRepublicans = []
+    let democratsAndIndependents = []
+    let republicansAndIndependents = []
 
     //extract data in array per party in variables//
     function extractPartyMembers() {
@@ -65,12 +68,24 @@ window.onload = function () {
             if (senateMembers[i].party === "I") {
                 independents.push(senateMembers[i])
             }
+            if (senateMembers[i].party === "D" || senateMembers[i].party === "R") {
+                democratsAndRepublicans.push(senateMembers[i])
+            }
+            if (senateMembers[i].party === "D" || senateMembers[i].party === "I") {
+                democratsAndIndependents.push(senateMembers[i])
+            }
+            if (senateMembers[i].party === "R" || senateMembers[i].party === "I") {
+                republicansAndIndependents.push(senateMembers[i])
+            }
         }
 
         return {
             republicans,
             democrats,
-            independents
+            independents,
+            democratsAndRepublicans,
+            democratsAndIndependents,
+            republicansAndIndependents
 
         }
     }
@@ -116,18 +131,28 @@ window.onload = function () {
     }
 
 
-    //when checkboxes are checked//
 
-    //filter for democrats when the democrat checkbox is checked//
+    //initalize variables to get the checkbox input tags to verify later on whether they are checked//
+
     let democratsClicked = document.getElementById("democratFilter")
     let republicansClicked = document.getElementById("republicanFilter")
     let independentsClicked = document.getElementById("independentFilter")
+    let democratsRepublicansClicked = document.getElementById("democratRepublicanFilter")
+    let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
+    let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
 
+    //when checkboxes are checked//
+
+
+    //get only democrats when the democrat checkbox is checked//
     democratsClicked.onclick = function (e) {
 
         if (e.target.checked === true) {
             independentsClicked.checked = false
             republicansClicked.checked = false
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
 
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
@@ -143,6 +168,9 @@ window.onload = function () {
         if (e.target.checked !== true) {
             independentsClicked.checked = false
             republicansClicked.checked = false
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
                 myNode.removeChild(myNode.firstChild);
@@ -156,7 +184,7 @@ window.onload = function () {
     }
 
 
-    //filter for republicans when the republican checkbox is checked//
+    //get only republicans when the republican checkbox is checked//
 
 
     republicansClicked.onclick = function (e) {
@@ -166,6 +194,9 @@ window.onload = function () {
 
             democratsClicked.checked = false
             independentsClicked.checked = false
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
 
 
             const myNode = document.getElementById("table-data");
@@ -180,7 +211,9 @@ window.onload = function () {
         if (e.target.checked !== true) {
             democratsClicked.checked = false
             independentsClicked.checked = false
-
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
 
 
             const myNode = document.getElementById("table-data");
@@ -193,7 +226,7 @@ window.onload = function () {
         }
     }
 
-    //filter for independents when the independent checkbox is checked//
+    //get only independents when the independent checkbox is checked//
 
 
 
@@ -205,6 +238,9 @@ window.onload = function () {
 
             democratsClicked.checked = false
             republicansClicked.checked = false
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
 
 
             const myNode = document.getElementById("table-data");
@@ -223,6 +259,11 @@ window.onload = function () {
             democratsClicked.checked = false
             republicansClicked.checked = false
 
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
+
+
 
             const myNode = document.getElementById("table-data");
             while (myNode.firstChild) {
@@ -238,5 +279,142 @@ window.onload = function () {
     }
 
 
+
+
+
+
+    //get democrats and republicans when the democratRepublicanFilter checkbox is checked//
+
+    democratsRepublicansClicked.onclick = function (e) {
+
+
+        if (e.target.checked === true) {
+
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+
+            createTablePerParty(democratsAndRepublicans)
+
+
+        }
+        if (e.target.checked !== true) {
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsIndependentsClicked.checked = false
+            republicansIndependentsClicked.checked = false
+
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+            createTable(memberCollection)
+
+
+        }
+    }
+
+
+    //get democrats and independents when the democratIndependentFilter checkbox is checked//
+    democratsIndependentsClicked.onclick = function (e) {
+
+
+        if (e.target.checked === true) {
+
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsRepublicansClicked.checked = false
+            republicansIndependentsClicked.checked = false
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+
+            createTablePerParty(democratsAndIndependents)
+
+
+        }
+        if (e.target.checked !== true) {
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsRepublicansClicked.checked = false
+            republicansIndependentsClicked.checked = false
+
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+            createTable(memberCollection)
+
+
+        }
+    }
+
+    //get republicans and independents when the republicanIndependentFilter checkbox is checked//
+    republicansIndependentsClicked.onclick = function (e) {
+
+
+        if (e.target.checked === true) {
+
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+
+
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+
+            createTablePerParty(republicansAndIndependents)
+
+
+        }
+        if (e.target.checked !== true) {
+            democratsClicked.checked = false
+            republicansClicked.checked = false
+            independentsClicked.checked = false
+
+            democratsRepublicansClicked.checked = false
+            democratsIndependentsClicked.checked = false
+
+
+
+
+            const myNode = document.getElementById("table-data");
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+            createTable(memberCollection)
+
+
+        }
+    }
 
 }
