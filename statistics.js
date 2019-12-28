@@ -87,6 +87,7 @@ return overallVoteStatistics
 const overallVoteStatisticsObject =  getOverallVoteStatistics()
 
 
+
 let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
   return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
 })

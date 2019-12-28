@@ -234,4 +234,49 @@ window.onload = function () {
         filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, democratsRepublicansClicked, republicansAndIndependents)
     }
 
+    // Sprint 3: dropdown to filter the data on state//
+
+
+
+
+    let stateeee = []
+    let stateObject = {}
+    let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
+        if (a.state < b.state) return -1;
+        else if (a.state > b.state) return 1;
+        else return 0;
+
+    })
+    console.log(sortedOnStateAscending)
+
+    for (i = 0; i < sortedOnStateAscending.length; i++) {
+        console.log(memberCollection[i].state)
+        stateeee.push(memberCollection[i].state)
+    }
+    // console.log(stateeee.sort())
+
+    // console.log(sortedOnStateAscending[0].state===sortedOnStateAscending[1].state)
+    // console.log(sortedOnStateAscending[6].state===sortedOnStateAscending[7].state)
+    for (i = 0; i < sortedOnStateAscending.length-1; i++) {
+        console.log(sortedOnStateAscending[i].state)
+        //  console.log(sortedOnStateAscending[i].state)
+
+        if(sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state){
+            stateObject.test= []
+            }
+
+        if(sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state){
+            stateObject.push("sds") 
+            
+            console.log(stateObject.test)
+        }
+       
+
+        // if (sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state) {
+
+        //     console.log(sortedOnStateAscending[i].state, sortedOnStateAscending[i + 1].state, i)
+        // }
+    }
+console.log(stateObject)
+
 }
