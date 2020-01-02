@@ -239,44 +239,88 @@ window.onload = function () {
 
 
 
-    let stateeee = []
+
     let stateObject = {}
+    let onlyStateArray = []
+
     let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
         if (a.state < b.state) return -1;
         else if (a.state > b.state) return 1;
         else return 0;
 
     })
-    console.log(sortedOnStateAscending)
 
-    for (i = 0; i < sortedOnStateAscending.length; i++) {
-        console.log(memberCollection[i].state)
-        stateeee.push(memberCollection[i].state)
-    }
-    // console.log(stateeee.sort())
+
+
 
     // console.log(sortedOnStateAscending[0].state===sortedOnStateAscending[1].state)
     // console.log(sortedOnStateAscending[6].state===sortedOnStateAscending[7].state)
-    for (i = 0; i < sortedOnStateAscending.length-1; i++) {
+    for (i = 0; i < sortedOnStateAscending.length; i++) {
         console.log(sortedOnStateAscending[i].state)
-        //  console.log(sortedOnStateAscending[i].state)
 
-        if(sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state){
-            stateObject.test= []
-            }
+        onlyStateArray.push(sortedOnStateAscending[i].state)
 
-        if(sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state){
-            stateObject.push("sds") 
-            
-            console.log(stateObject.test)
+        if (i < sortedOnStateAscending) {
+            console.log(sortedOnStateAscending[i + 1].state)
         }
-       
+
+        //  if(sortedOnStateAscending[i].state !== sortedOnStateAscending[i+1].state){
+        //      onlyStateArray.slice()    
+        //      }
+
+
+
+        // if(sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state){
+        //     stateObject.test.push("sds") 
+
+        //     console.log(stateObject.test)
+        // }
+
 
         // if (sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state) {
 
         //     console.log(sortedOnStateAscending[i].state, sortedOnStateAscending[i + 1].state, i)
         // }
     }
+
+    let dropdownObject = []
+
+    for (j = 0; j < sortedOnStateAscending.length; j++) {
+        if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
+            console.log(j)
+
+            dropdownObject.push({})
+
+
+            console.log(dropdownObject)
+
+
+
+        }
+
+    }
+
+    for (k = 0; k <  dropdownObject.length; k++) {
+
+        let x = onlyStateArray[k]
+        dropdownObject[k][x] = "dsd"
+
+        console.log(dropdownObject)
+
+
+
+    }
+
+
+
+
+
+
+
 console.log(stateObject)
+console.log(onlyStateArray)
+
+console.log(dropdownObject[0])
+
 
 }
