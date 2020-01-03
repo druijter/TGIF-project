@@ -240,7 +240,7 @@ window.onload = function () {
 
 
 
-    let stateObject = {}
+
     let onlyStateArray = []
 
     let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
@@ -256,71 +256,188 @@ window.onload = function () {
     // console.log(sortedOnStateAscending[0].state===sortedOnStateAscending[1].state)
     // console.log(sortedOnStateAscending[6].state===sortedOnStateAscending[7].state)
     for (i = 0; i < sortedOnStateAscending.length; i++) {
-        console.log(sortedOnStateAscending[i].state)
+        // console.log(sortedOnStateAscending[i].state)
 
         onlyStateArray.push(sortedOnStateAscending[i].state)
 
         if (i < sortedOnStateAscending) {
-            console.log(sortedOnStateAscending[i + 1].state)
+            // console.log(sortedOnStateAscending[i + 1].state)
         }
 
-        //  if(sortedOnStateAscending[i].state !== sortedOnStateAscending[i+1].state){
-        //      onlyStateArray.slice()    
-        //      }
 
-
-
-        // if(sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state){
-        //     stateObject.test.push("sds") 
-
-        //     console.log(stateObject.test)
-        // }
-
-
-        // if (sortedOnStateAscending[i].state === sortedOnStateAscending[i + 1].state) {
-
-        //     console.log(sortedOnStateAscending[i].state, sortedOnStateAscending[i + 1].state, i)
-        // }
     }
 
+    //Get all the states in the dataset//
     let dropdownObject = []
+    let statePropertyArray = []
+    let stateCompareArray = []
 
     for (j = 0; j < sortedOnStateAscending.length; j++) {
         if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
-            console.log(j)
+            // console.log(j)
 
+            stateCompareArray.push(onlyStateArray[j])
+            statePropertyArray.push(onlyStateArray[j])
             dropdownObject.push({})
 
 
-            console.log(dropdownObject)
+            // console.log(statePropertyArray)
+            // console.log(dropdownObject)
 
 
 
         }
+        if (sortedOnStateAscending[j].state === onlyStateArray[j + 1]) {
 
-    }
 
-    for (k = 0; k <  dropdownObject.length; k++) {
+            stateCompareArray.push("")
 
-        let x = onlyStateArray[k]
-        dropdownObject[k][x] = "dsd"
-
-        console.log(dropdownObject)
-
+        }
 
 
     }
 
+    //make the statePropertyArray equal in length to the members array, to be able to compare/loop for state names//
+    stateCompareArray.shift()
+    stateCompareArray.push("")
+
+    //Creating an object to be able to filter on states.// 
+    //First step: creating on object for every state. Then adding the person (senators) in it as an array of objects//
+
+    for (k = 0; k < dropdownObject.length; k++) {
+
+        let x = statePropertyArray[k]
+        dropdownObject[k][x] = ""
+
+        // console.log(dropdownObject)
+
+
+
+    }
+
+    stateDataArray = []
+
+    //Second step: creating the differernt person (senators) arrays for every state//
+    for (l = 0; l < sortedOnStateAscending.length; l++) {
+
+        if (sortedOnStateAscending[l].state !== stateCompareArray[l]) {
+            // console.log(onlyStateArray.splice())
+
+
+
+        }
+    }
+
+    var object = [];
+    var result = [];
+    for (var i = 0; i < sortedOnStateAscending.length; i++) {
+        if (sortedOnStateAscending[i].state !== onlyStateArray[i + 1]) {
+
+            // console.log("state")
+        } else {
+            // console.log(sortedOnStateAscending[i].state)
+            // console.log(object)
+            // console.log(result)
+            // object.push(sortedOnStateAscending[i].state);
+            // result.push(object);
+
+            // (sortedOnStateAscending[i].state !== onlyStateArray[i + 1])
+
+        }
 
 
 
 
 
+    }
 
-console.log(stateObject)
-console.log(onlyStateArray)
 
-console.log(dropdownObject[0])
+    // //does not work//
+
+    // for (m = 0; m < statePropertyArray.length; m++) {
+    //     for (n = 0; n < sortedOnStateAscending.length; n++) {
+
+    //         //in tweede loop//
+    //         console.log(n)
+    //         if (sortedOnStateAscending[n].state === sortedOnStateAscending[n + 1].state) {
+    //             console.log("piet")
+    //             dropdownObject[m] += sortedOnStateAscending[n].state
+    //             //  sortedOnStateAscending[m]// 
+    //             console.log(dropdownObject[n])
+
+
+    //         }
+
+    //         if (statePropertyArray[m] !== sortedOnStateAscending[n].state) {
+    //             console.log("piet")
+    //             dropdownObject[m] += sortedOnStateAscending[n].state
+    //             //  sortedOnStateAscending[m]// 
+    //             console.log(dropdownObject[n])
+
+
+    //         }
+    //     }
+
+    //     //in tweede loop//
+
+
+
+
+
+    // }
+    //  //does not work//
+
+
+    // console.log(object2)
+
+    //geef me de index wanneer de waarde van de volgende ongelijk is aan de vorige, stop die in een functie die dan het object vult//
+
+    for (m = 0; m < sortedOnStateAscending.length - 1; m++) {
+        if (sortedOnStateAscending[m].state !== sortedOnStateAscending[m + 1].state) {
+            console.log("hi")
+            console.log(m + 1)
+
+            x(m + 10)
+        }
+
+
+    }
+
+
+    // for (m = 0; m < sortedOnStateAscending.length; m++) {
+    //     if (sortedOnStateAscending[m].state === onlyStateArray[0]) {
+    //         console.log("hi")
+    //     }
+    //     if (sortedOnStateAscending[m].state === onlyStateArray[2]) {
+    //         console.log("hi")
+    //     }
+    //     if (sortedOnStateAscending[m].state === onlyStateArray[4]) {
+    //         console.log("hi")
+    //     }
+    // }
+
+
+    function x(r) {
+        for (m = 0; m < sortedOnStateAscending.length; m++) {
+            if (sortedOnStateAscending[m].state === onlyStateArray[r]) {
+                console.log(sortedOnStateAscending[m].state)
+            }
+        }
+        
+    }
+
+
+
+
+
+    // console.log(statePropertyArray.AK)
+    // console.log(result)
+    // console.log(onlyStateArray)
+    // console.log(stateCompareArray)
+    // console.log(stateDataArray)
+    // console.log(dropdownObject[0])
+    // console.log(dropdownObject)
+
 
 
 }
