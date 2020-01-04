@@ -391,17 +391,21 @@ window.onload = function () {
     // console.log(object2)
 
     //geef me de index wanneer de waarde van de volgende ongelijk is aan de vorige, stop die in een functie die dan het object vult//
+    var mArray = []
 
     for (m = 0; m < sortedOnStateAscending.length - 1; m++) {
         if (sortedOnStateAscending[m].state !== sortedOnStateAscending[m + 1].state) {
-            console.log("hi")
-            console.log(m + 1)
+            mArray.push(m + 1)
+            // console.log("hi")
+            // console.log(m + 1)
 
-            x(m + 10)
+
         }
 
 
     }
+
+    console.log(mArray)
 
 
     // for (m = 0; m < sortedOnStateAscending.length; m++) {
@@ -416,17 +420,69 @@ window.onload = function () {
     //     }
     // }
 
+    // for (o = 0; o < mArray.length; o++) {
+    //     console.log(mArray[o])
+    //     x(mArray[o])
 
-    function x(r) {
-        for (m = 0; m < sortedOnStateAscending.length; m++) {
-            if (sortedOnStateAscending[m].state === onlyStateArray[r]) {
-                console.log(sortedOnStateAscending[m].state)
-            }
+
+    // }
+
+    //try it with forEach//
+    sortedOnStateAscending.forEach(function (statie) {
+        console.log(statie)
+        console.log(onlyStateArray[0])
+        if (statie.state = onlyStateArray[0]) {
+            console.log("hi")
         }
-        
+    })
+    //try it with forEach//
+
+    for (n = 0; n < sortedOnStateAscending.length; n++) {
+
+        for (s = 0; s < mArray.length; s++)
+
+            if (sortedOnStateAscending[n].state === onlyStateArray[mArray[s]]) {
+                // console.log(onlyStateArray[0])
+                console.log(sortedOnStateAscending[n].state)
+                object.x += [sortedOnStateAscending[n].state]
+
+
+                // console.log(n)
+                // console.log(r)
+                // object.push({test:sortedOnStateAscending[n].state})
+
+
+                // console.log(dropdownObject[n])
+
+                // let z = statePropertyArray[n]
+                // dropdownObject[n][z] = 5
+            }
+        // if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
+        //     // console.log(onlyStateArray[0])
+        //     console.log(sortedOnStateAscending[n].state)
+
+
+
+        // }
     }
 
 
+    // }
+
+
+    // for (n = 0; n < sortedOnStateAscending.length; n++) {
+    //     if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
+    //         // console.log(onlyStateArray[0])
+    //         console.log(sortedOnStateAscending[n].state)
+
+
+
+    //     }
+    // }
+
+
+
+    console.log(object)
 
 
 
@@ -439,5 +495,41 @@ window.onload = function () {
     // console.log(dropdownObject)
 
 
+    // const res = sortedOnStateAscending.reduce((acc, curr) => {
+    //     if (!acc[curr.account.type]) acc[curr.account.type] = []; //If this type wasn't previously stored
+    //     acc[curr.account.type].push(curr);
+    //     return acc;
+    // }, {});
 
-}
+    // console.log(res);
+
+    //googling on the problem//
+    Object.defineProperty(Array.prototype, 'group', {
+        enumerable: false,
+        value: function (key) {
+            var map = {};
+            this.forEach(function (e) {
+                
+                var k = key(e);
+                map[k] = map[k] || [];
+                map[k].push(e);
+                
+                
+            });
+            return Object.keys(map).map(function (k) {
+                return {
+                    key: k,
+                    data: map[k]
+                };
+            });
+        }
+    });
+
+
+    var newArray = sortedOnStateAscending.group(function (item) {
+        console.log(item.state)
+        return item.state;
+    });
+    console.log(newArray)
+    //googling on the problem//
+};
