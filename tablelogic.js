@@ -329,16 +329,40 @@ window.onload = function () {
     }
 
     var object = [];
-    var result = [];
-    for (var i = 0; i < sortedOnStateAscending.length; i++) {
-        if (sortedOnStateAscending[i].state !== onlyStateArray[i + 1]) {
+    var result = []
+    
 
+  
+
+
+    // object.push({
+    //     test: sortedOnStateAscending[0],
+    //     test2: sortedOnStateAscending[1]
+    // })
+
+    for (var i = 0; i < sortedOnStateAscending.length-1 ; i++) {
+        if (sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state) {
+          
+
+            object = []
+            
+            object.push(sortedOnStateAscending[i + 1])
+            result.push(object)
+
+        console.log(object)
             // console.log("state")
         } else {
+            object.push(sortedOnStateAscending[i + 1])
+            
+
+            
+
             // console.log(sortedOnStateAscending[i].state)
             // console.log(object)
             // console.log(result)
             // object.push(sortedOnStateAscending[i].state);
+            //   object.push("gep")
+
             // result.push(object);
 
             // (sortedOnStateAscending[i].state !== onlyStateArray[i + 1])
@@ -348,9 +372,8 @@ window.onload = function () {
 
 
 
-
     }
-
+    console.log(result.length)
 
     // //does not work//
 
@@ -391,21 +414,21 @@ window.onload = function () {
     // console.log(object2)
 
     //geef me de index wanneer de waarde van de volgende ongelijk is aan de vorige, stop die in een functie die dan het object vult//
-    var mArray = []
+    // var mArray = []
 
-    for (m = 0; m < sortedOnStateAscending.length - 1; m++) {
-        if (sortedOnStateAscending[m].state !== sortedOnStateAscending[m + 1].state) {
-            mArray.push(m + 1)
-            // console.log("hi")
-            // console.log(m + 1)
-
-
-        }
+    // for (m = 0; m < sortedOnStateAscending.length - 1; m++) {
+    //     if (sortedOnStateAscending[m].state !== sortedOnStateAscending[m + 1].state) {
+    //         mArray.push(m + 1)
+    //         // console.log("hi")
+    //         // console.log(m + 1)
 
 
-    }
+    //     }
 
-    console.log(mArray)
+
+    // }
+
+    // console.log(mArray)
 
 
     // for (m = 0; m < sortedOnStateAscending.length; m++) {
@@ -428,43 +451,43 @@ window.onload = function () {
     // }
 
     //try it with forEach//
-    sortedOnStateAscending.forEach(function (statie) {
-        console.log(statie)
-        console.log(onlyStateArray[0])
-        if (statie.state = onlyStateArray[0]) {
-            console.log("hi")
-        }
-    })
+    // sortedOnStateAscending.forEach(function (statie) {
+    //     console.log(statie)
+    //     console.log(onlyStateArray[0])
+    //     if (statie.state = onlyStateArray[0]) {
+    //         console.log("hi")
+    //     }
+    // })
     //try it with forEach//
 
-    for (n = 0; n < sortedOnStateAscending.length; n++) {
+    // for (n = 0; n < sortedOnStateAscending.length; n++) {
 
-        for (s = 0; s < mArray.length; s++)
+    //     for (s = 0; s < mArray.length; s++)
 
-            if (sortedOnStateAscending[n].state === onlyStateArray[mArray[s]]) {
-                // console.log(onlyStateArray[0])
-                console.log(sortedOnStateAscending[n].state)
-                object.x += [sortedOnStateAscending[n].state]
-
-
-                // console.log(n)
-                // console.log(r)
-                // object.push({test:sortedOnStateAscending[n].state})
+    //         if (sortedOnStateAscending[n].state === onlyStateArray[mArray[s]]) {
+    //             // console.log(onlyStateArray[0])
+    //             console.log(sortedOnStateAscending[n].state)
+    //             object.x += [sortedOnStateAscending[n].state]
 
 
-                // console.log(dropdownObject[n])
-
-                // let z = statePropertyArray[n]
-                // dropdownObject[n][z] = 5
-            }
-        // if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
-        //     // console.log(onlyStateArray[0])
-        //     console.log(sortedOnStateAscending[n].state)
+    // console.log(n)
+    // console.log(r)
+    // object.push({test:sortedOnStateAscending[n].state})
 
 
+    // console.log(dropdownObject[n])
 
-        // }
-    }
+    // let z = statePropertyArray[n]
+    // dropdownObject[n][z] = 5
+    // }
+    // if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
+    //     // console.log(onlyStateArray[0])
+    //     console.log(sortedOnStateAscending[n].state)
+
+
+
+    // }
+    // }
 
 
     // }
@@ -482,7 +505,7 @@ window.onload = function () {
 
 
 
-    console.log(object)
+
 
 
 
@@ -503,33 +526,33 @@ window.onload = function () {
 
     // console.log(res);
 
-    //googling on the problem//
-    Object.defineProperty(Array.prototype, 'group', {
-        enumerable: false,
-        value: function (key) {
-            var map = {};
-            this.forEach(function (e) {
-                
-                var k = key(e);
-                map[k] = map[k] || [];
-                map[k].push(e);
-                
-                
-            });
-            return Object.keys(map).map(function (k) {
-                return {
-                    key: k,
-                    data: map[k]
-                };
-            });
-        }
-    });
+    // //googling on the problem//
+    // Object.defineProperty(Array.prototype, 'group', {
+    //     enumerable: false,
+    //     value: function (key) {
+    //         var map = {};
+    //         this.forEach(function (e) {
+
+    //             var k = key(e);
+    //             map[k] = map[k] || [];
+    //             map[k].push(e);
 
 
-    var newArray = sortedOnStateAscending.group(function (item) {
-        console.log(item.state)
-        return item.state;
-    });
-    console.log(newArray)
-    //googling on the problem//
+    //         });
+    //         return Object.keys(map).map(function (k) {
+    //             return {
+    //                 key: k,
+    //                 data: map[k]
+    //             };
+    //         });
+    //     }
+    // });
+
+
+    // var newArray = sortedOnStateAscending.group(function (item) {
+    //     console.log(item.state)
+    //     return item.state;
+    // });
+    // console.log(newArray)
+    // //googling on the problem//
 };
