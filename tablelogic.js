@@ -343,11 +343,12 @@ window.onload = function () {
     for (var i = 0; i < sortedOnStateAscending.length-1 ; i++) {
         if (sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state) {
           
-
+            // let currentState = sortedOnStateAscending[i + 1].state
+            // console.log(currentState)
             object = []
             
             object.push(sortedOnStateAscending[i + 1])
-            result.push(object)
+            result.push({currentState: object})
 
         console.log(object)
             // console.log("state")
@@ -373,7 +374,14 @@ window.onload = function () {
 
 
     }
-    console.log(result.length)
+
+let firstTwoArray = [sortedOnStateAscending[0],sortedOnStateAscending[1]]
+
+    result.unshift({firstTwoArray
+      })
+    console.log(firstTwoArray)
+    console.log(result)
+    console.log(dropdownObject)
 
     // //does not work//
 
