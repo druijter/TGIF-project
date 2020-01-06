@@ -1,9 +1,10 @@
 window.onload = function () {
 
     let memberCollection = data.results[0].members;
+    let filteredTable = []
+    let filteredTableAll = []
 
-
-    createTable(memberCollection)
+    // createTable(memberCollection)
 
 
 
@@ -41,16 +42,109 @@ window.onload = function () {
     //see which checkboxes are checked//
 
     function test() {
-        var checkboxes = document.getElementsByTagName("input");
-        for (var i = 0; i < checkboxes.length; i++) {
+        let checkboxes = document.getElementsByTagName("input");
+        for (let i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].type == "checkbox") {
-                var isChecked = checkboxes[i].checked;
+                let isChecked = checkboxes[i].checked;
                 console.log(isChecked)
                 console.log(i)
-                if (isChecked === true){
-                console.log(checkboxes[i])
+                let id = checkboxes[i].id
+                if (isChecked) {
+                    filteredTable.push(memberCollection[i])
+                    createTable(filteredTable)
+
+
+                    // if (id === "democratFilter") {
+
+                    //     console.log("demos")
+                    //     for (j = 0; j < memberCollection.length; j++) {
+                    //         if (memberCollection[j].party === "D") {
+
+                    //             filteredTable.push(memberCollection[j])
+                    //             console.log(filteredTable)
+
+
+
+                    //         }
+
+                          
+                    //     }
+
+
+                    // }
+                    
+
+                    // if (id === "republicanFilter") {
+
+                    //     console.log("reps")
+                    // }
+                    // if (id === "independentFilter") {
+
+                    //     console.log("indeps")
+                    // }
                 }
 
+                // if (id === "democratFilter" && filteredTable.length<57) {
+
+
+
+                //     // let checkedCheckbox = document.getElementById(id)
+
+                //     //push data into variable to show data on checkbox filters//
+
+
+                //         console.log("hi")
+                //         for (j = 0; j < memberCollection.length; j++) {
+                //             if (memberCollection[j].party === "D") {
+
+                //                 filteredTable.push(memberCollection[j])
+                //                 // console.log(filteredTable)
+
+
+
+                //             }
+
+                //         createTable(filteredTable)
+                //     }
+
+                // }
+
+
+
+                // if (id === "republicanFilter") {
+                //     console.log("republicans")
+                //     for (k = 0; j < memberCollection.length; k++) {
+
+                //         if (memberCollection[j].party === "R") {
+
+                //             filteredTable.push(memberCollection[k])
+                //             console.log(filteredTable)
+
+
+                //         }
+                //     }
+                //     createTable(filteredTable)
+                // }
+                // if (id !== "republicanFilter"){
+                //     filteredTable =[]
+                // }
+                // if (id === "independentFilter") {
+                //     console.log("independents")
+                //     for (l = 0; l < memberCollection.length; l++) {
+
+                //         if (memberCollection[l].party === "I") {
+
+                //             filteredTable.push(memberCollection[l])
+                //             console.log(filteredTable)
+
+
+                //         }
+                //     }
+                //     createTable(filteredTable)
+                // }
+                // if (id !== "independentFilter"){
+                //     filteredTable =[]
+                // }
             }
         }
     }
