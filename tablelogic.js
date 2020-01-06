@@ -1,16 +1,16 @@
 window.onload = function () {
 
     let memberCollection = data.results[0].members;
-    let filteredTable = []
-    let filteredTableAll = []
+    
+   
 
-    // createTable(memberCollection)
+    createTable(memberCollection)
 
 
 
 
     function createTable(memberCollection) {
-        console.log('inside createTable', memberCollection)
+        
 
         const tbody = document.getElementById("table-data");
         tbody.innerHTML = ""
@@ -43,42 +43,39 @@ window.onload = function () {
     
 
 
-
-
-
-
-    function checkedCheckboxes(arr, identity) {
+    function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
         filteredTable = []
 
         let checkBoxesArray = arr
-        console.log(checkBoxesArray[0])
+       
 
-
+            //if the democrat checkbox is checked//
             if (checkBoxesArray[0]) {
 
           
                 
                 for(j=0; j<memberCollection.length; j++)
-                // console.log(memberCollection)
+               
                 if (memberCollection[j].party==="D"){
                 filteredTable.push(memberCollection[j])
                 }
-              
-
+                
+            //if the republican checkbox is checked//
             }
             if (checkBoxesArray[1]) {
 
                 for(j=0; j<memberCollection.length; j++)
-                // console.log(memberCollection)
+             
                 if (memberCollection[j].party==="R"){
                 filteredTable.push(memberCollection[j])
                 }
 
             }
+            //if the independents checkbox is checked//
             if (checkBoxesArray[2]) {
 
                 for(j=0; j<memberCollection.length; j++)
-                // console.log(memberCollection)
+          
                 if (memberCollection[j].party==="I"){
                 filteredTable.push(memberCollection[j])
                 }
@@ -86,7 +83,6 @@ window.onload = function () {
         
 
         
-        // let checkedParties = [];
 
         //insert some code to populate checkedParties with selected values (D, R, I) or comination of
         createTable(filteredTable)
@@ -110,32 +106,26 @@ window.onload = function () {
         let checkboxes = document.getElementsByTagName("input");
 
         //assign a variable to the value returned by checkedCheckboxes(checkboxes)
-
-
-
-        // important! let checkedParties = checkedCheckboxes(checkboxes)
+ 
 
         for (let i = 0; i < checkboxes.length; i++) {
             //
             if (checkboxes[i].type == "checkbox") {
                 let isChecked = checkboxes[i].checked;
                 checkedBoxes.push(isChecked)
-                let checkBoxId = checkboxes[i].id
-                checkBoxIdArray.push(checkBoxId)
-                console.log(isChecked)
-
-                console.log(i)
-
+              
+         
 
             }
 
         }
         // console.log(checkedBoxes)
-        checkedCheckboxes(checkedBoxes, checkBoxIdArray)
+        filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
         return checkedBoxes
 
     }
 
+    //trigger the onclick function when a checkbox is checked//
 
     document.getElementById("democratFilter").onclick = createCheckBoxBooleanArray;
 
