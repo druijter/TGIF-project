@@ -1,552 +1,583 @@
 window.onload = function () {
 
-    let memberCollection = data.results[0].members;
-    let filteredTable = []
-    let filteredTableAll = []
+        let memberCollection = data.results[0].members;
+        let filteredTable = []
+        let filteredTableAll = []
 
-    // createTable(memberCollection)
-
-
+        // createTable(memberCollection)
 
 
-    function createTable(memberCollection) {
-
-        const tbody = document.getElementById("table-data");
-
-        for (i = 0; i < memberCollection.length; i++) {
 
 
-            let tr = document.createElement("TR")
+        function createTable(memberCollection) {
+            console.log('inside createTable', memberCollection)
 
-            tbody.appendChild(tr)
+            const tbody = document.getElementById("table-data");
+            tbody.innerHTML=""
 
-            let a = document.createElement("a")
-            a.href = memberCollection[i].url
-            a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
-
-
-            tr.insertCell().appendChild(a)
-            tr.insertCell().innerHTML = memberCollection[i].party
-            tr.insertCell().innerHTML = memberCollection[i].state
-            tr.insertCell().innerHTML = memberCollection[i].seniority
-            tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
+            for (i = 0; i < memberCollection.length; i++) {
 
 
+                let tr = document.createElement("TR")
+
+                tbody.appendChild(tr)
+
+                let a = document.createElement("a")
+                a.href = memberCollection[i].url
+                a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
+
+
+                tr.insertCell().appendChild(a)
+                tr.insertCell().innerHTML = memberCollection[i].party
+                tr.insertCell().innerHTML = memberCollection[i].state
+                tr.insertCell().innerHTML = memberCollection[i].seniority
+                tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
+
+
+
+
+            }
 
 
         }
 
 
-    }
-
-    //see which checkboxes are checked//
-
-    function test() {
-        let checkboxes = document.getElementsByTagName("input");
-        for (let i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].type == "checkbox") {
-                let isChecked = checkboxes[i].checked;
-                console.log(isChecked)
-                console.log(i)
-                let id = checkboxes[i].id
-                if (isChecked) {
-                    filteredTable.push(memberCollection[i])
-                    createTable(filteredTable)
 
 
-                    // if (id === "democratFilter") {
+        //see which checkboxes are checked//
 
-                    //     console.log("demos")
-                    //     for (j = 0; j < memberCollection.length; j++) {
-                    //         if (memberCollection[j].party === "D") {
+        function test() {
 
-                    //             filteredTable.push(memberCollection[j])
-                    //             console.log(filteredTable)
+            filteredTable = []
+
+            let checkboxes = document.getElementsByTagName("input");
+            console.log('checkboxes', checkboxes)
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type == "checkbox") {
+                    let isChecked = checkboxes[i].checked;
+                    console.log(isChecked)
+                    console.log(i)
+                    let id = checkboxes[i].id
+                    if (isChecked) {
 
 
 
-                    //         }
-
-                          
-                    //     }
+                        // filteredTable.push(memberCollection[i])
+                        // createTable(filteredTable)
 
 
-                    // }
-                    
+                        if (id === "independentFilter") {
 
-                    // if (id === "republicanFilter") {
+                            console.log("independents")
+                            //     for (j = 0; j < memberCollection.length; j++) {
+                            //         if (memberCollection[j].party === "D") {
 
-                    //     console.log("reps")
-                    // }
-                    // if (id === "independentFilter") {
+                            //             filteredTable.push(memberCollection[j])
+                            //             console.log(filteredTable)
+                            memberCollection.filter(function (arr) {
+                                
+                                if (arr.party === "I") {
+                                    console.log(arr)
+                                    filteredTable.push(arr)
 
-                    //     console.log("indeps")
-                    // }
+                                }
+                            })
+                            createTable(filteredTable)
+
+
+                            // document.getElementById('independentFilter').onchange = function () {
+                            //     filteredTable = []
+                            //     memberCollection.filter(function (arr) {
+                            //             if (arr.party === "I") {
+                            //                 console.log("onchange")
+                            //                 filteredTable.splice(arr)
+
+                            //             }
+
+
+                            //         });
+                            //     }
+
+                                }
+
+
+                                //     }
+
+
+                                // }
+
+
+                                if (id === "republicanFilter") {
+
+                                    console.log("reps")
+                                }
+                                if (id === "independentFilter") {
+
+                                    console.log("indeps")
+                                }
+                            }
+
+                            // if (id === "democratFilter" && filteredTable.length<57) {
+
+
+
+                            //     // let checkedCheckbox = document.getElementById(id)
+
+                            //     //push data into variable to show data on checkbox filters//
+
+
+                            //         console.log("hi")
+                            //         for (j = 0; j < memberCollection.length; j++) {
+                            //             if (memberCollection[j].party === "D") {
+
+                            //                 filteredTable.push(memberCollection[j])
+                            //                 // console.log(filteredTable)
+
+
+
+                            //             }
+
+                            //         createTable(filteredTable)
+                            //     }
+
+                            // }
+
+
+
+                            // if (id === "republicanFilter") {
+                            //     console.log("republicans")
+                            //     for (k = 0; j < memberCollection.length; k++) {
+
+                            //         if (memberCollection[j].party === "R") {
+
+                            //             filteredTable.push(memberCollection[k])
+                            //             console.log(filteredTable)
+
+
+                            //         }
+                            //     }
+                            //     createTable(filteredTable)
+                            // }
+                            // if (id !== "republicanFilter"){
+                            //     filteredTable =[]
+                            // }
+                            // if (id === "independentFilter") {
+                            //     console.log("independents")
+                            //     for (l = 0; l < memberCollection.length; l++) {
+
+                            //         if (memberCollection[l].party === "I") {
+
+                            //             filteredTable.push(memberCollection[l])
+                            //             console.log(filteredTable)
+
+
+                            //         }
+                            //     }
+                            //     createTable(filteredTable)
+                            // }
+                            // if (id !== "independentFilter"){
+                            //     filteredTable =[]
+                            // }
+                        }
+                    }
                 }
 
-                // if (id === "democratFilter" && filteredTable.length<57) {
+
+                document.getElementById("democratFilter").onclick = function () {
+                    test()
+                }
+                document.getElementById("republicanFilter").onclick = function () {
+                    test()
+                }
+                document.getElementById("independentFilter").onclick = test;
+
+                //    test("democratFilter", "republicanFilter", "independentFilter")
+
+                // document.getElementById("republicanFilter").onclick = function () {
 
 
-
-                //     // let checkedCheckbox = document.getElementById(id)
-
-                //     //push data into variable to show data on checkbox filters//
-
-
-                //         console.log("hi")
-                //         for (j = 0; j < memberCollection.length; j++) {
-                //             if (memberCollection[j].party === "D") {
-
-                //                 filteredTable.push(memberCollection[j])
-                //                 // console.log(filteredTable)
-
-
-
-                //             }
-
-                //         createTable(filteredTable)
-                //     }
-
-                // }
-
-
-
-                // if (id === "republicanFilter") {
-                //     console.log("republicans")
-                //     for (k = 0; j < memberCollection.length; k++) {
-
-                //         if (memberCollection[j].party === "R") {
-
-                //             filteredTable.push(memberCollection[k])
-                //             console.log(filteredTable)
-
-
+                //     var checkboxes = document.getElementsByTagName("input");
+                //     for (var i = 0; i < checkboxes.length; i++) {
+                //         if (checkboxes[i].type == "checkbox") {
+                //             var isChecked = checkboxes[i].checked;
+                //             console.log(isChecked)
                 //         }
                 //     }
-                //     createTable(filteredTable)
                 // }
-                // if (id !== "republicanFilter"){
-                //     filteredTable =[]
-                // }
-                // if (id === "independentFilter") {
-                //     console.log("independents")
-                //     for (l = 0; l < memberCollection.length; l++) {
 
-                //         if (memberCollection[l].party === "I") {
-
-                //             filteredTable.push(memberCollection[l])
-                //             console.log(filteredTable)
+                // document.getElementById("independentFilter").onclick = function () {
 
 
+                //     var checkboxes = document.getElementsByTagName("input");
+                //     for (var i = 0; i < checkboxes.length; i++) {
+                //         if (checkboxes[i].type == "checkbox") {
+                //             var isChecked = checkboxes[i].checked;
+                //             console.log(isChecked)
                 //         }
                 //     }
-                //     createTable(filteredTable)
                 // }
-                // if (id !== "independentFilter"){
-                //     filteredTable =[]
+
+                // table creation and checkbox logic//
+
+                // //create the arrays with objects per party. First defining empty arrays, to be filled below here//
+                // let republicans = []
+                // let democrats = []
+                // let independents = []
+                // let democratsAndRepublicans = []
+                // let democratsAndIndependents = []
+                // let republicansAndIndependents = []
+
+                // //extract data in array per party in variables//
+                // function extractPartyMembers() {
+
+                //     let senateMembers = data.results[0].members
+                //     for (i = 0; i < senateMembers.length; i++) {
+
+
+                //         if (senateMembers[i].party === "R") {
+                //             republicans.push(senateMembers[i])
+                //         }
+
+                //         if (senateMembers[i].party === "D") {
+                //             democrats.push(senateMembers[i])
+                //         }
+
+                //         if (senateMembers[i].party === "I") {
+                //             independents.push(senateMembers[i])
+                //         }
+                //         if (senateMembers[i].party === "D" || senateMembers[i].party === "R") {
+                //             democratsAndRepublicans.push(senateMembers[i])
+                //         }
+                //         if (senateMembers[i].party === "D" || senateMembers[i].party === "I") {
+                //             democratsAndIndependents.push(senateMembers[i])
+                //         }
+                //         if (senateMembers[i].party === "R" || senateMembers[i].party === "I") {
+                //             republicansAndIndependents.push(senateMembers[i])
+                //         }
+                //     }
+
+                //     return {
+                //         republicans,
+                //         democrats,
+                //         independents,
+                //         democratsAndRepublicans,
+                //         democratsAndIndependents,
+                //         republicansAndIndependents
+
+                //     }
                 // }
-            }
-        }
-    }
-
-
-    document.getElementById("democratFilter").onclick = function () {
-        test()
-    }
-    document.getElementById("republicanFilter").onclick = function () {
-        test()
-    }
-    document.getElementById("independentFilter").onclick = function () {
-        test()
-    }
 
-    //    test("democratFilter", "republicanFilter", "independentFilter")
+                // //set variables to their objects//
 
-    // document.getElementById("republicanFilter").onclick = function () {
+                // extractedPartyMembersObject = extractPartyMembers()
 
+                // republicans = extractedPartyMembersObject.republicans
+                // democrats = extractedPartyMembersObject.democrats
+                // independents = extractedPartyMembersObject.independents
+                // democratsAndRepublicans = extractedPartyMembersObject.democratsAndRepublicans
+                // democratsAndIndependents = extractedPartyMembersObject.democratsAndIndependents
+                // republicansAndIndependents = extractedPartyMembersObject.republicansAndIndependents
 
-    //     var checkboxes = document.getElementsByTagName("input");
-    //     for (var i = 0; i < checkboxes.length; i++) {
-    //         if (checkboxes[i].type == "checkbox") {
-    //             var isChecked = checkboxes[i].checked;
-    //             console.log(isChecked)
-    //         }
-    //     }
-    // }
 
-    // document.getElementById("independentFilter").onclick = function () {
+                //default table: shown when no checkbox is checked//
+                // function createTablePerParty(memberCollection) {
 
+                //     const tbody = document.getElementById("table-data");
 
-    //     var checkboxes = document.getElementsByTagName("input");
-    //     for (var i = 0; i < checkboxes.length; i++) {
-    //         if (checkboxes[i].type == "checkbox") {
-    //             var isChecked = checkboxes[i].checked;
-    //             console.log(isChecked)
-    //         }
-    //     }
-    // }
+                //     for (i = 0; i < memberCollection.length; i++) {
 
-    // table creation and checkbox logic//
 
-    // //create the arrays with objects per party. First defining empty arrays, to be filled below here//
-    // let republicans = []
-    // let democrats = []
-    // let independents = []
-    // let democratsAndRepublicans = []
-    // let democratsAndIndependents = []
-    // let republicansAndIndependents = []
+                //         let tr = document.createElement("TR")
 
-    // //extract data in array per party in variables//
-    // function extractPartyMembers() {
+                //         tbody.appendChild(tr)
 
-    //     let senateMembers = data.results[0].members
-    //     for (i = 0; i < senateMembers.length; i++) {
+                //         let a = document.createElement("a")
+                //         a.href = memberCollection[i].url
+                //         a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
 
 
-    //         if (senateMembers[i].party === "R") {
-    //             republicans.push(senateMembers[i])
-    //         }
+                //         tr.insertCell().appendChild(a)
+                //         tr.insertCell().innerHTML = memberCollection[i].party
+                //         tr.insertCell().innerHTML = memberCollection[i].state
+                //         tr.insertCell().innerHTML = memberCollection[i].seniority
+                //         tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
 
-    //         if (senateMembers[i].party === "D") {
-    //             democrats.push(senateMembers[i])
-    //         }
 
-    //         if (senateMembers[i].party === "I") {
-    //             independents.push(senateMembers[i])
-    //         }
-    //         if (senateMembers[i].party === "D" || senateMembers[i].party === "R") {
-    //             democratsAndRepublicans.push(senateMembers[i])
-    //         }
-    //         if (senateMembers[i].party === "D" || senateMembers[i].party === "I") {
-    //             democratsAndIndependents.push(senateMembers[i])
-    //         }
-    //         if (senateMembers[i].party === "R" || senateMembers[i].party === "I") {
-    //             republicansAndIndependents.push(senateMembers[i])
-    //         }
-    //     }
 
-    //     return {
-    //         republicans,
-    //         democrats,
-    //         independents,
-    //         democratsAndRepublicans,
-    //         democratsAndIndependents,
-    //         republicansAndIndependents
 
-    //     }
-    // }
+                //     }
 
-    // //set variables to their objects//
 
-    // extractedPartyMembersObject = extractPartyMembers()
+                // }
 
-    // republicans = extractedPartyMembersObject.republicans
-    // democrats = extractedPartyMembersObject.democrats
-    // independents = extractedPartyMembersObject.independents
-    // democratsAndRepublicans = extractedPartyMembersObject.democratsAndRepublicans
-    // democratsAndIndependents = extractedPartyMembersObject.democratsAndIndependents
-    // republicansAndIndependents = extractedPartyMembersObject.republicansAndIndependents
 
 
-    //default table: shown when no checkbox is checked//
-    // function createTablePerParty(memberCollection) {
+                // //initalize variables to get the checkbox input tags to verify later on whether they are checked//
 
-    //     const tbody = document.getElementById("table-data");
+                // let democratsClicked = document.getElementById("democratFilter")
+                // let republicansClicked = document.getElementById("republicanFilter")
+                // let independentsClicked = document.getElementById("independentFilter")
+                // let democratsRepublicansClicked = document.getElementById("democratRepublicanFilter")
+                // let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
+                // let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
 
-    //     for (i = 0; i < memberCollection.length; i++) {
+                // function to show the default table
 
+                // function showDefaultTable() {
 
-    //         let tr = document.createElement("TR")
 
-    //         tbody.appendChild(tr)
 
-    //         let a = document.createElement("a")
-    //         a.href = memberCollection[i].url
-    //         a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
 
+                //     const myNode = document.getElementById("table-data");
+                //     while (myNode.firstChild) {
+                //         myNode.removeChild(myNode.firstChild);
+                //     }
+                //     createTable(memberCollection)
 
-    //         tr.insertCell().appendChild(a)
-    //         tr.insertCell().innerHTML = memberCollection[i].party
-    //         tr.insertCell().innerHTML = memberCollection[i].state
-    //         tr.insertCell().innerHTML = memberCollection[i].seniority
-    //         tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
 
 
+                // }
 
+                // //!!WHEN CHECKBOXES ARE CHECKED!!//
 
-    //     }
+                // // General function to create the filtered tables//
 
+                // function filteredTableCreator(e, filterParameter1, filterParameter2, filterParameter3, filterParameter4, filterParameter5, partyGroup) {
 
-    // }
 
 
 
-    // //initalize variables to get the checkbox input tags to verify later on whether they are checked//
+                //     if (e.target.checked === true) {
 
-    // let democratsClicked = document.getElementById("democratFilter")
-    // let republicansClicked = document.getElementById("republicanFilter")
-    // let independentsClicked = document.getElementById("independentFilter")
-    // let democratsRepublicansClicked = document.getElementById("democratRepublicanFilter")
-    // let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
-    // let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
+                //         filterParameter1.checked = false
+                //         filterParameter2.checked = false
+                //         filterParameter3.checked = false
+                //         filterParameter4.checked = false
+                //         filterParameter5.checked = false
 
-    // function to show the default table
 
-    // function showDefaultTable() {
+                //         const myNode = document.getElementById("table-data");
+                //         while (myNode.firstChild) {
+                //             myNode.removeChild(myNode.firstChild);
+                //         }
 
+                //         createTablePerParty(partyGroup)
 
 
+                //     }
+                //     if (e.target.checked !== true) {
 
-    //     const myNode = document.getElementById("table-data");
-    //     while (myNode.firstChild) {
-    //         myNode.removeChild(myNode.firstChild);
-    //     }
-    //     createTable(memberCollection)
 
 
 
-    // }
+                //         showDefaultTable()
 
-    // //!!WHEN CHECKBOXES ARE CHECKED!!//
 
-    // // General function to create the filtered tables//
+                //     }
+                // }
 
-    // function filteredTableCreator(e, filterParameter1, filterParameter2, filterParameter3, filterParameter4, filterParameter5, partyGroup) {
 
+                // //get only democrats when the democrat checkbox is checked//
+                // democratsClicked.onclick = function (e) {
+                //     filteredTableCreator(e, independentsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, democrats)
+                // }
 
 
+                // //get only republicans when the republican checkbox is checked//
+                // republicansClicked.onclick = function (e) {
+                //     filteredTableCreator(e, democratsClicked, independentsClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, republicans)
+                // }
 
-    //     if (e.target.checked === true) {
+                // //get only independents when the independent checkbox is checked//
 
-    //         filterParameter1.checked = false
-    //         filterParameter2.checked = false
-    //         filterParameter3.checked = false
-    //         filterParameter4.checked = false
-    //         filterParameter5.checked = false
+                // independentsClicked.onclick = function (e) {
+                //     filteredTableCreator(e, democratsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, independents)
+                // }
 
+                // //get democrats and republicans when the democrat and republicans checkbox is checked//
 
-    //         const myNode = document.getElementById("table-data");
-    //         while (myNode.firstChild) {
-    //             myNode.removeChild(myNode.firstChild);
-    //         }
+                // democratsRepublicansClicked.onclick = function (e) {
+                //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, republicansIndependentsClicked, democratsAndRepublicans)
+                // }
 
-    //         createTablePerParty(partyGroup)
+                // //get democrats and independents when the democrat and independents checkbox is checked//
+                // democratsIndependentsClicked.onclick = function (e) {
+                //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsRepublicansClicked, republicansIndependentsClicked, democratsAndIndependents)
+                // }
 
+                // //get republicans and independents when the republicans and independents checkbox is checked//
 
-    //     }
-    //     if (e.target.checked !== true) {
+                // republicansIndependentsClicked.onclick = function (e) {
+                //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, democratsRepublicansClicked, republicansAndIndependents)
+                // }
 
+                // Sprint 3: dropdown to filter the data on state//
 
 
 
-    //         showDefaultTable()
 
 
-    //     }
-    // }
 
+                let onlyStateArray = []
 
-    // //get only democrats when the democrat checkbox is checked//
-    // democratsClicked.onclick = function (e) {
-    //     filteredTableCreator(e, independentsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, democrats)
-    // }
+                let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
+                    if (a.state < b.state) return -1;
+                    else if (a.state > b.state) return 1;
+                    else return 0;
 
+                })
 
-    // //get only republicans when the republican checkbox is checked//
-    // republicansClicked.onclick = function (e) {
-    //     filteredTableCreator(e, democratsClicked, independentsClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, republicans)
-    // }
 
-    // //get only independents when the independent checkbox is checked//
 
-    // independentsClicked.onclick = function (e) {
-    //     filteredTableCreator(e, democratsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, independents)
-    // }
 
-    // //get democrats and republicans when the democrat and republicans checkbox is checked//
+                // console.log(sortedOnStateAscending[0].state===sortedOnStateAscending[1].state)
+                // console.log(sortedOnStateAscending[6].state===sortedOnStateAscending[7].state)
+                for (i = 0; i < sortedOnStateAscending.length; i++) {
+                    // console.log(sortedOnStateAscending[i].state)
 
-    // democratsRepublicansClicked.onclick = function (e) {
-    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, republicansIndependentsClicked, democratsAndRepublicans)
-    // }
+                    onlyStateArray.push(sortedOnStateAscending[i].state)
 
-    // //get democrats and independents when the democrat and independents checkbox is checked//
-    // democratsIndependentsClicked.onclick = function (e) {
-    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsRepublicansClicked, republicansIndependentsClicked, democratsAndIndependents)
-    // }
+                    if (i < sortedOnStateAscending) {
+                        // console.log(sortedOnStateAscending[i + 1].state)
+                    }
 
-    // //get republicans and independents when the republicans and independents checkbox is checked//
 
-    // republicansIndependentsClicked.onclick = function (e) {
-    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, democratsRepublicansClicked, republicansAndIndependents)
-    // }
+                }
 
-    // Sprint 3: dropdown to filter the data on state//
+                //Get all the states in the dataset//
+                let dropdownObject = []
+                let statePropertyArray = []
+                let stateCompareArray = []
 
+                for (j = 0; j < sortedOnStateAscending.length; j++) {
+                    if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
+                        // console.log(j)
 
+                        stateCompareArray.push(onlyStateArray[j])
+                        statePropertyArray.push(onlyStateArray[j])
+                        dropdownObject.push({})
 
 
+                        // console.log(statePropertyArray)
+                        // console.log(dropdownObject)
 
 
-    let onlyStateArray = []
 
-    let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
-        if (a.state < b.state) return -1;
-        else if (a.state > b.state) return 1;
-        else return 0;
+                    }
+                    if (sortedOnStateAscending[j].state === onlyStateArray[j + 1]) {
 
-    })
 
+                        stateCompareArray.push("")
 
+                    }
 
 
-    // console.log(sortedOnStateAscending[0].state===sortedOnStateAscending[1].state)
-    // console.log(sortedOnStateAscending[6].state===sortedOnStateAscending[7].state)
-    for (i = 0; i < sortedOnStateAscending.length; i++) {
-        // console.log(sortedOnStateAscending[i].state)
+                }
 
-        onlyStateArray.push(sortedOnStateAscending[i].state)
+                //make the statePropertyArray equal in length to the members array, to be able to compare/loop for state names//
+                stateCompareArray.shift()
+                stateCompareArray.push("")
 
-        if (i < sortedOnStateAscending) {
-            // console.log(sortedOnStateAscending[i + 1].state)
-        }
+                //Creating an object to be able to filter on states.// 
+                //First step: creating on object for every state. Then adding the person (senators) in it as an array of objects//
 
+                for (k = 0; k < dropdownObject.length; k++) {
 
-    }
+                    let x = statePropertyArray[k]
+                    dropdownObject[k][x] = ""
 
-    //Get all the states in the dataset//
-    let dropdownObject = []
-    let statePropertyArray = []
-    let stateCompareArray = []
+                    // console.log(dropdownObject)
 
-    for (j = 0; j < sortedOnStateAscending.length; j++) {
-        if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
-            // console.log(j)
 
-            stateCompareArray.push(onlyStateArray[j])
-            statePropertyArray.push(onlyStateArray[j])
-            dropdownObject.push({})
 
+                }
 
-            // console.log(statePropertyArray)
-            // console.log(dropdownObject)
+                stateDataArray = []
 
+                //Second step: creating the differerent person (senators) arrays for every state//
+                for (l = 0; l < sortedOnStateAscending.length; l++) {
 
+                    if (sortedOnStateAscending[l].state !== stateCompareArray[l]) {
+                        // console.log(onlyStateArray.splice())
 
-        }
-        if (sortedOnStateAscending[j].state === onlyStateArray[j + 1]) {
 
 
-            stateCompareArray.push("")
+                    }
+                }
 
-        }
+                var timelyArray = [];
+                var filteredStateData = []
 
 
-    }
 
-    //make the statePropertyArray equal in length to the members array, to be able to compare/loop for state names//
-    stateCompareArray.shift()
-    stateCompareArray.push("")
 
-    //Creating an object to be able to filter on states.// 
-    //First step: creating on object for every state. Then adding the person (senators) in it as an array of objects//
 
-    for (k = 0; k < dropdownObject.length; k++) {
 
-        let x = statePropertyArray[k]
-        dropdownObject[k][x] = ""
+                for (var i = 0; i < sortedOnStateAscending.length - 1; i++) {
+                    if (sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state) {
 
-        // console.log(dropdownObject)
 
+                        timelyArray = []
 
+                        timelyArray.push(sortedOnStateAscending[i + 1])
+                        filteredStateData.push(
+                            timelyArray
+                        )
 
-    }
 
-    stateDataArray = []
 
-    //Second step: creating the differerent person (senators) arrays for every state//
-    for (l = 0; l < sortedOnStateAscending.length; l++) {
+                    } else {
+                        timelyArray.push(sortedOnStateAscending[i + 1])
 
-        if (sortedOnStateAscending[l].state !== stateCompareArray[l]) {
-            // console.log(onlyStateArray.splice())
 
 
 
-        }
-    }
 
-    var timelyArray = [];
-    var filteredStateData = []
+                    }
 
 
 
 
+                }
 
+                //adding the first two senators as an array to the object//
 
-    for (var i = 0; i < sortedOnStateAscending.length - 1; i++) {
-        if (sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state) {
+                filteredStateData.unshift([sortedOnStateAscending[0], sortedOnStateAscending[1]])
 
 
-            timelyArray = []
+                // creating the dataset to filter senators on state//
+                for (k = 0; k < dropdownObject.length; k++) {
 
-            timelyArray.push(sortedOnStateAscending[i + 1])
-            filteredStateData.push(
-                timelyArray
-            )
+                    let x = statePropertyArray[k]
+                    dropdownObject[k][x] = filteredStateData[k]
 
+                    // console.log(dropdownObject)
 
 
-        } else {
-            timelyArray.push(sortedOnStateAscending[i + 1])
 
+                }
 
+                console.log(statePropertyArray)
 
+                for (l = 0; l < statePropertyArray.length; l++) {
+                    let dropdownButton = document.getElementById('state')
 
+                    let option = document.createElement('option')
 
-        }
 
+                    option.id = "options" + l
+                    var b = "options" + l
 
+                    // console.log(b)
+                    // console.log(document.getElementById(option.id))
+                    let optionClick = document.getElementById(option.id)
+                    // console.log(optionClick)
+                    // optionClick.onclick = function (){
+                    //         console.log("i'm clicked")
+                    //     }
 
+                    dropdownButton.appendChild(option)
+                    option.text = statePropertyArray[l]
 
-    }
-
-    //adding the first two senators as an array to the object//
-
-    filteredStateData.unshift([sortedOnStateAscending[0], sortedOnStateAscending[1]])
-
-
-    // creating the dataset to filter senators on state//
-    for (k = 0; k < dropdownObject.length; k++) {
-
-        let x = statePropertyArray[k]
-        dropdownObject[k][x] = filteredStateData[k]
-
-        // console.log(dropdownObject)
-
-
-
-    }
-
-    console.log(statePropertyArray)
-
-    for (l = 0; l < statePropertyArray.length; l++) {
-        let dropdownButton = document.getElementById('state')
-
-        let option = document.createElement('option')
-
-
-        option.id = "options" + l
-        var b = "options" + l
-
-        // console.log(b)
-        // console.log(document.getElementById(option.id))
-        let optionClick = document.getElementById(option.id)
-        // console.log(optionClick)
-        // optionClick.onclick = function (){
-        //         console.log("i'm clicked")
-        //     }
-
-        dropdownButton.appendChild(option)
-        option.text = statePropertyArray[l]
-
-    }
-};
+                }
+            };
