@@ -38,7 +38,59 @@ window.onload = function () {
 
     }
 
+    //see which checkboxes are checked//
 
+    function test() {
+        var checkboxes = document.getElementsByTagName("input");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == "checkbox") {
+                var isChecked = checkboxes[i].checked;
+                console.log(isChecked)
+                console.log(i)
+                if (isChecked === true){
+                console.log(checkboxes[i])
+                }
+
+            }
+        }
+    }
+
+
+    document.getElementById("democratFilter").onclick = function () {
+        test()
+    }
+    document.getElementById("republicanFilter").onclick = function () {
+        test()
+    }
+    document.getElementById("independentFilter").onclick = function () {
+        test()
+    }
+
+    //    test("democratFilter", "republicanFilter", "independentFilter")
+
+    // document.getElementById("republicanFilter").onclick = function () {
+
+
+    //     var checkboxes = document.getElementsByTagName("input");
+    //     for (var i = 0; i < checkboxes.length; i++) {
+    //         if (checkboxes[i].type == "checkbox") {
+    //             var isChecked = checkboxes[i].checked;
+    //             console.log(isChecked)
+    //         }
+    //     }
+    // }
+
+    // document.getElementById("independentFilter").onclick = function () {
+
+
+    //     var checkboxes = document.getElementsByTagName("input");
+    //     for (var i = 0; i < checkboxes.length; i++) {
+    //         if (checkboxes[i].type == "checkbox") {
+    //             var isChecked = checkboxes[i].checked;
+    //             console.log(isChecked)
+    //         }
+    //     }
+    // }
 
     // table creation and checkbox logic//
 
@@ -103,35 +155,35 @@ window.onload = function () {
 
 
     //default table: shown when no checkbox is checked//
-    function createTablePerParty(memberCollection) {
+    // function createTablePerParty(memberCollection) {
 
-        const tbody = document.getElementById("table-data");
+    //     const tbody = document.getElementById("table-data");
 
-        for (i = 0; i < memberCollection.length; i++) {
-
-
-            let tr = document.createElement("TR")
-
-            tbody.appendChild(tr)
-
-            let a = document.createElement("a")
-            a.href = memberCollection[i].url
-            a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
+    //     for (i = 0; i < memberCollection.length; i++) {
 
 
-            tr.insertCell().appendChild(a)
-            tr.insertCell().innerHTML = memberCollection[i].party
-            tr.insertCell().innerHTML = memberCollection[i].state
-            tr.insertCell().innerHTML = memberCollection[i].seniority
-            tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
+    //         let tr = document.createElement("TR")
+
+    //         tbody.appendChild(tr)
+
+    //         let a = document.createElement("a")
+    //         a.href = memberCollection[i].url
+    //         a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
+
+
+    //         tr.insertCell().appendChild(a)
+    //         tr.insertCell().innerHTML = memberCollection[i].party
+    //         tr.insertCell().innerHTML = memberCollection[i].state
+    //         tr.insertCell().innerHTML = memberCollection[i].seniority
+    //         tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
 
 
 
 
-        }
+    //     }
 
 
-    }
+    // }
 
 
 
@@ -146,20 +198,20 @@ window.onload = function () {
 
     // function to show the default table
 
-    function showDefaultTable() {
+    // function showDefaultTable() {
 
 
 
 
-        const myNode = document.getElementById("table-data");
-        while (myNode.firstChild) {
-            myNode.removeChild(myNode.firstChild);
-        }
-        createTable(memberCollection)
+    //     const myNode = document.getElementById("table-data");
+    //     while (myNode.firstChild) {
+    //         myNode.removeChild(myNode.firstChild);
+    //     }
+    //     createTable(memberCollection)
 
 
 
-    }
+    // }
 
     // //!!WHEN CHECKBOXES ARE CHECKED!!//
 
@@ -383,24 +435,24 @@ window.onload = function () {
     console.log(statePropertyArray)
 
     for (l = 0; l < statePropertyArray.length; l++) {
-    let dropdownButton = document.getElementById('state')
+        let dropdownButton = document.getElementById('state')
 
-    let option = document.createElement('option')
-    
-       
-    option.id = "options" + l
-    var b = "options" + l
-    
-    console.log(b)
-    console.log(document.getElementById(option.id))
-    let optionClick = document.getElementById(option.id)
-    console.log(optionClick)
-    // optionClick.onclick = function (){
-    //         console.log("i'm clicked")
-    //     }
+        let option = document.createElement('option')
 
-    dropdownButton.appendChild(option)
-    option.text = statePropertyArray[l]
+
+        option.id = "options" + l
+        var b = "options" + l
+
+        // console.log(b)
+        // console.log(document.getElementById(option.id))
+        let optionClick = document.getElementById(option.id)
+        // console.log(optionClick)
+        // optionClick.onclick = function (){
+        //         console.log("i'm clicked")
+        //     }
+
+        dropdownButton.appendChild(option)
+        option.text = statePropertyArray[l]
 
     }
 };
