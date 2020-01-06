@@ -42,64 +42,64 @@ window.onload = function () {
 
     // table creation and checkbox logic//
 
-    //create the arrays with objects per party. First defining empty arrays, to be filled below here//
-    let republicans = []
-    let democrats = []
-    let independents = []
-    let democratsAndRepublicans = []
-    let democratsAndIndependents = []
-    let republicansAndIndependents = []
+    // //create the arrays with objects per party. First defining empty arrays, to be filled below here//
+    // let republicans = []
+    // let democrats = []
+    // let independents = []
+    // let democratsAndRepublicans = []
+    // let democratsAndIndependents = []
+    // let republicansAndIndependents = []
 
-    //extract data in array per party in variables//
-    function extractPartyMembers() {
+    // //extract data in array per party in variables//
+    // function extractPartyMembers() {
 
-        let senateMembers = data.results[0].members
-        for (i = 0; i < senateMembers.length; i++) {
+    //     let senateMembers = data.results[0].members
+    //     for (i = 0; i < senateMembers.length; i++) {
 
 
-            if (senateMembers[i].party === "R") {
-                republicans.push(senateMembers[i])
-            }
+    //         if (senateMembers[i].party === "R") {
+    //             republicans.push(senateMembers[i])
+    //         }
 
-            if (senateMembers[i].party === "D") {
-                democrats.push(senateMembers[i])
-            }
+    //         if (senateMembers[i].party === "D") {
+    //             democrats.push(senateMembers[i])
+    //         }
 
-            if (senateMembers[i].party === "I") {
-                independents.push(senateMembers[i])
-            }
-            if (senateMembers[i].party === "D" || senateMembers[i].party === "R") {
-                democratsAndRepublicans.push(senateMembers[i])
-            }
-            if (senateMembers[i].party === "D" || senateMembers[i].party === "I") {
-                democratsAndIndependents.push(senateMembers[i])
-            }
-            if (senateMembers[i].party === "R" || senateMembers[i].party === "I") {
-                republicansAndIndependents.push(senateMembers[i])
-            }
-        }
+    //         if (senateMembers[i].party === "I") {
+    //             independents.push(senateMembers[i])
+    //         }
+    //         if (senateMembers[i].party === "D" || senateMembers[i].party === "R") {
+    //             democratsAndRepublicans.push(senateMembers[i])
+    //         }
+    //         if (senateMembers[i].party === "D" || senateMembers[i].party === "I") {
+    //             democratsAndIndependents.push(senateMembers[i])
+    //         }
+    //         if (senateMembers[i].party === "R" || senateMembers[i].party === "I") {
+    //             republicansAndIndependents.push(senateMembers[i])
+    //         }
+    //     }
 
-        return {
-            republicans,
-            democrats,
-            independents,
-            democratsAndRepublicans,
-            democratsAndIndependents,
-            republicansAndIndependents
+    //     return {
+    //         republicans,
+    //         democrats,
+    //         independents,
+    //         democratsAndRepublicans,
+    //         democratsAndIndependents,
+    //         republicansAndIndependents
 
-        }
-    }
+    //     }
+    // }
 
-    //set variables to their objects//
+    // //set variables to their objects//
 
-    extractedPartyMembersObject = extractPartyMembers()
+    // extractedPartyMembersObject = extractPartyMembers()
 
-    republicans = extractedPartyMembersObject.republicans
-    democrats = extractedPartyMembersObject.democrats
-    independents = extractedPartyMembersObject.independents
-    democratsAndRepublicans = extractedPartyMembersObject.democratsAndRepublicans
-    democratsAndIndependents = extractedPartyMembersObject.democratsAndIndependents
-    republicansAndIndependents = extractedPartyMembersObject.republicansAndIndependents
+    // republicans = extractedPartyMembersObject.republicans
+    // democrats = extractedPartyMembersObject.democrats
+    // independents = extractedPartyMembersObject.independents
+    // democratsAndRepublicans = extractedPartyMembersObject.democratsAndRepublicans
+    // democratsAndIndependents = extractedPartyMembersObject.democratsAndIndependents
+    // republicansAndIndependents = extractedPartyMembersObject.republicansAndIndependents
 
 
     //default table: shown when no checkbox is checked//
@@ -135,14 +135,14 @@ window.onload = function () {
 
 
 
-    //initalize variables to get the checkbox input tags to verify later on whether they are checked//
+    // //initalize variables to get the checkbox input tags to verify later on whether they are checked//
 
-    let democratsClicked = document.getElementById("democratFilter")
-    let republicansClicked = document.getElementById("republicanFilter")
-    let independentsClicked = document.getElementById("independentFilter")
-    let democratsRepublicansClicked = document.getElementById("democratRepublicanFilter")
-    let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
-    let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
+    // let democratsClicked = document.getElementById("democratFilter")
+    // let republicansClicked = document.getElementById("republicanFilter")
+    // let independentsClicked = document.getElementById("independentFilter")
+    // let democratsRepublicansClicked = document.getElementById("democratRepublicanFilter")
+    // let democratsIndependentsClicked = document.getElementById("democratIndependentFilter")
+    // let republicansIndependentsClicked = document.getElementById("republicanIndependentFilter")
 
     // function to show the default table
 
@@ -161,78 +161,78 @@ window.onload = function () {
 
     }
 
-    //!!WHEN CHECKBOXES ARE CHECKED!!//
+    // //!!WHEN CHECKBOXES ARE CHECKED!!//
 
-    // General function to create the filtered tables//
+    // // General function to create the filtered tables//
 
-    function filteredTableCreator(e, filterParameter1, filterParameter2, filterParameter3, filterParameter4, filterParameter5, partyGroup) {
-
-
-
-
-        if (e.target.checked === true) {
-
-            filterParameter1.checked = false
-            filterParameter2.checked = false
-            filterParameter3.checked = false
-            filterParameter4.checked = false
-            filterParameter5.checked = false
-
-
-            const myNode = document.getElementById("table-data");
-            while (myNode.firstChild) {
-                myNode.removeChild(myNode.firstChild);
-            }
-
-            createTablePerParty(partyGroup)
-
-
-        }
-        if (e.target.checked !== true) {
+    // function filteredTableCreator(e, filterParameter1, filterParameter2, filterParameter3, filterParameter4, filterParameter5, partyGroup) {
 
 
 
 
-            showDefaultTable()
+    //     if (e.target.checked === true) {
+
+    //         filterParameter1.checked = false
+    //         filterParameter2.checked = false
+    //         filterParameter3.checked = false
+    //         filterParameter4.checked = false
+    //         filterParameter5.checked = false
 
 
-        }
-    }
+    //         const myNode = document.getElementById("table-data");
+    //         while (myNode.firstChild) {
+    //             myNode.removeChild(myNode.firstChild);
+    //         }
+
+    //         createTablePerParty(partyGroup)
 
 
-    //get only democrats when the democrat checkbox is checked//
-    democratsClicked.onclick = function (e) {
-        filteredTableCreator(e, independentsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, democrats)
-    }
+    //     }
+    //     if (e.target.checked !== true) {
 
 
-    //get only republicans when the republican checkbox is checked//
-    republicansClicked.onclick = function (e) {
-        filteredTableCreator(e, democratsClicked, independentsClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, republicans)
-    }
 
-    //get only independents when the independent checkbox is checked//
 
-    independentsClicked.onclick = function (e) {
-        filteredTableCreator(e, democratsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, independents)
-    }
+    //         showDefaultTable()
 
-    //get democrats and republicans when the democrat and republicans checkbox is checked//
 
-    democratsRepublicansClicked.onclick = function (e) {
-        filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, republicansIndependentsClicked, democratsAndRepublicans)
-    }
+    //     }
+    // }
 
-    //get democrats and independents when the democrat and independents checkbox is checked//
-    democratsIndependentsClicked.onclick = function (e) {
-        filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsRepublicansClicked, republicansIndependentsClicked, democratsAndIndependents)
-    }
 
-    //get republicans and independents when the republicans and independents checkbox is checked//
+    // //get only democrats when the democrat checkbox is checked//
+    // democratsClicked.onclick = function (e) {
+    //     filteredTableCreator(e, independentsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, democrats)
+    // }
 
-    republicansIndependentsClicked.onclick = function (e) {
-        filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, democratsRepublicansClicked, republicansAndIndependents)
-    }
+
+    // //get only republicans when the republican checkbox is checked//
+    // republicansClicked.onclick = function (e) {
+    //     filteredTableCreator(e, democratsClicked, independentsClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, republicans)
+    // }
+
+    // //get only independents when the independent checkbox is checked//
+
+    // independentsClicked.onclick = function (e) {
+    //     filteredTableCreator(e, democratsClicked, republicansClicked, democratsRepublicansClicked, democratsIndependentsClicked, republicansIndependentsClicked, independents)
+    // }
+
+    // //get democrats and republicans when the democrat and republicans checkbox is checked//
+
+    // democratsRepublicansClicked.onclick = function (e) {
+    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, republicansIndependentsClicked, democratsAndRepublicans)
+    // }
+
+    // //get democrats and independents when the democrat and independents checkbox is checked//
+    // democratsIndependentsClicked.onclick = function (e) {
+    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsRepublicansClicked, republicansIndependentsClicked, democratsAndIndependents)
+    // }
+
+    // //get republicans and independents when the republicans and independents checkbox is checked//
+
+    // republicansIndependentsClicked.onclick = function (e) {
+    //     filteredTableCreator(e, democratsClicked, republicansClicked, independentsClicked, democratsIndependentsClicked, democratsRepublicansClicked, republicansAndIndependents)
+    // }
 
     // Sprint 3: dropdown to filter the data on state//
 
@@ -317,7 +317,7 @@ window.onload = function () {
 
     stateDataArray = []
 
-    //Second step: creating the differernt person (senators) arrays for every state//
+    //Second step: creating the differerent person (senators) arrays for every state//
     for (l = 0; l < sortedOnStateAscending.length; l++) {
 
         if (sortedOnStateAscending[l].state !== stateCompareArray[l]) {
@@ -328,45 +328,33 @@ window.onload = function () {
         }
     }
 
-    var object = [];
-    var result = []
-    
-
-  
+    var timelyArray = [];
+    var filteredStateData = []
 
 
-    // object.push({
-    //     test: sortedOnStateAscending[0],
-    //     test2: sortedOnStateAscending[1]
-    // })
 
-    for (var i = 0; i < sortedOnStateAscending.length-1 ; i++) {
+
+
+
+    for (var i = 0; i < sortedOnStateAscending.length - 1; i++) {
         if (sortedOnStateAscending[i].state !== sortedOnStateAscending[i + 1].state) {
-          
-            // let currentState = sortedOnStateAscending[i + 1].state
-            // console.log(currentState)
-            object = []
-            
-            object.push(sortedOnStateAscending[i + 1])
-            result.push({currentState: object})
 
-        console.log(object)
-            // console.log("state")
+
+            timelyArray = []
+
+            timelyArray.push(sortedOnStateAscending[i + 1])
+            filteredStateData.push(
+                timelyArray
+            )
+
+
+
         } else {
-            object.push(sortedOnStateAscending[i + 1])
-            
+            timelyArray.push(sortedOnStateAscending[i + 1])
 
-            
 
-            // console.log(sortedOnStateAscending[i].state)
-            // console.log(object)
-            // console.log(result)
-            // object.push(sortedOnStateAscending[i].state);
-            //   object.push("gep")
 
-            // result.push(object);
 
-            // (sortedOnStateAscending[i].state !== onlyStateArray[i + 1])
 
         }
 
@@ -375,192 +363,44 @@ window.onload = function () {
 
     }
 
-let firstTwoArray = [sortedOnStateAscending[0],sortedOnStateAscending[1]]
+    //adding the first two senators as an array to the object//
 
-    result.unshift({firstTwoArray
-      })
-    console.log(firstTwoArray)
-    console.log(result)
-    console.log(dropdownObject)
-
-    // //does not work//
-
-    // for (m = 0; m < statePropertyArray.length; m++) {
-    //     for (n = 0; n < sortedOnStateAscending.length; n++) {
-
-    //         //in tweede loop//
-    //         console.log(n)
-    //         if (sortedOnStateAscending[n].state === sortedOnStateAscending[n + 1].state) {
-    //             console.log("piet")
-    //             dropdownObject[m] += sortedOnStateAscending[n].state
-    //             //  sortedOnStateAscending[m]// 
-    //             console.log(dropdownObject[n])
+    filteredStateData.unshift([sortedOnStateAscending[0], sortedOnStateAscending[1]])
 
 
-    //         }
+    // creating the dataset to filter senators on state//
+    for (k = 0; k < dropdownObject.length; k++) {
 
-    //         if (statePropertyArray[m] !== sortedOnStateAscending[n].state) {
-    //             console.log("piet")
-    //             dropdownObject[m] += sortedOnStateAscending[n].state
-    //             //  sortedOnStateAscending[m]// 
-    //             console.log(dropdownObject[n])
+        let x = statePropertyArray[k]
+        dropdownObject[k][x] = filteredStateData[k]
+
+        // console.log(dropdownObject)
 
 
-    //         }
+
+    }
+
+    console.log(statePropertyArray)
+
+    for (l = 0; l < statePropertyArray.length; l++) {
+    let dropdownButton = document.getElementById('state')
+
+    let option = document.createElement('option')
+    
+       
+    option.id = "options" + l
+    var b = "options" + l
+    
+    console.log(b)
+    console.log(document.getElementById(option.id))
+    let optionClick = document.getElementById(option.id)
+    console.log(optionClick)
+    // optionClick.onclick = function (){
+    //         console.log("i'm clicked")
     //     }
 
-    //     //in tweede loop//
+    dropdownButton.appendChild(option)
+    option.text = statePropertyArray[l]
 
-
-
-
-
-    // }
-    //  //does not work//
-
-
-    // console.log(object2)
-
-    //geef me de index wanneer de waarde van de volgende ongelijk is aan de vorige, stop die in een functie die dan het object vult//
-    // var mArray = []
-
-    // for (m = 0; m < sortedOnStateAscending.length - 1; m++) {
-    //     if (sortedOnStateAscending[m].state !== sortedOnStateAscending[m + 1].state) {
-    //         mArray.push(m + 1)
-    //         // console.log("hi")
-    //         // console.log(m + 1)
-
-
-    //     }
-
-
-    // }
-
-    // console.log(mArray)
-
-
-    // for (m = 0; m < sortedOnStateAscending.length; m++) {
-    //     if (sortedOnStateAscending[m].state === onlyStateArray[0]) {
-    //         console.log("hi")
-    //     }
-    //     if (sortedOnStateAscending[m].state === onlyStateArray[2]) {
-    //         console.log("hi")
-    //     }
-    //     if (sortedOnStateAscending[m].state === onlyStateArray[4]) {
-    //         console.log("hi")
-    //     }
-    // }
-
-    // for (o = 0; o < mArray.length; o++) {
-    //     console.log(mArray[o])
-    //     x(mArray[o])
-
-
-    // }
-
-    //try it with forEach//
-    // sortedOnStateAscending.forEach(function (statie) {
-    //     console.log(statie)
-    //     console.log(onlyStateArray[0])
-    //     if (statie.state = onlyStateArray[0]) {
-    //         console.log("hi")
-    //     }
-    // })
-    //try it with forEach//
-
-    // for (n = 0; n < sortedOnStateAscending.length; n++) {
-
-    //     for (s = 0; s < mArray.length; s++)
-
-    //         if (sortedOnStateAscending[n].state === onlyStateArray[mArray[s]]) {
-    //             // console.log(onlyStateArray[0])
-    //             console.log(sortedOnStateAscending[n].state)
-    //             object.x += [sortedOnStateAscending[n].state]
-
-
-    // console.log(n)
-    // console.log(r)
-    // object.push({test:sortedOnStateAscending[n].state})
-
-
-    // console.log(dropdownObject[n])
-
-    // let z = statePropertyArray[n]
-    // dropdownObject[n][z] = 5
-    // }
-    // if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
-    //     // console.log(onlyStateArray[0])
-    //     console.log(sortedOnStateAscending[n].state)
-
-
-
-    // }
-    // }
-
-
-    // }
-
-
-    // for (n = 0; n < sortedOnStateAscending.length; n++) {
-    //     if (sortedOnStateAscending[n].state === onlyStateArray[2]) {
-    //         // console.log(onlyStateArray[0])
-    //         console.log(sortedOnStateAscending[n].state)
-
-
-
-    //     }
-    // }
-
-
-
-
-
-
-
-    // console.log(statePropertyArray.AK)
-    // console.log(result)
-    // console.log(onlyStateArray)
-    // console.log(stateCompareArray)
-    // console.log(stateDataArray)
-    // console.log(dropdownObject[0])
-    // console.log(dropdownObject)
-
-
-    // const res = sortedOnStateAscending.reduce((acc, curr) => {
-    //     if (!acc[curr.account.type]) acc[curr.account.type] = []; //If this type wasn't previously stored
-    //     acc[curr.account.type].push(curr);
-    //     return acc;
-    // }, {});
-
-    // console.log(res);
-
-    // //googling on the problem//
-    // Object.defineProperty(Array.prototype, 'group', {
-    //     enumerable: false,
-    //     value: function (key) {
-    //         var map = {};
-    //         this.forEach(function (e) {
-
-    //             var k = key(e);
-    //             map[k] = map[k] || [];
-    //             map[k].push(e);
-
-
-    //         });
-    //         return Object.keys(map).map(function (k) {
-    //             return {
-    //                 key: k,
-    //                 data: map[k]
-    //             };
-    //         });
-    //     }
-    // });
-
-
-    // var newArray = sortedOnStateAscending.group(function (item) {
-    //     console.log(item.state)
-    //     return item.state;
-    // });
-    // console.log(newArray)
-    // //googling on the problem//
+    }
 };
