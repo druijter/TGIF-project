@@ -1,8 +1,8 @@
 window.onload = function () {
 
     let memberCollection = data.results[0].members;
-    
-   
+
+
 
     createTable(memberCollection)
 
@@ -10,7 +10,7 @@ window.onload = function () {
 
 
     function createTable(memberCollection) {
-        
+
 
         const tbody = document.getElementById("table-data");
         tbody.innerHTML = ""
@@ -40,63 +40,63 @@ window.onload = function () {
 
 
     }
-    
 
+    
 
     function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
         filteredTable = []
 
         let checkBoxesArray = arr
-       
 
-            //if the democrat checkbox is checked//
-            if (checkBoxesArray[0]) {
 
-          
-                
-                for(j=0; j<memberCollection.length; j++)
-               
-                if (memberCollection[j].party==="D"){
-                filteredTable.push(memberCollection[j])
+        //if the democrat checkbox is checked//
+        if (checkBoxesArray[0]) {
+
+
+
+            for (j = 0; j < memberCollection.length; j++)
+
+                if (memberCollection[j].party === "D") {
+                    filteredTable.push(memberCollection[j])
                 }
-                
+
             //if the republican checkbox is checked//
-            }
-            if (checkBoxesArray[1]) {
+        }
+        if (checkBoxesArray[1]) {
 
-                for(j=0; j<memberCollection.length; j++)
-             
-                if (memberCollection[j].party==="R"){
-                filteredTable.push(memberCollection[j])
+            for (j = 0; j < memberCollection.length; j++)
+
+                if (memberCollection[j].party === "R") {
+                    filteredTable.push(memberCollection[j])
                 }
 
-            }
-            //if the independents checkbox is checked//
-            if (checkBoxesArray[2]) {
+        }
+        //if the independents checkbox is checked//
+        if (checkBoxesArray[2]) {
 
-                for(j=0; j<memberCollection.length; j++)
-          
-                if (memberCollection[j].party==="I"){
-                filteredTable.push(memberCollection[j])
+            for (j = 0; j < memberCollection.length; j++)
+
+                if (memberCollection[j].party === "I") {
+                    filteredTable.push(memberCollection[j])
                 }
-            }
-        
+        }
 
-        
+
+
 
         //insert some code to populate checkedParties with selected values (D, R, I) or comination of
         createTable(filteredTable)
         return filteredTable;
-        
+
     }
 
-    
+
 
     //see which checkboxes are checked//
 
     function createCheckBoxBooleanArray() {
 
-        
+
 
         let checkedBoxes = []
         let checkBoxIdArray = []
@@ -106,15 +106,15 @@ window.onload = function () {
         let checkboxes = document.getElementsByTagName("input");
 
         //assign a variable to the value returned by checkedCheckboxes(checkboxes)
- 
+
 
         for (let i = 0; i < checkboxes.length; i++) {
             //
             if (checkboxes[i].type == "checkbox") {
                 let isChecked = checkboxes[i].checked;
                 checkedBoxes.push(isChecked)
-              
-         
+
+
 
             }
 
@@ -291,18 +291,53 @@ window.onload = function () {
 
 
         option.id = "options" + l
-        var b = "options" + l
+        let b = option.id
+        
 
-        // console.log(b)
-        // console.log(document.getElementById(option.id))
-        let optionClick = document.getElementById(option.id)
+       
+      
+        
+        //  dat.onclick = function() {
+        //      console.log("DAADADA")
+        //  }
+        // let optionClick = document.getElementById(option0)
         // console.log(optionClick)
-        // optionClick.onclick = function (){
-        //         console.log("i'm clicked")
-        //     }
-
+      
         dropdownButton.appendChild(option)
         option.text = statePropertyArray[l]
+        // console.log(optionClick)
+
+      
+
+
 
     }
+    let mySelect = document.getElementById("state");
+
+mySelect.onchange = function() {
+
+   let stateFilteredArray=[] 
+   let x = document.getElementById("state").value;
+   console.log(x)
+   console.log(dropdownObject)
+   for (r=0; r<dropdownObject.length; r++){
+       let dropDownObjectValue = Object.keys(dropdownObject[r]).toString()
+       let selectedDropDownValue = x
+       if(selectedDropDownValue===dropDownObjectValue){
+           console.log("They Are Equal" + selectedDropDownValue)
+           let dropDownFilteredData = dropdownObject[r][selectedDropDownValue]
+
+           console.log(dropDownFilteredData.length)
+           for (s=0; s<dropDownFilteredData.length; s++){
+               console.log(dropDownFilteredData[s])
+               stateFilteredArray.push(dropDownFilteredData[s])
+                              
+           }
+           createTable(stateFilteredArray)
+       }
+     
+   }
+   
+//    document.getElementById("options0").innerHTML = "You selected: " + x;
+ }
 };
