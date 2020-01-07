@@ -45,41 +45,54 @@ window.onload = function () {
 
     function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
         filteredTable = []
-
+        let selectedState = document.getElementById("state").value;
         let checkBoxesArray = arr
 
+        for (j = 0; j < memberCollection.length; j++) {
+            if (selectedState === memberCollection[j].state || selectedState == 'all') {
+                if (memberCollection[j].party === "D" && checkBoxesArray[0] ) {
+                    filteredTable.push(memberCollection[j])
+                }
+                if (memberCollection[j].party === "R" && checkBoxesArray[1]) {
+                    filteredTable.push(memberCollection[j])
+                }
+                if (memberCollection[j].party === "I" && checkBoxesArray[2]) {
+                    filteredTable.push(memberCollection[j])
+                }
+            }
+        }
 
         //if the democrat checkbox is checked//
-        if (checkBoxesArray[0]) {
+        // if (checkBoxesArray[0]) {
 
-            console.log()
+        //     console.log()
 
-            for (j = 0; j < memberCollection.length; j++)
+        //     for (j = 0; j < memberCollection.length; j++)
 
-                if (memberCollection[j].party === "D") {
-                    filteredTable.push(memberCollection[j])
-                }
+        //         if (memberCollection[j].party === "D" && ) {
+        //             filteredTable.push(memberCollection[j])
+        //         }
 
-            //if the republican checkbox is checked//
-        }
-        if (checkBoxesArray[1]) {
+        //     //if the republican checkbox is checked//
+        // }
+        // if (checkBoxesArray[1]) {
 
-            for (j = 0; j < memberCollection.length; j++)
+        //     for (j = 0; j < memberCollection.length; j++)
 
-                if (memberCollection[j].party === "R") {
-                    filteredTable.push(memberCollection[j])
-                }
+        //         if (memberCollection[j].party === "R") {
+        //             filteredTable.push(memberCollection[j])
+        //         }
 
-        }
-        //if the independents checkbox is checked//
-        if (checkBoxesArray[2]) {
+        // }
+        // //if the independents checkbox is checked//
+        // if (checkBoxesArray[2]) {
 
-            for (j = 0; j < memberCollection.length; j++)
+        //     for (j = 0; j < memberCollection.length; j++)
 
-                if (memberCollection[j].party === "I") {
-                    filteredTable.push(memberCollection[j])
-                }
-        }
+        //         if (memberCollection[j].party === "I") {
+        //             filteredTable.push(memberCollection[j])
+        //         }
+        // }
 
         // if (checkBoxesArray[0] && ) {
 
@@ -101,7 +114,7 @@ window.onload = function () {
 
         //insert some code to populate checkedParties with selected values (D, R, I) or comination of
         createTable(filteredTable)
-        return filteredTable;
+        // return filteredTable;
 
     }
 
@@ -136,7 +149,7 @@ window.onload = function () {
         }
         // console.log(checkedBoxes)
         filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
-        return checkedBoxes
+        // return checkedBoxes
 
     }
 
@@ -149,6 +162,10 @@ window.onload = function () {
 
 
     document.getElementById("independentFilter").onclick = createCheckBoxBooleanArray;
+
+    document.getElementById("state").onchange = createCheckBoxBooleanArray
+
+    // mySelect.onchange = filterByState
 
 
     // Sprint 3: dropdown to filter the data on state//
@@ -327,9 +344,9 @@ window.onload = function () {
 
 
     }
-    let mySelect = document.getElementById("state");
+    // let mySelect = document.getElementById("state");
 
-    mySelect.onchange = filterByState
+    // mySelect.onchange = filterByState
     
     function filterByState () {
 
@@ -353,10 +370,12 @@ window.onload = function () {
                     filteredTable.push(dropDownFilteredData[s])
 
                 }
-                createTable(filteredTable)    
+                  
             }
 
         }
+
+        createTable(filteredTable)  
 
         //    document.getElementById("options0").innerHTML = "You selected: " + x;
     }
