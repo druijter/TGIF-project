@@ -68,7 +68,6 @@ window.onload = function () {
     }
 
 
-
     //see which checkboxes are checked//
 
     function createCheckBoxBooleanArray() {
@@ -155,6 +154,32 @@ window.onload = function () {
         console.log(statePropertyArray)
         console.log(onlyStateArray)
     }
+
     createDropdownMenu()
+
+
+    //fetch data//
+    let promise = fetch('https://api.propublica.org/congress/v1/{senate}/{133}/members.json',
+    )
+    console.log(promise)
+
+//     var url = "https://yourUrl";
+// var bearer = 'Bearer ' + bearer_token;
+// fetch(url, {
+//         method: 'GET',
+//         withCredentials: true,
+//         credentials: 'include',
+//         headers: {
+//             'Authorization': bearer,
+//             'X-FP-API-KEY': 'iphone', //it can be iPhone or your any other attribute
+//             'Content-Type': 'application/json'
+//         }
+//     }).then(responseJson => {
+//         var items = JSON.parse(responseJson._bodyInit);
+//     })
+//     .catch(error => this.setState({
+//         isLoading: false,
+//         message: 'Something bad happened ' + error
+//     }));
 
 };
