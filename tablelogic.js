@@ -58,7 +58,7 @@ window.onload = function () {
         }
 
 
- 
+
 
 
         //insert some code to populate checkedParties with selected values (D, R, I) or combination of
@@ -73,7 +73,7 @@ window.onload = function () {
 
     function createCheckBoxBooleanArray() {
         let checkedBoxes = []
-       
+
         let checkboxes = document.getElementsByTagName("input");
 
         //assign a variable to the value returned by checkedCheckboxes(checkboxes)
@@ -101,56 +101,60 @@ window.onload = function () {
     document.getElementById("state").onchange = createCheckBoxBooleanArray
 
     // Sprint 3: dropdown to filter the data on state//
+    function createDropdownMenu() {
+
+        let onlyStateArray = []
+        let statePropertyArray = []
+
+        let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
+            if (a.state < b.state) return -1;
+            else if (a.state > b.state) return 1;
+            else return 0;
+
+        })
 
 
-    let onlyStateArray = []
-
-    let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
-        if (a.state < b.state) return -1;
-        else if (a.state > b.state) return 1;
-        else return 0;
-
-    })
+        for (i = 0; i < sortedOnStateAscending.length; i++) {
 
 
-    for (i = 0; i < sortedOnStateAscending.length; i++) {
+            onlyStateArray.push(sortedOnStateAscending[i].state)
 
 
-        onlyStateArray.push(sortedOnStateAscending[i].state)
 
-        if (i < sortedOnStateAscending) {
 
         }
 
 
-    }
-
-   
-    //creating array with only states//
-    
-    let statePropertyArray = []
+        //creating array with only states//
 
 
-    for (j = 0; j < sortedOnStateAscending.length; j++) {
-        if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
 
-          
-            statePropertyArray.push(onlyStateArray[j])
-            
+
+        for (j = 0; j < sortedOnStateAscending.length; j++) {
+            if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
+
+
+                statePropertyArray.push(onlyStateArray[j])
+
+            }
+
         }
-        
+
+        //creating dropdowns//
+
+        for (l = 0; l < statePropertyArray.length; l++) {
+            let dropdownButton = document.getElementById('state')
+
+            let option = document.createElement('option')
+
+            dropdownButton.appendChild(option)
+            option.text = statePropertyArray[l]
+
+        }
+
+        console.log(statePropertyArray)
+        console.log(onlyStateArray)
     }
- 
-    //creating dropdowns//
-     
-    for (l = 0; l < statePropertyArray.length; l++) {
-        let dropdownButton = document.getElementById('state')
-
-        let option = document.createElement('option')
-
-        dropdownButton.appendChild(option)
-        option.text = statePropertyArray[l]
-
-    }
+    createDropdownMenu()
 
 };
