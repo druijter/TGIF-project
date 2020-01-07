@@ -41,7 +41,7 @@ window.onload = function () {
 
     }
 
-    
+
 
     function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
         filteredTable = []
@@ -52,7 +52,7 @@ window.onload = function () {
         //if the democrat checkbox is checked//
         if (checkBoxesArray[0]) {
 
-
+            console.log()
 
             for (j = 0; j < memberCollection.length; j++)
 
@@ -81,7 +81,22 @@ window.onload = function () {
                 }
         }
 
+        // if (checkBoxesArray[0] && ) {
 
+        //     console.log()
+
+        //     for (j = 0; j < memberCollection.length; j++)
+
+        //         if (memberCollection[j].party === "D") {
+        //             filteredTable.push(memberCollection[j])
+        //         }
+
+
+
+        let mySelect = document.getElementById("options1").selected
+        console.log(mySelect)
+
+    // mySelect.onchange = filterByState
 
 
         //insert some code to populate checkedParties with selected values (D, R, I) or comination of
@@ -292,52 +307,57 @@ window.onload = function () {
 
         option.id = "options" + l
         let b = option.id
-        
 
-       
-      
-        
+
+
+
+
         //  dat.onclick = function() {
         //      console.log("DAADADA")
         //  }
         // let optionClick = document.getElementById(option0)
         // console.log(optionClick)
-      
+
         dropdownButton.appendChild(option)
         option.text = statePropertyArray[l]
         // console.log(optionClick)
 
-      
+
 
 
 
     }
     let mySelect = document.getElementById("state");
 
-mySelect.onchange = function() {
+    mySelect.onchange = filterByState
+    
+    function filterByState () {
 
-   let stateFilteredArray=[] 
-   let x = document.getElementById("state").value;
-   console.log(x)
-   console.log(dropdownObject)
-   for (r=0; r<dropdownObject.length; r++){
-       let dropDownObjectValue = Object.keys(dropdownObject[r]).toString()
-       let selectedDropDownValue = x
-       if(selectedDropDownValue===dropDownObjectValue){
-           console.log("They Are Equal" + selectedDropDownValue)
-           let dropDownFilteredData = dropdownObject[r][selectedDropDownValue]
+        let filteredTable = []
+        let x = document.getElementById("state").value;
 
-           console.log(dropDownFilteredData.length)
-           for (s=0; s<dropDownFilteredData.length; s++){
-               console.log(dropDownFilteredData[s])
-               stateFilteredArray.push(dropDownFilteredData[s])
-                              
-           }
-           createTable(stateFilteredArray)
-       }
-     
-   }
-   
-//    document.getElementById("options0").innerHTML = "You selected: " + x;
- }
+        console.log(x)
+        console.log(dropdownObject)
+        for (r = 0; r < dropdownObject.length; r++) {
+            let dropDownObjectValue = Object.keys(dropdownObject[r]).toString()
+            let selectedDropDownValue = x
+            if (selectedDropDownValue === dropDownObjectValue) {
+                console.log(createCheckBoxBooleanArray())
+
+                console.log("They Are Equal" + selectedDropDownValue)
+                let dropDownFilteredData = dropdownObject[r][selectedDropDownValue]
+
+                console.log(dropDownFilteredData.length)
+                for (s = 0; s < dropDownFilteredData.length; s++) {
+                    console.log(dropDownFilteredData[s])
+                    filteredTable.push(dropDownFilteredData[s])
+
+                }
+                createTable(filteredTable)    
+            }
+
+        }
+
+        //    document.getElementById("options0").innerHTML = "You selected: " + x;
+    }
 };
