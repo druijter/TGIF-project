@@ -2,12 +2,18 @@
 
 
 let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
+let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
 
 let apiData = [];
 let memberCollection;
 
-fetchData(senateUrl)
 
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/house-data.html"){
+    fetchData(houseUrl)
+}
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/senate-data.html"){
+    fetchData(senateUrl)
+}
 
 
 function executeTableAndFiltersAfterDataAreFetched() {
@@ -173,7 +179,9 @@ function executeTableAndFiltersAfterDataAreFetched() {
 //show loader//
 function showLoader (){
     // document.body.innerHTML="s"
-    
+    var mainContent = document.getElementById('mainContent')
+    console.log(mainContent)
+    mainContent.style.display="none"
     console.log("hi")
     var animationWindow = document.getElementById('animationWindow')
     animationWindow.style.display = "block"
@@ -212,6 +220,9 @@ function fetchData(url) {
             memberCollection = apiData
             var animationWindow = document.getElementById('animationWindow')
         animationWindow.style.display="none"
+        var mainContent = document.getElementById('mainContent')
+        console.log(mainContent)
+        mainContent.style.display="block"
             executeTableAndFiltersAfterDataAreFetched()
 
 
