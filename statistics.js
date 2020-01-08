@@ -1,21 +1,27 @@
-let url = "https://api.propublica.org/congress/v1/113/senate/members.json";
 
-// let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
-// let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
+
+let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
+let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
 
 let apiData = [];
 
 let memberCollection;
 
 
-// if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/house-party-loyalty.html"){
-//     fetchData2(houseUrl)
-// }
-// if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/senate-party-loyalty.html"){
-//     fetchData2(senateUrl)
-// }
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/house-party-loyalty.html"){
+    fetchData2(houseUrl)
+}
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/senate-party-loyalty.html"){
+    fetchData2(senateUrl)
+}
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/house-attendance.html"){
+    fetchData2(houseUrl)
+}
+if (window.location.href === "file:///home/daan/Desktop/Ubiqum/tgif/senate-attendance.html"){
+    fetchData2(senateUrl)
+}
 
-fetchData2(url)
+
 console.log(apiData)
 
 function executeAttendanceAndLoyaltyTables() {

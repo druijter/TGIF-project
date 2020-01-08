@@ -12,15 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style type="text/css">
-        
-        .table :first-child
-{
-    width:37%;
-}
-.table {
-    width:70%;
-}
-        
+        .table :first-child {
+            width: 37%;
+        }
+
+        .table {
+            width: 70%;
+        }
     </style>
 </head>
 
@@ -133,14 +131,16 @@
             </ul>
         </div>
     </nav>
-
+    <div id="animationWindow">
+        The data is being loaded
+    </div>
 
     <header>
         <div>
         </div>
     </header>
     <!-- main -->
-    <main>
+    <main id="mainContent">
 
         <!--Table container-->
         <div class="table table-responsive table-striped">
@@ -159,7 +159,7 @@
                     </tr>
                 </thead>
                 <tbody id="loyalty-table">
-                   
+
                 </tbody>
             </table>
 
@@ -173,7 +173,7 @@
                     </tr>
                 </thead>
                 <tbody id="least-loyal-table">
-                   
+
                 </tbody>
             </table>
 
@@ -187,7 +187,7 @@
                     </tr>
                 </thead>
                 <tbody id="most-loyal-table">
-                    
+
                 </tbody>
             </table>
 
@@ -203,6 +203,7 @@
     </footer>
     <!-- Footer -->
 </body>
-<script type="text/javascript" src="housedata.js"></script>
-        <script type="text/javascript" src="statistics.js"></script>
+
+<script type="text/javascript" src="statistics.js"></script>
+
 </html>
