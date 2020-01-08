@@ -159,27 +159,31 @@ window.onload = function () {
 
 
     //fetch data//
-    let promise = fetch('https://api.propublica.org/congress/v1/{senate}/{133}/members.json',
-    )
-    console.log(promise)
 
-//     var url = "https://yourUrl";
-// var bearer = 'Bearer ' + bearer_token;
-// fetch(url, {
-//         method: 'GET',
-//         withCredentials: true,
-//         credentials: 'include',
-//         headers: {
-//             'Authorization': bearer,
-//             'X-FP-API-KEY': 'iphone', //it can be iPhone or your any other attribute
-//             'Content-Type': 'application/json'
-//         }
-//     }).then(responseJson => {
-//         var items = JSON.parse(responseJson._bodyInit);
-//     })
-//     .catch(error => this.setState({
-//         isLoading: false,
-//         message: 'Something bad happened ' + error
-//     }));
+
+
+
+    var url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+    // var bearer = 'Bearer ' + bearer_token;
+    var promise = fetch(url, {
+            method: 'GET',
+            withCredentials: true,
+            // credentials: 'include',
+            headers: {
+                // 'Authorization': bearer,
+                "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA', //it can be iPhone or your any other attribute
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        
+        .then(jsons =>
+            console.log(jsons))
+        .catch(error => {
+
+            console.log(error)
+        });
+
+    
 
 };
