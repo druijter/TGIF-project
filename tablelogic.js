@@ -160,25 +160,23 @@ window.onload = function () {
 
     //fetch data//
 
-
-
-
-    var url = "https://api.propublica.org/congress/v1/113/senate/members.json";
-    // var bearer = 'Bearer ' + bearer_token;
-    var promise = fetch(url, {
+    let url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+ 
+    let promise = fetch(url, {
             method: 'GET',
             withCredentials: true,
-            // credentials: 'include',
             headers: {
                 // 'Authorization': bearer,
-                "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA', //it can be iPhone or your any other attribute
+                "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA', 
                 'Content-Type': 'application/json'
             }
         })
         .then(response => response.json())
         
         .then(jsons =>
-            console.log(jsons))
+            console.log(jsons.results[0].members))
+            // let memberCollection = jsons.results[0].members
+           
         .catch(error => {
 
             console.log(error)
