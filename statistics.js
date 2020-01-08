@@ -1,36 +1,41 @@
-
-
+//define some global variables//
+let senateMembersStatistics = data.results[0].members
 let republicans = []
 let democrats = []
 let independents = []
+let overallVoteStatistics = []
 
 //extract data in array in variables//
-function extractPartyMembers(){
+function extractPartyMembers() {
 
-let senateMembers = data.results[0].members
-for (i = 0; i < senateMembers.length; i++) {
+  let senateMembers = data.results[0].members
+  for (i = 0; i < senateMembers.length; i++) {
 
 
-  if (senateMembers[i].party === "R")
-    republicans.push(senateMembers[i])
+    if (senateMembers[i].party === "R")
+      republicans.push(senateMembers[i])
 
-  if (senateMembers[i].party === "D")
-    democrats.push(senateMembers[i])
+    if (senateMembers[i].party === "D")
+      democrats.push(senateMembers[i])
 
-  if (senateMembers[i].party === "I")
-    independents.push(senateMembers[i])
+    if (senateMembers[i].party === "I")
+      independents.push(senateMembers[i])
 
+  }
+  return {
+    republicans,
+    democrats,
+    independents
+
+  }
 }
-return {republicans, democrats, independents
-
-}
-}
 
 
 
-let total = 0
+
 // making a general function to calculate the average per party
 function calculateAveragePerParty(partyTypeArray, datatype) {
+  let total = 0
   for (j = 0; j < partyTypeArray.length; j++) {
 
 
@@ -48,9 +53,10 @@ function calculateAveragePerParty(partyTypeArray, datatype) {
 
 
 
-let overallTotal = 0
 // making a general function to calculate the overall average 
 function calculateOverallAverage(datatype) {
+
+  let overallTotal = 0
   for (j = 0; j < datatype.length; j++) {
 
 
@@ -66,25 +72,25 @@ function calculateOverallAverage(datatype) {
 
 }
 
-let senateMembersStatistics = data.results[0].members
+
 
 //get overall vote statistics//
-let overallVoteStatistics = []
-function getOverallVoteStatistics(){
+
+function getOverallVoteStatistics() {
 
 
-for (i = 0; i < senateMembersStatistics.length; i++) {
-  overallVoteStatistics.push({
-    "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-    "missedVotesNum": senateMembersStatistics[i].missed_votes,
-    "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
-  })
+  for (i = 0; i < senateMembersStatistics.length; i++) {
+    overallVoteStatistics.push({
+      "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+      "missedVotesNum": senateMembersStatistics[i].missed_votes,
+      "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
+    })
+  }
+  return overallVoteStatistics
 }
-return overallVoteStatistics
-}
 
 
-const overallVoteStatisticsObject =  getOverallVoteStatistics()
+const overallVoteStatisticsObject = getOverallVoteStatistics()
 
 
 
@@ -113,36 +119,37 @@ let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percenta
 
 //get overall loyalty statistics
 
-function getOverallLoyaltyStatistics(){
-let overallLoyaltyStatistics = []
-for (i = 0; i < senateMembersStatistics.length; i++) {
-  overallLoyaltyStatistics.push({
-    "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-    "partyVotesNum": `${senateMembersStatistics[i].total_votes}`,
-    "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
-  })
+function getOverallLoyaltyStatistics() {
+  let overallLoyaltyStatistics = []
+  for (i = 0; i < senateMembersStatistics.length; i++) {
+    overallLoyaltyStatistics.push({
+      "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+      "partyVotesNum": `${senateMembersStatistics[i].total_votes}`,
+      "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
+    })
+  }
+  return overallLoyaltyStatistics
 }
-return overallLoyaltyStatistics
-}
 
-let overallLoyaltyStatisticsObject = getOverallLoyaltyStatistics()
-
-
-//now sort the array ascending and descending//
-let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-  return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
-})
-
-
-
-let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-  return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
-})
 
 
 
 
 function returnEngagement() {
+  let overallLoyaltyStatisticsObject = getOverallLoyaltyStatistics()
+
+
+  //now sort the array ascending and descending//
+  let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
+    return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
+  })
+  
+  
+  
+  let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
+    return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
+  })
+  
 
   let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
   let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
@@ -151,7 +158,7 @@ function returnEngagement() {
   let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
   let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
 
-  
+
 
   for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
     if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
@@ -264,88 +271,88 @@ function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) 
 }
 
 
+//function that creates all tables//
+function createTheTables() {
 
-//create the Senate at a glance table//
+  //create the Senate at a glance table//
 
-let tableBody = document.getElementById("attendance-table")
-
-
-
-if (tableBody !== null) {
-
-  createGlanceTable(tableBody, "numberOfRepresentatives", "votedWithParty")
-
-
-}
-
-//create the Senate at a glance missed votes table//
-let tableBody2 = document.getElementById("loyalty-table")
-if (tableBody2 !== null) {
-
-
-  createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty")
-}
-
- 
-
-//set the party statistics function to create the tables//
-function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
-  for (m = 0; m < statistics[engagement].length; m++) {
+  let tableBody = document.getElementById("attendance-table")
 
 
 
-    let tr = document.createElement('tr')
+  if (tableBody !== null) {
 
-
-
-    tableVariable.appendChild(tr)
-    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn1]
-    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn2]
-    tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn3]
-
+    createGlanceTable(tableBody, "numberOfRepresentatives", "votedWithParty")
 
 
   }
 
+  //create the Senate at a glance missed votes table//
+  let tableBody2 = document.getElementById("loyalty-table")
+  if (tableBody2 !== null) {
+
+
+    createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty")
+  }
+
+
+  //set the party statistics function to create the tables//
+  function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
+    for (m = 0; m < statistics[engagement].length; m++) {
+
+
+
+      let tr = document.createElement('tr')
+
+
+
+      tableVariable.appendChild(tr)
+      tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn1]
+      tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn2]
+      tr.insertCell().innerHTML = statistics[engagement][m][dataToShowcolumn3]
+
+
+
+    }
+
+  }
+
+
+
+  let tableBody3 = document.getElementById("least-attendance-table")
+
+  if (tableBody3 !== null) {
+
+
+    createPartyStatisticsTable(tableBody3, "leastEngaged", "name", "missedVotesNum", "missedPct")
+  }
+
+
+  let tableBody4 = document.getElementById("most-attendance-table")
+
+  if (tableBody4 !== null) {
+
+
+    createPartyStatisticsTable(tableBody4, "mostEngaged", "name", "missedVotesNum", "missedPct")
+  }
+
+
+  let tableBody5 = document.getElementById("least-loyal-table")
+
+  if (tableBody5 !== null) {
+
+
+    createPartyStatisticsTable(tableBody5, "leastLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
+  }
+
+
+
+  let tableBody6 = document.getElementById("most-loyal-table")
+
+  if (tableBody6 !== null) {
+
+
+    createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
+  }
 }
-
-
-
-let tableBody3 = document.getElementById("least-attendance-table")
-
-if (tableBody3 !== null) {
-
-
-  createPartyStatisticsTable(tableBody3, "leastEngaged", "name", "missedVotesNum", "missedPct")
-}
-
-
-let tableBody4 = document.getElementById("most-attendance-table")
-
-if (tableBody4 !== null) {
-
-
-  createPartyStatisticsTable(tableBody4, "mostEngaged", "name", "missedVotesNum", "missedPct")
-}
-
-
-let tableBody5 = document.getElementById("least-loyal-table")
-
-if (tableBody5 !== null) {
-
-
-  createPartyStatisticsTable(tableBody5, "leastLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
-}
-
-
-
-let tableBody6 = document.getElementById("most-loyal-table")
-
-if (tableBody6 !== null) {
-
-
-  createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
-}
-
-
-
+createTheTables()
