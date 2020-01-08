@@ -1,6 +1,16 @@
-window.onload = function () {
 
-    let memberCollection = data.results[0].members;
+
+
+let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
+
+let apiData = [];
+let memberCollection;
+
+fetchData(senateUrl)
+
+
+
+function executeTableAndFiltersAfterDataAreFetched() {
 
     createTable(memberCollection)
 
@@ -40,6 +50,7 @@ window.onload = function () {
 
     function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
         filteredTable = []
+
         let selectedState = document.getElementById("state").value;
         let checkBoxesArray = arr
 
@@ -157,31 +168,28 @@ window.onload = function () {
 
     createDropdownMenu()
 
+}
 
-    //fetch data//
+//fetch data//
 
-    let url = "https://api.propublica.org/congress/v1/113/senate/members.json";
- 
-    let promise = fetch(url, {
+
+function fetchData(url) {
+    fetch(url, {
             method: 'GET',
             withCredentials: true,
             headers: {
                 // 'Authorization': bearer,
-                "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA', 
+                "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA',
                 'Content-Type': 'application/json'
             }
         })
         .then(response => response.json())
-        
-        .then(jsons =>
-            console.log(jsons.results[0].members))
-            // let memberCollection = jsons.results[0].members
-           
-        .catch(error => {
+        .then(test => {
+            apiData = test.results[0].members
+            memberCollection = apiData
+            executeTableAndFiltersAfterDataAreFetched()
 
-            console.log(error)
-        });
 
-    
-
+        })
+        .catch(error => console.log(error))
 };
