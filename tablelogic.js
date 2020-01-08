@@ -170,26 +170,52 @@ function executeTableAndFiltersAfterDataAreFetched() {
 
 }
 
+//show loader//
+function showLoader (){
+    // document.body.innerHTML="s"
+    
+    console.log("hi")
+    var animationWindow = document.getElementById('animationWindow')
+    animationWindow.style.display = "block"
+    
+    animationWindow.style.background = "blue"
+    animationWindow.style.height="800px"
+    animationWindow.style.fontSize = "450%"
+    animationWindow.style.color = "white"
+    animationWindow.style.textAlign = "center"
+    animationWindow.style.paddingTop = "250px"
+    
+}
+
+
 //fetch data//
 
 
 function fetchData(url) {
+   
+
     fetch(url, {
             method: 'GET',
             withCredentials: true,
             headers: {
-                // 'Authorization': bearer,
+                
                 "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA',
                 'Content-Type': 'application/json'
             }
-        })
+        }, showLoader())
+
+      
+
         .then(response => response.json())
         .then(test => {
             apiData = test.results[0].members
             memberCollection = apiData
+            var animationWindow = document.getElementById('animationWindow')
+        animationWindow.style.display="none"
             executeTableAndFiltersAfterDataAreFetched()
 
 
         })
         .catch(error => console.log(error))
+        
 };
