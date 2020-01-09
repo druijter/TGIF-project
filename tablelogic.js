@@ -56,7 +56,7 @@ function executeTableAndFiltersAfterDataAreFetched() {
 
   filterDataOnPartyWhenCheckBoxIsChecked(apiData)
 
-  // createCheckBoxBooleanArray()
+
 
   createDropdownMenu()
 
@@ -125,24 +125,24 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 
 
 
-  // making a general function to calculate the overall average 
-  function calculateOverallAverage(datatype) {
+  // // making a general function to calculate the overall average 
+  // function calculateOverallAverage(datatype) {
 
-    let overallTotal = 0
-    for (j = 0; j < datatype.length; j++) {
-
-
-      overallTotal += data.results[0].members[j][datatype]
+  //   let overallTotal = 0
+  //   for (j = 0; j < datatype.length; j++) {
 
 
+  //     overallTotal += data.results[0].members[j][datatype]
 
-    }
 
-    let overallAverage = overallTotal / (datatype.length)
-    overallTotal = null
-    return overallAverage
 
-  }
+  //   }
+
+  //   let overallAverage = overallTotal / (datatype.length)
+  //   overallTotal = null
+  //   return overallAverage
+
+  // }
 
 
 
@@ -158,37 +158,52 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
         "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
       })
     }
-    return overallVoteStatistics
+
+
+
+
+
+    const overallVoteStatisticsObject = overallVoteStatistics
+    console.log(overallVoteStatisticsObject)
+
+
+
+
+    let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
+      return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
+    })
+
+
+
+
+
+
+    //create most engaged object//
+
+    let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(function (a, b) {
+      return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
+    })
+
+
+
+
+
+    const percentage = 0.10 * senateMembersStatistics.length
+
+    let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
+
+    let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
+    console.log(lastPersonMissedVotes)
+
+    return {
+      sortedOnMissedVotesAscending,
+      sortedOnMissedVotesDescending,
+      percentage,
+      lastPersonMissedVotes
+    }
   }
 
-
-  const overallVoteStatisticsObject = getOverallVoteStatistics()
-
-
-
-  let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
-    return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
-  })
-
-
-
-
-
-  //create most engaged object//
-
-  let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(function (a, b) {
-    return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
-  })
-
-
-
-  const percentage = 0.10 * senateMembersStatistics.length
-
-  let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
-
-  let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
-
-
+  // console.log(getOverallVoteStatistics())
   //get overall loyalty statistics
 
   function getOverallLoyaltyStatistics() {
@@ -221,7 +236,15 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
     let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
       return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
     })
+    let sortedArray = getOverallVoteStatistics()
+    let sortedArrayOnVotesAscending = sortedArray.sortedOnMissedVotesAscending
+    let sortedArrayOnVotesDescending = sortedArray.sortedOnMissedVotesDescending
+    // console.log(sortedArrayOnVotes)
 
+    let sortedOnMissedVotesAscending = sortedArrayOnVotesAscending
+    let sortedOnMissedVotesDescending = sortedArrayOnVotesDescending
+    let percentage = sortedArray.percentage
+    let lastPersonMissedVotes = sortedArray.lastPersonMissedVotes
 
     let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
     let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
@@ -272,7 +295,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
     }
   }
 
-
+function createObjectWithAllAttendanceAndLoyaltyData(){
 
   var test = returnEngagement()
   var partyMembersObject = extractPartyMembers()
@@ -311,11 +334,14 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
     "mostLoyalSenate": test.loyalty.mostLoyal,
 
   }
-
+  return statistics
+}
 
 
 
   function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3) {
+
+    let statistics = createObjectWithAllAttendanceAndLoyaltyData()
     for (m = 0; m < 3; m++) {
 
 
@@ -370,6 +396,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 
     //set the party statistics function to create the tables//
     function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
+      let statistics = createObjectWithAllAttendanceAndLoyaltyData()
       for (m = 0; m < statistics[engagement].length; m++) {
 
 
@@ -431,7 +458,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 }
 
 
-//function defenitions, overall part//
+//FUNCTION DEFINITIONS FOR THE OVERALL PART (senate data page and house data page)//
 function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
   filteredTable = []
 
@@ -506,9 +533,6 @@ function createDropdownMenu() {
 
       }
     }
-    // console.log(checkedBoxes)
-    // filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
-    // return checkedBoxes
 
   }
   let onlyStateArray = []
@@ -562,7 +586,7 @@ function createDropdownMenu() {
 
 }
 
-
+//FUNCTION DEFINITIONS FOR THE ATTENDANCE AND LOYALTY PART (senate attendance and loyalty page and house attendance and loyalty page)//
 
 
 
@@ -570,7 +594,7 @@ function createDropdownMenu() {
 
 // show loader//
 function showLoader() {
-  // document.body.innerHTML="s"
+
   let mainContent = document.getElementById('mainContent')
 
   mainContent.style.display = "none"
