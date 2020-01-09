@@ -52,7 +52,7 @@ function executeTableAndFiltersAfterDataAreFetched() {
   document.getElementById("state").onchange = createCheckBoxBooleanArray
 
 
-  //call functions to create the tables (function definions at the lower part)//  
+  //call functions to create the overall congress statistics tables (function definitioons at the lower part)//  
 
   filterDataOnPartyWhenCheckBoxIsChecked(apiData)
 
@@ -107,7 +107,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
   let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
 
   var test = returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes)
- 
+
 
 
   //get overall loyalty statistics
@@ -115,15 +115,15 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
   getOverallLoyaltyStatistics(senateMembersStatistics)
 
 
-console.log(returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes))
+  console.log(returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes))
 
   let statistics = {}
 
 
-console.log(statistics)
-   
-   
-   statistics.overall = {
+  console.log(statistics)
+
+
+  statistics.overall = {
 
     numberOfRepresentatives: [
       partyMembersObject.democrats.length,
@@ -132,33 +132,31 @@ console.log(statistics)
     ],
   }
 
-  statistics.votedWithParty =
-  [
-    calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1),
-    calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1),
-    calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
-  ],
+  statistics.votedWithParty = [
+      calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1),
+      calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1),
+      calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
+    ],
 
-  statistics.missedVotePerParty =
-  [
-    calculateAveragePerParty(democrats, "missed_votes_pct"),
-    calculateAveragePerParty(republicans, "missed_votes_pct"),
-    calculateAveragePerParty(independents, "missed_votes_pct")
-  ]
+    statistics.missedVotePerParty = [
+      calculateAveragePerParty(democrats, "missed_votes_pct"),
+      calculateAveragePerParty(republicans, "missed_votes_pct"),
+      calculateAveragePerParty(independents, "missed_votes_pct")
+    ]
 
 
-  
-  statistics.leastEngaged  = test.engagement.leastEngaged
 
-  statistics.mostEngaged =test.engagement.mostEngaged
+  statistics.leastEngaged = test.engagement.leastEngaged
 
-statistics.leastLoyalSenate = test.loyalty.leastLoyal
+  statistics.mostEngaged = test.engagement.mostEngaged
+
+  statistics.leastLoyalSenate = test.loyalty.leastLoyal
 
   statistics.mostLoyalSenate = test.loyalty.mostLoyal
 
   // console.log(statistics)
-    
 
+  
 
 
 
@@ -171,8 +169,347 @@ statistics.leastLoyalSenate = test.loyalty.leastLoyal
 
 
   //function that creates all tables//
+  createTheTables(statistics)
+
+}
+
+
+
+
+//FUNCTION DEFINITIONS FOR THE OVERALL PART (senate data page and house data page)//
+function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
+  filteredTable = []
+
+  let selectedState = document.getElementById("state").value;
+  console.log(selectedState)
+  let checkBoxesArray = arr
+
+  for (j = 0; j < memberCollection.length; j++) {
+    if (selectedState === memberCollection[j].state || selectedState === 'all') {
+      if (memberCollection[j].party === "D" && checkBoxesArray[0]) {
+        filteredTable.push(memberCollection[j])
+      }
+      if (memberCollection[j].party === "R" && checkBoxesArray[1]) {
+        filteredTable.push(memberCollection[j])
+      }
+      if (memberCollection[j].party === "I" && checkBoxesArray[2]) {
+        filteredTable.push(memberCollection[j])
+      }
+    }
+  }
+
+
+
+
+
+  //insert some code to populate checkedParties with selected values (D, R, I) or combination of
+  createTable(filteredTable)
+
+
+}
+  //see which checkboxes are checked//
+
+  function createCheckBoxBooleanArray() {
+    let checkedBoxes = []
+
+    let checkboxes = document.getElementsByTagName("input");
+
+    //assign a variable to the value returned by checkedCheckboxes(checkboxes)
+
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      //
+      if (checkboxes[i].type == "checkbox") {
+        let isChecked = checkboxes[i].checked;
+        checkedBoxes.push(isChecked)
+
+      }
+    }
+    // console.log(checkedBoxes)
+    filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
+    // return checkedBoxes
+
+  }
+
+  // Sprint 3: dropdown to filter the data on state//
+  function createDropdownMenu() {
+    function createCheckBoxBooleanArray() {
+      let checkedBoxes = []
+
+      let checkboxes = document.getElementsByTagName("input");
+
+      //assign a variable to the value returned by checkedCheckboxes(checkboxes)
+
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        //
+        if (checkboxes[i].type == "checkbox") {
+          let isChecked = checkboxes[i].checked;
+          checkedBoxes.push(isChecked)
+
+        }
+      }
+
+    }
+    let onlyStateArray = []
+    let statePropertyArray = []
+
+    let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
+      if (a.state < b.state) return -1;
+      else if (a.state > b.state) return 1;
+      else return 0;
+
+    })
+
+
+    for (i = 0; i < sortedOnStateAscending.length; i++) {
+
+
+      onlyStateArray.push(sortedOnStateAscending[i].state)
+
+
+
+
+    }
+
+
+    //creating array with only states//
+
+
+
+
+    for (j = 0; j < sortedOnStateAscending.length; j++) {
+      if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
+
+
+        statePropertyArray.push(onlyStateArray[j])
+
+      }
+
+    }
+
+    //creating dropdowns//
+
+    for (l = 0; l < statePropertyArray.length; l++) {
+      let dropdownButton = document.getElementById('state')
+
+      let option = document.createElement('option')
+
+      dropdownButton.appendChild(option)
+      option.text = statePropertyArray[l]
+
+    }
+
+  }
+
+  function createTable(memberCollection) {
+
+
+    const tbody = document.getElementById("table-data");
+    tbody.innerHTML = ""
+  
+    for (i = 0; i < memberCollection.length; i++) {
+  
+  
+      let tr = document.createElement("TR")
+  
+      tbody.appendChild(tr)
+  
+      let a = document.createElement("a")
+      a.href = memberCollection[i].url
+      a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
+  
+  
+      tr.insertCell().appendChild(a)
+      tr.insertCell().innerHTML = memberCollection[i].party
+      tr.insertCell().innerHTML = memberCollection[i].state
+      tr.insertCell().innerHTML = memberCollection[i].seniority
+      tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
+  
+  
+  
+  
+    }
+  
+  
+  }
+
+  //FUNCTION DEFINITIONS FOR THE ATTENDANCE AND LOYALTY PART (senate attendance and loyalty page and house attendance and loyalty page)//
+
+  function extractPartyMembers(republicans, democrats, independents) {
+
+    let senateMembers = memberCollection
+    for (i = 0; i < senateMembers.length; i++) {
+
+
+      if (senateMembers[i].party === "R")
+        republicans.push(senateMembers[i])
+
+      if (senateMembers[i].party === "D")
+        democrats.push(senateMembers[i])
+
+      if (senateMembers[i].party === "I")
+        independents.push(senateMembers[i])
+
+    }
+    return {
+      republicans,
+      democrats,
+      independents
+
+    }
+  }
+
+
+  // making a general function to calculate the average per party
+  function calculateAveragePerParty(partyTypeArray, datatype) {
+    let total = 0
+    for (j = 0; j < partyTypeArray.length; j++) {
+
+
+      total += partyTypeArray[j][datatype]
+
+
+
+    }
+
+    let average = total / (partyTypeArray.length)
+    total = null
+    return average
+
+  }
+
+
+  //get overall vote statistics//
+
+  function getOverallVoteStatistics(overallVoteStatistics, memberCollection) {
+    let senateMembersStatistics = memberCollection
+    console.log(memberCollection)
+
+    for (i = 0; i < senateMembersStatistics.length; i++) {
+      overallVoteStatistics.push({
+        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+        "missedVotesNum": senateMembersStatistics[i].missed_votes,
+        "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
+      })
+    }
+    return overallVoteStatistics
+  }
+
+
+  //get overall loyalty statistics
+
+  function getOverallLoyaltyStatistics(memberCollection) {
+    let senateMembersStatistics = memberCollection
+    let overallLoyaltyStatistics = []
+    console.log(senateMembersStatistics)
+    for (i = 0; i < senateMembersStatistics.length; i++) {
+      overallLoyaltyStatistics.push({
+        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+        "partyVotesNum": `${senateMembersStatistics[i].total_votes}`,
+        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
+      })
+    }
+    return overallLoyaltyStatistics
+  }
+
+  function returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes) {
+
+    let overallLoyaltyStatisticsObject = getOverallLoyaltyStatistics(senateMembersStatistics)
+
+
+    //now sort the array ascending and descending//
+    let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
+      return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
+    })
+
+
+
+    let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
+      return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
+    })
+
+
+    let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
+    let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
+
+    //variables for party loyalty//
+    let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
+    let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
+
+
+
+    for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
+      if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
+
+        leastEngaged.push({
+          "name": `${sortedOnMissedVotesDescending[i].name}`,
+          "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
+          "missedPct": sortedOnMissedVotesDescending[i].missedPct
+        })
+        mostEngaged.push({
+          "name": `${sortedOnMissedVotesAscending[i].name}`,
+          "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
+          "missedPct": sortedOnMissedVotesAscending[i].missedPct
+        })
+        mostLoyal.push({
+          "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+          "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+          "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
+        })
+        leastLoyal.push({
+          "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+          "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+          "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+        })
+
+      } else {
+        break
+      }
+    }
+    return {
+      engagement: {
+        leastEngaged: leastEngaged,
+        mostEngaged: mostEngaged
+      },
+      loyalty: {
+        leastLoyal: leastLoyal,
+        mostLoyal: mostLoyal
+      }
+    }
+  }
+
+  function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3, statistics) {
+    console.log(dataToShowcolumn3)
+    console.log(statistics.votedWithParty)
+    for (m = 0; m < 3; m++) {
+
+
+
+      let tr = document.createElement('tr')
+
+      if (m == 0) {
+        tr.innerHTML = "Republican"
+      }
+      if (m == 1) {
+
+        tr.innerHTML = "Democrat"
+      }
+      if (m == 2) {
+
+        tr.innerHTML = "Independent"
+      }
+      tableVariable.appendChild(tr)
+      tr.insertCell().innerHTML = statistics.overall[dataToShowcolumn2][m]
+      tr.insertCell().innerHTML = statistics.votedWithParty[m]
+
+
+
+    }
+  }
+
   function createTheTables(statistics) {
-console.log(statistics)
+    console.log(statistics)
     //create the Senate at a glance table//
 
     let tableBody = document.getElementById("attendance-table")
@@ -181,7 +518,7 @@ console.log(statistics)
 
     if (tableBody !== null) {
 
-      createGlanceTable(tableBody, "numberOfRepresentatives", "votedWithParty",statistics)
+      createGlanceTable(tableBody, "numberOfRepresentatives", "votedWithParty", statistics)
 
 
     }
@@ -191,13 +528,13 @@ console.log(statistics)
     if (tableBody2 !== null) {
 
 
-      createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty",statistics)
+      createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty", statistics)
     }
 
 
     //set the party statistics function to create the tables//
     function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
-     
+
       for (m = 0; m < statistics[engagement].length; m++) {
 
         // console.log(statistics[engagement][m][dataToShowcolumn1])
@@ -255,312 +592,11 @@ console.log(statistics)
       createPartyStatisticsTable(tableBody6, "mostLoyalSenate", "name", "partyVotesNum", "partyVotesPct")
     }
   }
-  createTheTables(statistics)
-}
+  
 
 
-//FUNCTION DEFINITIONS FOR THE OVERALL PART (senate data page and house data page)//
-function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
-  filteredTable = []
 
-  let selectedState = document.getElementById("state").value;
-  console.log(selectedState)
-  let checkBoxesArray = arr
-
-  for (j = 0; j < memberCollection.length; j++) {
-    if (selectedState === memberCollection[j].state || selectedState === 'all') {
-      if (memberCollection[j].party === "D" && checkBoxesArray[0]) {
-        filteredTable.push(memberCollection[j])
-      }
-      if (memberCollection[j].party === "R" && checkBoxesArray[1]) {
-        filteredTable.push(memberCollection[j])
-      }
-      if (memberCollection[j].party === "I" && checkBoxesArray[2]) {
-        filteredTable.push(memberCollection[j])
-      }
-    }
-  }
-
-
-
-
-
-  //insert some code to populate checkedParties with selected values (D, R, I) or combination of
-  createTable(filteredTable)
-
-
-}
-
-
-//see which checkboxes are checked//
-
-function createCheckBoxBooleanArray() {
-  let checkedBoxes = []
-
-  let checkboxes = document.getElementsByTagName("input");
-
-  //assign a variable to the value returned by checkedCheckboxes(checkboxes)
-
-
-  for (let i = 0; i < checkboxes.length; i++) {
-    //
-    if (checkboxes[i].type == "checkbox") {
-      let isChecked = checkboxes[i].checked;
-      checkedBoxes.push(isChecked)
-
-    }
-  }
-  // console.log(checkedBoxes)
-  filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
-  // return checkedBoxes
-
-}
-
-// Sprint 3: dropdown to filter the data on state//
-function createDropdownMenu() {
-  function createCheckBoxBooleanArray() {
-    let checkedBoxes = []
-
-    let checkboxes = document.getElementsByTagName("input");
-
-    //assign a variable to the value returned by checkedCheckboxes(checkboxes)
-
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      //
-      if (checkboxes[i].type == "checkbox") {
-        let isChecked = checkboxes[i].checked;
-        checkedBoxes.push(isChecked)
-
-      }
-    }
-
-  }
-  let onlyStateArray = []
-  let statePropertyArray = []
-
-  let sortedOnStateAscending = [...memberCollection].sort(function (a, b) {
-    if (a.state < b.state) return -1;
-    else if (a.state > b.state) return 1;
-    else return 0;
-
-  })
-
-
-  for (i = 0; i < sortedOnStateAscending.length; i++) {
-
-
-    onlyStateArray.push(sortedOnStateAscending[i].state)
-
-
-
-
-  }
-
-
-  //creating array with only states//
-
-
-
-
-  for (j = 0; j < sortedOnStateAscending.length; j++) {
-    if (sortedOnStateAscending[j].state !== onlyStateArray[j + 1]) {
-
-
-      statePropertyArray.push(onlyStateArray[j])
-
-    }
-
-  }
-
-  //creating dropdowns//
-
-  for (l = 0; l < statePropertyArray.length; l++) {
-    let dropdownButton = document.getElementById('state')
-
-    let option = document.createElement('option')
-
-    dropdownButton.appendChild(option)
-    option.text = statePropertyArray[l]
-
-  }
-
-}
-
-//FUNCTION DEFINITIONS FOR THE ATTENDANCE AND LOYALTY PART (senate attendance and loyalty page and house attendance and loyalty page)//
-
-function extractPartyMembers(republicans, democrats, independents) {
-
-  let senateMembers = memberCollection
-  for (i = 0; i < senateMembers.length; i++) {
-
-
-    if (senateMembers[i].party === "R")
-      republicans.push(senateMembers[i])
-
-    if (senateMembers[i].party === "D")
-      democrats.push(senateMembers[i])
-
-    if (senateMembers[i].party === "I")
-      independents.push(senateMembers[i])
-
-  }
-  return {
-    republicans,
-    democrats,
-    independents
-
-  }
-}
-
-
-// making a general function to calculate the average per party
-function calculateAveragePerParty(partyTypeArray, datatype) {
-  let total = 0
-  for (j = 0; j < partyTypeArray.length; j++) {
-
-
-    total += partyTypeArray[j][datatype]
-
-
-
-  }
-
-  let average = total / (partyTypeArray.length)
-  total = null
-  return average
-
-}
-
-
-//get overall vote statistics//
-
-function getOverallVoteStatistics(overallVoteStatistics, memberCollection) {
-  let senateMembersStatistics = memberCollection
-  console.log(memberCollection)
-
-  for (i = 0; i < senateMembersStatistics.length; i++) {
-    overallVoteStatistics.push({
-      "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-      "missedVotesNum": senateMembersStatistics[i].missed_votes,
-      "missedPct": senateMembersStatistics[i].missed_votes_pct.toFixed(1)
-    })
-  }
-  return overallVoteStatistics
-}
-
-
-//get overall loyalty statistics
-
-function getOverallLoyaltyStatistics(memberCollection) {
-  let senateMembersStatistics = memberCollection
-  let overallLoyaltyStatistics = []
-  console.log(senateMembersStatistics)
-  for (i = 0; i < senateMembersStatistics.length; i++) {
-    overallLoyaltyStatistics.push({
-      "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-      "partyVotesNum": `${senateMembersStatistics[i].total_votes}`,
-      "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
-    })
-  }
-  return overallLoyaltyStatistics
-}
-
-function returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes) {
-
-  let overallLoyaltyStatisticsObject = getOverallLoyaltyStatistics(senateMembersStatistics)
-
-
-  //now sort the array ascending and descending//
-  let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-    return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
-  })
-
-
-
-  let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-    return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
-  })
-
-
-  let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
-  let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
-
-  //variables for party loyalty//
-  let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
-  let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
-
-
-
-  for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
-    if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
-
-      leastEngaged.push({
-        "name": `${sortedOnMissedVotesDescending[i].name}`,
-        "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
-        "missedPct": sortedOnMissedVotesDescending[i].missedPct
-      })
-      mostEngaged.push({
-        "name": `${sortedOnMissedVotesAscending[i].name}`,
-        "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
-        "missedPct": sortedOnMissedVotesAscending[i].missedPct
-      })
-      mostLoyal.push({
-        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
-      })
-      leastLoyal.push({
-        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
-      })
-
-    } else {
-      break
-    }
-  }
-  return {
-    engagement: {
-      leastEngaged: leastEngaged,
-      mostEngaged: mostEngaged
-    },
-    loyalty: {
-      leastLoyal: leastLoyal,
-      mostLoyal: mostLoyal
-    }
-  }
-}
-
-function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3, statistics) {
-console.log(dataToShowcolumn3)
-console.log(statistics.votedWithParty)
-  for (m = 0; m < 3; m++) {
-
-
-
-    let tr = document.createElement('tr')
-
-    if (m == 0) {
-      tr.innerHTML = "Republican"
-    }
-    if (m == 1) {
-
-      tr.innerHTML = "Democrat"
-    }
-    if (m == 2) {
-
-      tr.innerHTML = "Independent"
-    }
-    tableVariable.appendChild(tr)
-    tr.insertCell().innerHTML = statistics.overall[dataToShowcolumn2][m]
-    tr.insertCell().innerHTML = statistics.votedWithParty[m]
-
-
-
-  }
-}
-//FECHING AND LOADER PART//
+//FETCHING AND LOADER PART//
 
 // show loader//
 function showLoader() {
@@ -640,34 +676,3 @@ function fetchData(url) {
 
 };
 
-function createTable(memberCollection) {
-
-
-  const tbody = document.getElementById("table-data");
-  tbody.innerHTML = ""
-
-  for (i = 0; i < memberCollection.length; i++) {
-
-
-    let tr = document.createElement("TR")
-
-    tbody.appendChild(tr)
-
-    let a = document.createElement("a")
-    a.href = memberCollection[i].url
-    a.innerHTML = `${memberCollection[i].first_name} ${(memberCollection[i].middle_name || " ")}  ${memberCollection[i].last_name}`
-
-
-    tr.insertCell().appendChild(a)
-    tr.insertCell().innerHTML = memberCollection[i].party
-    tr.insertCell().innerHTML = memberCollection[i].state
-    tr.insertCell().innerHTML = memberCollection[i].seniority
-    tr.insertCell().innerHTML = memberCollection[i].votes_with_party_pct
-
-
-
-
-  }
-
-
-}
