@@ -56,7 +56,7 @@ function executeTableAndFiltersAfterDataAreFetched() {
 
   filterDataOnPartyWhenCheckBoxIsChecked(apiData)
 
-  createCheckBoxBooleanArray()
+  // createCheckBoxBooleanArray()
 
   createDropdownMenu()
 
@@ -436,10 +436,11 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
   filteredTable = []
 
   let selectedState = document.getElementById("state").value;
+  console.log(selectedState)
   let checkBoxesArray = arr
 
   for (j = 0; j < memberCollection.length; j++) {
-    if (selectedState === memberCollection[j].state || selectedState == 'all') {
+    if (selectedState === memberCollection[j].state || selectedState === 'all') {
       if (memberCollection[j].party === "D" && checkBoxesArray[0]) {
         filteredTable.push(memberCollection[j])
       }
@@ -506,7 +507,7 @@ function createDropdownMenu() {
       }
     }
     // console.log(checkedBoxes)
-    filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
+    // filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
     // return checkedBoxes
 
   }
@@ -559,8 +560,6 @@ function createDropdownMenu() {
 
   }
 
-  console.log(statePropertyArray)
-  console.log(onlyStateArray)
 }
 
 
