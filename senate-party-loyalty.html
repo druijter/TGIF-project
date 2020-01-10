@@ -12,13 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style type="text/css">
-.table :first-child
-{
-    width:37%;
-}
-.table {
-    width:70%;
-}
         
     </style>
 </head>
@@ -140,54 +133,65 @@
     </header>
     <!-- main -->
     <main id ="mainContent">
-        <!--Table container-->
-        <div class="table table-responsive table-striped">
-            <h2>Party Loyalty</h2>
+        <div class="pl-5 pr-5">
+            <h2 class="pt-5">Party Loyalty</h2>
             <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans
                 respectively, tend to be the most faithful in voting for their party's nominee for office and
                 legislation that backs their party's agenda. </p>
+            </div>
+       <!--Table container-->
+       <div class="table-responsive">
+        <h2 class="text-center pt-5">Senate at a glance</h2>
+        <div class="d-flex justify-content-center pb-5">
 
-            <h2>Senate at a glance</h2>
-            <table class="table">
+            <table class="table table-striped table-hover w-75 ">
+                <colgroup>
+
+                </colgroup>
                 <thead>
                     <tr>
-                        <th>Party</th>
-                        <th>Number of Reps</th>
-                        <th>% Voted with Prty</th>
+                        <th class="w-25">Party</th>
+                        <th class="w-25">Number of Reps</th>
+                        <th class="w-25">% Voted with Prty</th>
                     </tr>
                 </thead>
                 <tbody id="loyalty-table">
                   
                 </tbody>
             </table>
+        </div>
 
-            <h2>Least Loyal (Bottom 10% of Party)</h2>
-            <table class="table">
+            <h2 class="text-center">Least Loyal (Bottom 10% of Party)</h2>
+            <div class="d-flex justify-content-center pb-5">
+                <table class="table table-striped table-hover w-75 pt-5">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number Party Votes</th>
-                        <th>% Party Votes</th>
+                        <th class="w-25">Name</th>
+                        <th class="w-25">Number Party Votes</th>
+                        <th class="w-25">% Party Votes</th>
                     </tr>
                 </thead>
                 <tbody id="least-loyal-table">
                     
                 </tbody>
             </table>
+        </div>
 
-            <h2>Most Loyal (Top 10% of Party)</h2>
-            <table class="table">
+            <h2 class="text-center">Most Loyal (Top 10% of Party)</h2>
+            <div class="d-flex justify-content-center pb-5">
+                <table class="table table-striped table-hover w-75 ">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number Party Votes</th>
-                        <th>% Party Votes</th>
+                        <th class="w-25">Name</th>
+                        <th class="w-25">Number Party Votes</th>
+                        <th class="w-25">% Party Votes</th>
                     </tr>
                 </thead>
                 <tbody id="most-loyal-table">
                    
                 </tbody>
             </table>
+            </div>
 
         </div>
     </main>
