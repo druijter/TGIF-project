@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
+    <!-- <style type="text/css">
         .table :first-child {
             width: 40%;
         }
@@ -19,7 +19,7 @@
         .table {
             width: 70%;
         }
-    </style>
+    </style> -->
 </head>
 
 
@@ -140,65 +140,72 @@
     <!-- main -->
     <main id="mainContent">
 
-        <!--Table container-->
-        <div class="table table-responsive table-striped">
-            <h2>Attendance</h2>
-            <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each
-                house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls;
-                thus, in most cases, debates continue even if a majority is not present.</p>
 
-            <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator
-                stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the
-                most formal matters, as a roll-call of all 435 representatives takes quite some time; normally,
-                members vote by electronic device. In the case of a tie, the motion in question fails. In the
-                Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+        <h2>Attendance</h2>
+        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each
+            house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls;
+            thus, in most cases, debates continue even if a majority is not present.</p>
 
-            <h2>Senate at a glance</h2>
-            <table class="table">
+        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator
+            stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the
+            most formal matters, as a roll-call of all 435 representatives takes quite some time; normally,
+            members vote by electronic device. In the case of a tie, the motion in question fails. In the
+            Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+        
+            <!--Table container-->
+        <div class="table-responsive">
+            <h2 class="text-center pt-5">Senate at a glance</h2>
+            <div class="d-flex justify-content-center pb-5">
+            
+            <table class="table table-striped table-hover w-75 ">
                 <colgroup>
 
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Party</th>
-                        <th>Number of Reps</th>
-                        <th>% Voted with Prty</th>
+                        <th class="w-25">Party</th>
+                        <th class="w-25">Number of Reps</th>
+                        <th class="w-25">% Voted with Prty</th>
                     </tr>
                 </thead>
                 <tbody id="attendance-table">
 
                 </tbody>
             </table>
+        </div>
 
-            <h2>Least Engaged (Bottom 10% Attendance)</h2>
-           
-              
-            <table class="table">
+            <h2 class="text-center">Least Engaged (Bottom 10% Attendance)</h2>
+
+            <div class="d-flex justify-content-center pb-5">
+            <table class="table table-striped table-hover w-75 pt-3">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of Missed Votes</th>
-                        <th>% Missed</th>
+                        <th class="w-25">Name</th>
+                        <th class="w-25">Number of Missed Votes</th>
+                        <th class="w-25"> % Missed</th>
                     </tr>
                 </thead>
                 <tbody id="least-attendance-table">
 
                 </tbody>
             </table>
+            </div>
 
-            <h2>Most Engaged (Top 10% Attendance)</h2>
-            <table class="table">
+            <h2 class="text-center">Most Engaged (Top 10% Attendance)</h2>
+            <div class="d-flex justify-content-center pb-5">
+            <table class="table table-striped table-hover w-75 ">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of Missed Votes</th>
-                        <th>% Missed</th>
+                        <th class="w-25">Name</th>
+                        <th class="w-25">Number of Missed Votes</th>
+                        <th class="w-25">% Missed</th>
                     </tr>
                 </thead>
                 <tbody id="most-attendance-table">
 
                 </tbody>
             </table>
+            </div>
 
         </div>
     </main>
