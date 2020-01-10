@@ -1,3 +1,4 @@
+//define global variables to be able to fetch data for house and senate, depending on which page the user is on//
 let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
 let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
 
@@ -106,7 +107,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 
   let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
 
-  var test = returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes)
+  let engagementAndLoyaltyObject = returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes)
 
 
 
@@ -148,27 +149,16 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 
 
 
-  statistics.leastEngaged = test.engagement.leastEngaged
+  statistics.leastEngaged = engagementAndLoyaltyObject.engagement.leastEngaged
 
-  statistics.mostEngaged = test.engagement.mostEngaged
+  statistics.mostEngaged = engagementAndLoyaltyObject.engagement.mostEngaged
 
-  statistics.leastLoyalSenate = test.loyalty.leastLoyal
+  statistics.leastLoyalSenate = engagementAndLoyaltyObject.loyalty.leastLoyal
 
-  statistics.mostLoyalSenate = test.loyalty.mostLoyal
+  statistics.mostLoyalSenate = engagementAndLoyaltyObject.loyalty.mostLoyal
 
  
   
-
-
-
-
-
-
-
-
-
-
-
   //function that creates all tables//
   createTheTables(statistics)
 
@@ -629,11 +619,6 @@ function showLoader() {
   animationWindow.style.paddingTop = "250px"
 
 }
-
-
-
-
-
 
 //fetch data//
 
