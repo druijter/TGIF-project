@@ -115,12 +115,12 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
   getOverallLoyaltyStatistics(senateMembersStatistics)
 
 
-  console.log(returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes))
+  
 
   let statistics = {}
 
 
-  console.log(statistics)
+ 
 
 
   statistics.overall = {
@@ -131,6 +131,8 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
       partyMembersObject.independents.length
     ],
   }
+
+  console.log(independents.length)
 
   statistics.votedWithParty = [
       calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1),
@@ -154,8 +156,7 @@ function executeAttendanceAndLoyaltyTables(memberCollection) {
 
   statistics.mostLoyalSenate = test.loyalty.mostLoyal
 
-  // console.log(statistics)
-
+ 
   
 
 
@@ -181,7 +182,7 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
   filteredTable = []
 
   let selectedState = document.getElementById("state").value;
-  console.log(selectedState)
+  
   let checkBoxesArray = arr
 
   for (j = 0; j < memberCollection.length; j++) {
@@ -225,13 +226,13 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
 
       }
     }
-    // console.log(checkedBoxes)
+ 
     filterDataOnPartyWhenCheckBoxIsChecked(checkedBoxes)
-    // return checkedBoxes
+
 
   }
 
-  // Sprint 3: dropdown to filter the data on state//
+  // Dropdown to filter the data on state//
   function createDropdownMenu() {
     function createCheckBoxBooleanArray() {
       let checkedBoxes = []
@@ -363,9 +364,13 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
 
   // making a general function to calculate the average per party
   function calculateAveragePerParty(partyTypeArray, datatype) {
-    let total = 0
-    for (j = 0; j < partyTypeArray.length; j++) {
 
+    
+
+    let total = 0
+    
+    for (j = 0; j < partyTypeArray.length; j++) {
+      
 
       total += partyTypeArray[j][datatype]
 
@@ -374,8 +379,17 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
     }
 
     let average = total / (partyTypeArray.length)
+    
+    
     total = null
-    return average
+    if(!isNaN(average)){
+      return average
+    }
+    if(isNaN(average)){
+      return 0
+    }
+    
+    
 
   }
 
@@ -384,7 +398,7 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
 
   function getOverallVoteStatistics(overallVoteStatistics, memberCollection) {
     let senateMembersStatistics = memberCollection
-    console.log(memberCollection)
+  
 
     for (i = 0; i < senateMembersStatistics.length; i++) {
       overallVoteStatistics.push({
@@ -402,7 +416,7 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
   function getOverallLoyaltyStatistics(memberCollection) {
     let senateMembersStatistics = memberCollection
     let overallLoyaltyStatistics = []
-    console.log(senateMembersStatistics)
+  
     for (i = 0; i < senateMembersStatistics.length; i++) {
       overallLoyaltyStatistics.push({
         "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
@@ -480,8 +494,7 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
   }
 
   function createGlanceTable(tableVariable, dataToShowcolumn2, dataToShowcolumn3, statistics) {
-    console.log(dataToShowcolumn3)
-    console.log(statistics.votedWithParty)
+   
     for (m = 0; m < 3; m++) {
 
 
@@ -501,10 +514,10 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
       }
       tableVariable.appendChild(tr)
       tr.insertCell().innerHTML = statistics.overall[dataToShowcolumn2][m]
-      tr.insertCell().innerHTML = statistics.votedWithParty[m]
+      tr.insertCell().innerHTML = statistics[dataToShowcolumn3][m]
+      
 
-
-
+      
     }
   }
 
@@ -530,7 +543,7 @@ function filterDataOnPartyWhenCheckBoxIsChecked(arr) {
 
       createGlanceTable(tableBody2, "numberOfRepresentatives", "votedWithParty", statistics)
     }
-
+   
 
     //set the party statistics function to create the tables//
     function createPartyStatisticsTable(tableVariable, engagement, dataToShowcolumn1, dataToShowcolumn2, dataToShowcolumn3) {
@@ -641,8 +654,8 @@ function fetchData(url) {
 
 
     .then(response => response.json())
-    .then(test => {
-      apiData = test.results[0].members
+    .then(data => {
+      apiData = data.results[0].members
       memberCollection = apiData
       let animationWindow = document.getElementById('animationWindow')
       animationWindow.style.display = "none"
