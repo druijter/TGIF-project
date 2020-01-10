@@ -5,12 +5,12 @@ let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
 let apiData = [];
 let memberCollection;
 
-let senateOverallUrl = "file:///home/daan/Desktop/Ubiqum/tgif/senate-data.html"
-let houseOverallUrl = "file:///home/daan/Desktop/Ubiqum/tgif/house-data.html"
-let senateAttendanceUrl = "file:///home/daan/Desktop/Ubiqum/tgif/senate-attendance.html"
-let houseAttendanceUrl = "file:///home/daan/Desktop/Ubiqum/tgif/house-attendance.html"
-let senateLoyaltyUrl = "file:///home/daan/Desktop/Ubiqum/tgif/senate-party-loyalty.html"
-let houseLoyaltyUrl = "file:///home/daan/Desktop/Ubiqum/tgif/house-party-loyalty.html"
+let senateOverallUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/senate-data.html"
+let houseOverallUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/house-data.html"
+let senateAttendanceUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/senate-attendance.html"
+let houseAttendanceUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/house-attendance.html"
+let senateLoyaltyUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/senate-party-loyalty.html"
+let houseLoyaltyUrl = "file:///home/daan/Desktop/Ubiqum/tgifVUE/house-party-loyalty.html"
 
 let windowLocation = window.location.href
 
