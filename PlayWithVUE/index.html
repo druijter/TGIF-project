@@ -10,9 +10,22 @@
 
 </head>
 
+<!-- v-model="allSelected" -->
+<!-- @change="filterOnRepublicans" -->
+
 <body>
-    <h2>Vue.js</h2>
     <div id="app">
+    <h2>Vue.js</h2>
+
+    <label for ="republicanFilter">click to filter on republicans</label>
+    <input @click= "filterOnRepublicans" type="checkbox"   name="republicanFilter">
+    <!-- <span>Checked names: {{ checkedNames | json }}</span> -->
+
+    
+
+    <br>
+    <br>
+
         <div class="d-flex justify-content-center pb-5">
             <table class="table table-striped table-hover w-75">
                 <thead>

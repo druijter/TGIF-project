@@ -22,47 +22,64 @@ const app = new Vue({
     created() {
         this.fetchData()
         this.executeAfterVueInstanceCreated()
-        console.log(rowData)
+        // console.log(rowData)
     },
+    // watch: {
+    //     checkedNames: function () {
+    //         console.log("ajax")
+    //     }
+    // },
+
+
     methods: {
+        filterOnRepublicans() {
+            console.log(this.members)
+
+            console.log(this.members[0].party)
+            console.log("pietje")
+        },
+        // doThingWithRealValue(val){console.log("sdsdsd")},
         executeAfterVueInstanceCreated() {
             // console.log(this.members)
             this.test = ""
-            
+
         },
-        addItem() {
-            let tableData = this.members
-            console.log(tableData[0].id)
-            
-            // this.senator = []
-            // this.party = []
-            // this.state= []
-            // this.yearsInOffice = []
-            // this.votesParty= []
 
-console.log(tableData[0].first_name)
-            let rowData = []
-            let tableRow = {
-                senator: tableData[0].first_name,
-                party: tableData[0].party,
-                state: tableData[0].state,
-                yearsInOffice: tableData[0].seniority,
-                votesParty: tableData[0].votes_with_party_pct
-            };
-            console.log(tableRow.senator)
-            rowData.push(tableRow)
-            console.log(rowData)
-            return rowData
 
-            // this.senator = [],
-            //     this.party = [],
-            //     this.state = [],
-            //     this.yearsInOffice = [],
-            //     this.votesParty = []
 
-                // console.log(x[0].id)
-                // this.test=x[0].id
-        },
+        //         addItem() {
+        //             let tableData = this.members
+        //             console.log(tableData[0].id)
+
+        //             // this.senator = []
+        //             // this.party = []
+        //             // this.state= []
+        //             // this.yearsInOffice = []
+        //             // this.votesParty= []
+
+        // console.log(tableData[0].first_name)
+        //             let rowData = []
+        //             let tableRow = {
+        //                 senator: tableData[0].first_name,
+        //                 party: tableData[0].party,
+        //                 state: tableData[0].state,
+        //                 yearsInOffice: tableData[0].seniority,
+        //                 votesParty: tableData[0].votes_with_party_pct
+        //             };
+        //             console.log(tableRow.senator)
+        //             rowData.push(tableRow)
+        //             console.log(rowData)
+        //             return rowData
+
+        //             // this.senator = [],
+        //             //     this.party = [],
+        //             //     this.state = [],
+        //             //     this.yearsInOffice = [],
+        //             //     this.votesParty = []
+
+        //                 // console.log(x[0].id)
+        //                 // this.test=x[0].id
+        //         },
 
         async fetchData() {
 
@@ -79,8 +96,8 @@ console.log(tableData[0].first_name)
                 .then(data => {
                     return data.results[0].members
                 })
-            this.addItem()
-            
+
+
                 .catch(error => console.log(error))
         }
 
