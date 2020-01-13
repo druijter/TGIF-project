@@ -7,19 +7,66 @@ let url = "https://api.propublica.org/congress/v1/113/senate/members.json"
 const app = new Vue({
     el: "#app",
     data: {
-        message: "s"
+
+        members: [],
+        test: [],
+        senator: [],
+        party: [],
+        state: [],
+        yearsInOffice: [],
+        votesParty: [],
+        rowData: []
+
+
     },
-
-
+    created() {
+        this.fetchData()
+        this.executeAfterVueInstanceCreated()
+        console.log(rowData)
+    },
     methods: {
-        pushNewColor() {
-            this.message = "hj"
+        executeAfterVueInstanceCreated() {
+            // console.log(this.members)
+            this.test = ""
+            
+        },
+        addItem() {
+            let tableData = this.members
+            console.log(tableData[0].id)
+            
+            // this.senator = []
+            // this.party = []
+            // this.state= []
+            // this.yearsInOffice = []
+            // this.votesParty= []
 
+console.log(tableData[0].first_name)
+            let rowData = []
+            let tableRow = {
+                senator: tableData[0].first_name,
+                party: tableData[0].party,
+                state: tableData[0].state,
+                yearsInOffice: tableData[0].seniority,
+                votesParty: tableData[0].votes_with_party_pct
+            };
+            console.log(tableRow.senator)
+            rowData.push(tableRow)
+            console.log(rowData)
+            return rowData
+
+            // this.senator = [],
+            //     this.party = [],
+            //     this.state = [],
+            //     this.yearsInOffice = [],
+            //     this.votesParty = []
+
+                // console.log(x[0].id)
+                // this.test=x[0].id
         },
 
-        fetchData() {
+        async fetchData() {
 
-            fetch(url, {
+            this.members = await fetch(url, {
                     method: 'GET',
                     withCredentials: true,
                     headers: {
@@ -28,14 +75,13 @@ const app = new Vue({
                         'Content-Type': 'application/json'
                     }
                 })
-
                 .then(response => response.json())
                 .then(data => {
-                    this.message = data.results[0].members
-
+                    return data.results[0].members
                 })
+            this.addItem()
+            
                 .catch(error => console.log(error))
-
         }
 
 
@@ -44,19 +90,26 @@ const app = new Vue({
     }
 
 })
+console.log(app)
+
+// console.log(app.persons)
 
 
-var app2 = new Vue({
-    el: '#app-2',
-    data: {
-        message: 'You loaded this page on ' + new Date().toLocaleString()
-    }
-})
 
-var app3 = new Vue({
-    el: '#app-3',
-    data: {
-        seen: true
-    }
-})
 
+
+//everything I don't need//
+
+// var app2 = new Vue({
+//     el: '#app-2',
+//     data: {
+//         message: 'You loaded this page on ' + new Date().toLocaleString()
+//     }
+// })
+
+// var app3 = new Vue({
+//     el: '#app-3',
+//     data: {
+//         seen: true
+//     }
+// })

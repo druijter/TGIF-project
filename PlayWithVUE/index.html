@@ -13,16 +13,86 @@
 <body>
     <h2>Vue.js</h2>
     <div id="app">
-        <button v-on:click="fetchData()"> Add Color</button>
-        {{message}}
-    </div> 
+        <div class="d-flex justify-content-center pb-5">
+            <table class="table table-striped table-hover w-75">
+                <thead>
+
+                    <tr class="underline">
+                        <th id="thstijl1">
+                            Senator
+                        </th>
+
+                        <th id="thstijl2">
+                            Party
+                        </th>
+                        <th id="thstijl3">
+                            State
+                        </th>
+                        <th id="thstijl4">
+                            Years in office
+                        </th>
+                        <th id="thstijl5">
+                            %votes w/party
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-data">
+                    <tr v-for="member in members">
+                        <th scope="row">{{ member.first_name }}</th>
+                        <td>{{ member.party}}</td>
+                        <td>{{ member.state}}</td>
+                        <td>{{ member.seniority}}</td>
+                        <td>{{ member.votes_with_party_pct}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
 
 
-     <!-- <div id="app">
+        <!--      
+        {{message[0][0]}} -->
+
+        <ul>
+            <!-- <li v-for="msg in members">{{ msg }}</li> -->
+            <!-- <p v bind = test[0]></p> -->
+
+        </ul>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="playWithVue.js"></script>
+
+
+
+
+
+
+</body>
+
+
+</html>
+
+<!-- //everything i don't need// -->
+
+<!-- <div id="app">
         <button v-on:click="pushNewColor"> Add Color</button>
 
-        {{ message }} --> 
-        <!-- <input type="text" v-model="message">
+        {{ message }} -->
+<!-- <input type="text" v-model="message">
 
 
 
@@ -31,40 +101,34 @@
         {{color}}
     </li>
     <p v-if="colors.length > 5"> You have too many colors!</p>
-</ul> --> 
+</ul> -->
 
 <!-- <p> {{ message }} </p> -->
-  
 
-    <!-- <p>
+
+<!-- <p>
     <button id="lol">Click Me!</button>
     </p> -->
 
-    
+<!-- 
     <div id="app-2">
         <span v-bind:title="message">
           Hover your mouse over me for a few seconds
           to see my dynamically bound title! {{ message }}
         </span>
       </div>
-      <!-- <div id="app">
+     <div id="app">
        
       </div> -->
 
-      <div id="app-3">
+<!-- <div id="app-3">
         <span v-if="seen">Now you see me</span>
       </div>
-     
-      
+      -->
 
 
-    <script src="./senatedata.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    
-    <script src="playWithVue.js"></script>
-    
 
-    <!-- <script>
+<!-- <script>
         const app = new Vue ({
             el: "#app",
             data: {
@@ -83,10 +147,3 @@
 
 
     </script> -->
-
-
-
-</body>
-
-
-</html>

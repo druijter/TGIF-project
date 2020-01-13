@@ -137,7 +137,10 @@
     <!-- main -->
     <main id="mainContent">
 
-
+         <!-- practice with VUE  -->
+        <div id="app">
+            {{message}}
+            </div>
 
 
         <div>
@@ -162,11 +165,11 @@
             <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out by
                     clicking on the fiters:</strong><br></div>
             <div class="d-flex justify-content-center">
-                <input type="checkbox" id="democratFilter" name="democratFilter">
+                <input v-on:click=createCheckBoxBooleanArray() type="checkbox" id="" name="democratFilter">
                 <label for="democratFilter">democrats</label>
-                <input type="checkbox" id="republicanFilter" name="republicanFilter">
+                <input v-on:click="createCheckBoxBooleanArray()" type="checkbox" id="" name="republicanFilter">
                 <label for="republicanFilter">republicans</label>
-                <input type="checkbox" id="independentFilter" name="independentFilter">
+                <input v-on:click="createCheckBoxBooleanArray()" type="checkbox" id="" name="independentFilter">
                 <label for="independentFilter">independents</label>
 
                 <select name="state" id='state'>
@@ -200,13 +203,23 @@
                         </tr>
                     </thead>
                     <tbody id="table-data">
-
+                        <tr v-for="item in rowData" >
+                            <th scope="row">{{ item.mail }}</th>
+                            <td>{{ item.date }}</td>
+                            <td>{{ item.adress }}</td>
+                            <td>{{ item.company }}</td>
+                            <td>{{ item.fliers }}</td>
+                          </tr>
                     </tbody>
                 </table>
             </div>
 
 
     </main>
+
+    
+
+
     <!-- Footer -->
     <footer class="panel-default bg-primary ">
 
@@ -217,11 +230,15 @@
     </footer>
     <!-- Footer -->
 
+
+
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script type="text/javascript" src="tablelogic.js"></script>
 
 
+  
 
 </html>
