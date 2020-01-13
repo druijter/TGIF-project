@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+
+
+    <title>Play around with VUE</title>
+
+</head>
+
+<body>
+    <h2>Vue.js</h2>
+    <div id="app">
+        <button v-on:click="fetchData()"> Add Color</button>
+        {{message}}
+    </div> 
+
+
+     <!-- <div id="app">
+        <button v-on:click="pushNewColor"> Add Color</button>
+
+        {{ message }} --> 
+        <!-- <input type="text" v-model="message">
+
+
+
+<ul>
+    <li v-for="color in colors">
+        {{color}}
+    </li>
+    <p v-if="colors.length > 5"> You have too many colors!</p>
+</ul> --> 
+
+<!-- <p> {{ message }} </p> -->
+  
+
+    <!-- <p>
+    <button id="lol">Click Me!</button>
+    </p> -->
+
+    
+    <div id="app-2">
+        <span v-bind:title="message">
+          Hover your mouse over me for a few seconds
+          to see my dynamically bound title! {{ message }}
+        </span>
+      </div>
+      <!-- <div id="app">
+       
+      </div> -->
+
+      <div id="app-3">
+        <span v-if="seen">Now you see me</span>
+      </div>
+     
+      
+
+
+    <script src="./senatedata.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script src="playWithVue.js"></script>
+    
+
+    <!-- <script>
+        const app = new Vue ({
+            el: "#app",
+            data: {
+                message: "Hello World",
+                colors: ["red", "green", "blue"]
+            },
+            methods: {
+              sayHelloWorld() {
+                  this.message = "Hello World"
+              },
+              pushNewColor() {
+                  this.colors.push(this.message)
+              }
+            } 
+        })
+
+
+    </script> -->
+
+
+
+</body>
+
+
+</html>
