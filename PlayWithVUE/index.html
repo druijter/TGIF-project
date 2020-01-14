@@ -5,8 +5,20 @@
     <meta charset="utf-8">
 
 
-
+    
     <title>Play around with VUE</title>
+
+    <style>
+        .rep {
+            background: red;
+        }
+        .dem {
+            background: green;
+        }
+        .ind {
+            background: yellow;
+        }
+    </style>
 
 </head>
 
@@ -28,12 +40,11 @@
 
 
     <select v-model="selected">
-        <option v-for="option in members" v-bind:value="option.value">
+        <option v-for="option in members" v-bind:value="option.state">
             {{ option.state }}
         </option>
       </select>
       
-
 
     
 
@@ -64,8 +75,8 @@
                     </tr>
                 </thead>
                 <tbody id="table-data">
-                    <tr v-for="member in filteredMembers">
-                        <th scope="row">{{ member.first_name + member.middle_name + member.last_name }}</th>
+                    <tr v-for="member in filteredMembers" class="table-row" :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
+                        <th scope="row">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}</th>
                         <td>{{ member.party}}</td>
                         <td>{{ member.state}}</td>
                         <td>{{ member.seniority}}</td>

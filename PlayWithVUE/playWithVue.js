@@ -9,8 +9,8 @@ const app = new Vue({
                 filteredMembersArray: [],
 
                 isChecked: ["republicanFilter", "democratFilter", "independentFilter"],
-                statesArray: [],
-                selected: ""
+                states: [],
+                selected: "all"
 
             },
             created() {
@@ -109,22 +109,17 @@ const app = new Vue({
                                 stateArray.push(members[i].state)
                             }
                             console.log(stateArray)
-                            let sortedOnStateAscending = [...stateArray].sort(function (a, b) {
-                                if (a.state < b.state) return -1;
-                                else if (a.state > b.state) return 1;
-                                else return 0;
-
-                            })
+                            let sortedOnStateAscending = [...stateArray].sort()
                             console.log(sortedOnStateAscending)
 
-                            let test = [...stateArray].sort(function (a, b) {
-                                if (a.state < b.state) return -1;
-                                else if (a.state > b.state) return 1;
-                                else return 0;
+                            // let test = [...stateArray].sort(function (a, b) {
+                            //     if (a.state < b.state) return -1;
+                            //     else if (a.state > b.state) return 1;
+                            //     else return 0;
 
-                            })
-                            console.log(test)
-                            this.states = stateArray
+                            // })
+                            // console.log(test)
+                            this.states = sortedOnStateAscending
                         },
 
 
