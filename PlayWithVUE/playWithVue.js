@@ -2,151 +2,167 @@ let url = "https://api.propublica.org/congress/v1/113/senate/members.json"
 
 
 const app = new Vue({
-            el: "#app",
-            data: {
+    el: "#app",
+    data: {
 
-                members: [],
-                filteredMembersArray: [],
+        members: [],
+        filteredMembersArray: [],
 
-                isChecked: ["republicanFilter", "democratFilter", "independentFilter"],
-                states: [],
-                selected: "all"
+        isChecked: ["republicanFilter", "democratFilter", "independentFilter"],
+        states: [],
+        selected: "all",
 
-            },
-            created() {
-                this.fetchData()
+    },
+    created() {
+        this.fetchData()
 
-            },
+    },
 
-            computed: {
-                filteredMembers() {
+    computed: {
+        filteredMembers() {
 
-                    let members = this.members
-                    let filteredMembersArray = []
+            let members = this.members
+            let filteredMembersArray = []
 
-                    for (i = 0; i < members.length; i++) {
+            for (i = 0; i < members.length; i++) {
+                if (this.selected === members[i].state || this.selected !== "all") {
+                    
 
-
-                        if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
-                            filteredMembersArray.push(members[i])
-
-
-                        }
-                        if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
-                            filteredMembersArray.push(members[i])
+                    if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
+                        filteredMembersArray.push(members[i])
 
 
-                        }
-                        if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
-                            filteredMembersArray.push(members[i])
+                    }
+                    if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
+                        filteredMembersArray.push(members[i])
 
 
-                        }
+                    }
+                    if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
+                        filteredMembersArray.push(members[i])
+
 
                     }
 
-                    return filteredMembersArray;
-                },
-
-            },
-
-
-            methods: {
-                even: function (arr) {
-                    // Set slice() to avoid to generate an infinite loop!
-                    return arr.slice().sort(function (a, b) {
-                        return a.position - b.position;
-                    });
-                    
-                },
-
-                    filter() {
+                }
+                console.log(this.selected)
+                
+            }
+            return filteredMembersArray;
+        },
 
 
 
 
 
-                            let members = this.members
-                            let filteredMembersArray = []
+    },
 
 
-                            for (i = 0; i < members.length; i++) {
+    methods: {
+        even: function (arr) {
+            // Set slice() to avoid to generate an infinite loop!
+            return arr.slice().sort(function (a, b) {
+                return a.position - b.position;
+            });
 
+        },
 
-                                if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
-                                    filteredMembersArray.push(members[i])
-
-
-                                }
-                                if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
-                                    filteredMembersArray.push(members[i])
-
-
-                                }
-                                if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
-                                    filteredMembersArray.push(members[i])
-
-                                }
-
-                            }
-
-
-                            this.filteredMembers = filteredMembersArray
+        filter() {
 
 
 
 
 
-
-                        },
-
-                        createDropdowns() {
-                            let members = this.members
-                            let stateArray = []
-                            console.log(stateArray)
-
-                            for (i = 0; i < members.length; i++) {
-                                stateArray.push(members[i].state)
-                            }
-                            console.log(stateArray)
-                            let sortedOnStateAscending = [...stateArray].sort()
-                            console.log(sortedOnStateAscending)
-
-                            // let test = [...stateArray].sort(function (a, b) {
-                            //     if (a.state < b.state) return -1;
-                            //     else if (a.state > b.state) return 1;
-                            //     else return 0;
-
-                            // })
-                            // console.log(test)
-                            this.states = sortedOnStateAscending
-                        },
+            let members = this.members
+            let filteredMembersArray = []
 
 
-
-                        async fetchData() {
-
-                            this.members = await fetch(url, {
-                                    method: 'GET',
-                                    withCredentials: true,
-                                    headers: {
-
-                                        "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA',
-                                        'Content-Type': 'application/json'
-                                    }
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    return data.results[0].members
-                                })
-                                .catch(error => console.log(error))
-                            // console.log(this.even(this.members)) 
-                            this.createDropdowns()
+            for (i = 0; i < members.length; i++) {
 
 
+                if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
+                    filteredMembersArray.push(members[i])
 
-                        }
+
+                }
+                if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
+                    filteredMembersArray.push(members[i])
+
+
+                }
+                if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
+                    filteredMembersArray.push(members[i])
+
                 }
 
+            }
 
-            })
+
+            this.filteredMembers = filteredMembersArray
+
+
+
+
+
+
+        },
+
+        createDropdowns() {
+            let members = this.members
+            let stateArray = []
+            let onlyStateArray = []
+            console.log(stateArray)
+
+            for (i = 0; i < members.length; i++) {
+                stateArray.push(members[i].state)
+            }
+            console.log(stateArray)
+            let sortedOnStateAscending = [...stateArray].sort()
+            console.log(sortedOnStateAscending)
+
+
+            //creating array with only states//
+
+            for (j = 0; j < sortedOnStateAscending.length; j++) {
+                if (sortedOnStateAscending[j] !== sortedOnStateAscending[j + 1]) {
+
+                    console.log("sdsh")
+                    onlyStateArray.push(sortedOnStateAscending[j])
+
+                }
+
+            }
+
+            console.log(onlyStateArray)
+
+            this.states = onlyStateArray
+        },
+
+
+
+        async fetchData() {
+
+            this.members = await fetch(url, {
+                    method: 'GET',
+                    withCredentials: true,
+                    headers: {
+
+                        "X-API-KEY": 'y4GdOeUJNzi36ye8ISrsV5Fstamv7Ab0NNYJGOEA',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    return data.results[0].members
+                })
+                .catch(error => console.log(error))
+            // console.log(this.even(this.members)) 
+            this.createDropdowns()
+
+
+
+        }
+    }
+
+
+})

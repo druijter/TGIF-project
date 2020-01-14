@@ -40,8 +40,9 @@
 
 
     <select v-model="selected">
-        <option v-for="option in members" v-bind:value="option.state">
-            {{ option.state }}
+        <option>All</option>
+        <option v-for="option in states" v-bind:value="option">
+            {{ option }}
         </option>
       </select>
       
