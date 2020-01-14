@@ -10,8 +10,7 @@
 
 </head>
 
-<!-- v-model="allSelected" -->
-<!-- @change="filterOnRepublicans" -->
+
 
 <body>
     <div id="app">
@@ -23,7 +22,7 @@
     <input type="checkbox" value="democratFilter"  v-model="isChecked" name="democratFilter">
     <label for ="independentFilter">click to filter on independents</label>
     <input type="checkbox" value="independentFilter"  v-model="isChecked" name="independentFilter">
-    <!-- <span>Checked names: {{ checkedNames | json }}</span> -->
+   
 
     
 
@@ -66,49 +65,14 @@
             </table>
         </div>
 
-
-        <!-- <div class="d-flex justify-content-center pb-5">
-            <table class="table table-striped table-hover w-75">
-                <thead>
-
-                    <tr class="underline">
-                        <th id="thstijl1">
-                            Senator
-                        </th>
-
-                        <th id="thstijl2">
-                            Party
-                        </th>
-                        <th id="thstijl3">
-                            State
-                        </th>
-                        <th id="thstijl4">
-                            Years in office
-                        </th>
-                        <th id="thstijl5">
-                            %votes w/party
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="table-data">
-                     <tr v-for="filteredMember in filteredMembersArray">
-                        <th scope="row">{{ filteredMember.first_name + member.middle_name + member.last_name }}</th>
-                        <td>{{ filteredMember.party}}</td>
-                        <td>{{ filteredMember.state}}</td>
-                        <td>{{ filteredMember.seniority}}</td>
-                        <td>{{ filteredMember.votes_with_party_pct}}</td>
-                    </tr> -->
-
                 </tbody>
             </table>
         </div>
 
-        <!--      
-        {{message[0][0]}} -->
+
 
         <ul>
-            <!-- <li v-for="msg in members">{{ msg }}</li> -->
-            <!-- <p v bind = test[0]></p> -->
+
 
         </ul>
 
@@ -139,64 +103,3 @@
 
 </html>
 
-<!-- //everything i don't need// -->
-
-<!-- <div id="app">
-        <button v-on:click="pushNewColor"> Add Color</button>
-
-        {{ message }} -->
-<!-- <input type="text" v-model="message">
-
-
-
-<ul>
-    <li v-for="color in colors">
-        {{color}}
-    </li>
-    <p v-if="colors.length > 5"> You have too many colors!</p>
-</ul> -->
-
-<!-- <p> {{ message }} </p> -->
-
-
-<!-- <p>
-    <button id="lol">Click Me!</button>
-    </p> -->
-
-<!-- 
-    <div id="app-2">
-        <span v-bind:title="message">
-          Hover your mouse over me for a few seconds
-          to see my dynamically bound title! {{ message }}
-        </span>
-      </div>
-     <div id="app">
-       
-      </div> -->
-
-<!-- <div id="app-3">
-        <span v-if="seen">Now you see me</span>
-      </div>
-      -->
-
-
-
-<!-- <script>
-        const app = new Vue ({
-            el: "#app",
-            data: {
-                message: "Hello World",
-                colors: ["red", "green", "blue"]
-            },
-            methods: {
-              sayHelloWorld() {
-                  this.message = "Hello World"
-              },
-              pushNewColor() {
-                  this.colors.push(this.message)
-              }
-            } 
-        })
-
-
-    </script> -->
