@@ -24,6 +24,17 @@
     <input type="checkbox" value="independentFilter"  v-model="isChecked" name="independentFilter">
    
 
+    <!-- v-model="state" -->
+
+
+    <select v-model="selected">
+        <option v-for="option in members" v-bind:value="option.value">
+            {{ option.state }}
+        </option>
+      </select>
+      
+
+
     
 
     <br>
@@ -60,6 +71,7 @@
                         <td>{{ member.seniority}}</td>
                         <td>{{ member.votes_with_party_pct}}</td>
                     </tr>
+                    
 
                 </tbody>
             </table>
