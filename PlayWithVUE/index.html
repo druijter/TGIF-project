@@ -18,11 +18,11 @@
     <h2>Vue.js</h2>
 
     <label for ="republicanFilter">click to filter on republicans</label>
-    <input @click= "filter" type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
+    <input type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
     <label for ="democratFilter">click to filter on democrats</label>
-    <input @click= "filter" type="checkbox" value="democratFilter"  v-model="isChecked" name="democratFilter">
+    <input type="checkbox" value="democratFilter"  v-model="isChecked" name="democratFilter">
     <label for ="independentFilter">click to filter on independents</label>
-    <input @click= "filter" type="checkbox" value="independentFilter"  v-model="isChecked" name="independentFilter">
+    <input type="checkbox" value="independentFilter"  v-model="isChecked" name="independentFilter">
     <!-- <span>Checked names: {{ checkedNames | json }}</span> -->
 
     
@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody id="table-data">
-                    <tr v-for="member in members">
+                    <tr v-for="member in filteredMembers">
                         <th scope="row">{{ member.first_name + member.middle_name + member.last_name }}</th>
                         <td>{{ member.party}}</td>
                         <td>{{ member.state}}</td>

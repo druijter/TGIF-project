@@ -9,9 +9,10 @@ const app = new Vue({
     data: {
 
         members: [],
+        // filteredMembers: [],
         filteredMembersArray: [],
         test: [],
-        isChecked:[],
+        isChecked:["republicanFilter","democratFilter","independentFilter"],
         rowData: []
 
 
@@ -26,20 +27,9 @@ const app = new Vue({
     //         console.log("ajax")
     //     }
     // },
-
-
-    methods: {
-        checkCheckboxChecked() {
-            // console.log("hi")
-            // console.log(checkboxes[i].checked)
-
-        },
-            filter() {
-                
-
-
-      
-            
+    computed: {
+        filteredMembers() {
+               
             let members = this.members
             let filteredMembersArray = []
 
@@ -65,15 +55,64 @@ const app = new Vue({
                     // console.log(this.filteredMembersArray[2].id)
 
                 }
-                if (!this.isChecked.includes("republicanFilter") && !this.isChecked.includes("democratFilter") && !this.isChecked.includes("independentFilter")){
-                    filteredMembersArray = this.members
+                // if (!this.isChecked.includes("republicanFilter") && !this.isChecked.includes("democratFilter") && !this.isChecked.includes("independentFilter")){
+                //     filteredMembersArray = this.members
+                //     // console.log(this.filteredMembersArray[2].id)
+
+                // }
+            }
+
+            return filteredMembersArray;
+        }
+    },
+
+
+    methods: {
+        checkCheckboxChecked() {
+            // console.log("hi")
+            // console.log(checkboxes[i].checked)
+
+        },
+            filter() {
+                
+
+
+      
+                
+            let members = this.members
+            let filteredMembersArray = []
+
+            console.log(members)
+            console.log(this.filteredMembersArray)
+                console.log()
+
+            for (i = 0; i < members.length; i++) {
+
+                
+                if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
+                    filteredMembersArray.push(members[i])
                     // console.log(this.filteredMembersArray[2].id)
 
                 }
+                if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
+                    filteredMembersArray.push(members[i])
+                    // console.log(this.filteredMembersArray[2].id)
+
+                }
+                if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
+                    filteredMembersArray.push(members[i])
+                    // console.log(this.filteredMembersArray[2].id)
+
+                }
+                // if (!this.isChecked.includes("republicanFilter") && !this.isChecked.includes("democratFilter") && !this.isChecked.includes("independentFilter")){
+                //     filteredMembersArray = this.members
+                //     // console.log(this.filteredMembersArray[2].id)
+
+                // }
             }
 
            
-            this.members = filteredMembersArray
+            this.filteredMembers = filteredMembersArray
             // this.filteredMembersArray = filteredMembersArray
             console.log(this.filteredMembersArray)
 
