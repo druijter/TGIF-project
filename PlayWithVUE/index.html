@@ -18,7 +18,11 @@
     <h2>Vue.js</h2>
 
     <label for ="republicanFilter">click to filter on republicans</label>
-    <input @click= "filterOnRepublicans" type="checkbox"   name="republicanFilter">
+    <input @click= "filter" type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
+    <label for ="democratFilter">click to filter on democrats</label>
+    <input @click= "filter" type="checkbox" value="democratFilter"  v-model="isChecked" name="democratFilter">
+    <label for ="independentFilter">click to filter on independents</label>
+    <input @click= "filter" type="checkbox" value="independentFilter"  v-model="isChecked" name="independentFilter">
     <!-- <span>Checked names: {{ checkedNames | json }}</span> -->
 
     
@@ -51,7 +55,7 @@
                 </thead>
                 <tbody id="table-data">
                     <tr v-for="member in members">
-                        <th scope="row">{{ member.first_name }}</th>
+                        <th scope="row">{{ member.first_name + member.middle_name + member.last_name }}</th>
                         <td>{{ member.party}}</td>
                         <td>{{ member.state}}</td>
                         <td>{{ member.seniority}}</td>
@@ -62,6 +66,42 @@
             </table>
         </div>
 
+
+        <!-- <div class="d-flex justify-content-center pb-5">
+            <table class="table table-striped table-hover w-75">
+                <thead>
+
+                    <tr class="underline">
+                        <th id="thstijl1">
+                            Senator
+                        </th>
+
+                        <th id="thstijl2">
+                            Party
+                        </th>
+                        <th id="thstijl3">
+                            State
+                        </th>
+                        <th id="thstijl4">
+                            Years in office
+                        </th>
+                        <th id="thstijl5">
+                            %votes w/party
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-data">
+                     <tr v-for="filteredMember in filteredMembersArray">
+                        <th scope="row">{{ filteredMember.first_name + member.middle_name + member.last_name }}</th>
+                        <td>{{ filteredMember.party}}</td>
+                        <td>{{ filteredMember.state}}</td>
+                        <td>{{ filteredMember.seniority}}</td>
+                        <td>{{ filteredMember.votes_with_party_pct}}</td>
+                    </tr> -->
+
+                </tbody>
+            </table>
+        </div>
 
         <!--      
         {{message[0][0]}} -->
@@ -75,7 +115,7 @@
 
 
 
-    </div>
+    </div> 
 
 
 
