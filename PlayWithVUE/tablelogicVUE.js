@@ -21,6 +21,7 @@ const app = new Vue({
         democrats: [],
         independents: [],
         overallVoteStatistics: [],
+        statistics: []
 
 
     },
@@ -139,6 +140,9 @@ const app = new Vue({
               
               console.log(partyMembersObject.democrats.length)
                 statistics.overall = {
+                    party: [
+                      "democrats", "republicans", "independents"  
+                    ],
               
                   numberOfRepresentatives: [
                     partyMembersObject.democrats.length,
@@ -172,6 +176,7 @@ const app = new Vue({
                 statistics.mostLoyalSenate = engagementAndLoyaltyObject.loyalty.mostLoyal
               
               console.log(statistics)
+              this.statistics = statistics
               
             
               
@@ -359,6 +364,7 @@ const app = new Vue({
                 break
               }
             }
+            
             return {
               engagement: {
                 leastEngaged: leastEngaged,

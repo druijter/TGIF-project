@@ -167,12 +167,19 @@
                         <thead>
                             <tr>
                                 <th class="w-25">Party</th>
+                               
                                 <th class="w-25">Number of Reps</th>
                                 <th class="w-25">% Voted with Prty</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            
+                            <tr v-for="partyName in statistics" class="table-row">
+                            <td>{{partyName.overall.party}}</td>
+                            <!-- <td>{{i.numberOfRepresentatives}}</td>
+                            <td>{{i.party}}</td>
+                             -->
+                        </tr>
                         </tbody>
                     </table>
                 </div>
