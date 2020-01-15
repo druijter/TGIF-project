@@ -16,18 +16,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <style>
-        .rep {
-            background: red;
-        }
-
-        .dem {
-            background: green;
-        }
-
-        .ind {
-            background: yellow;
-        }
-
         th {
             width: 20%;
             padding: 5%;
@@ -153,92 +141,74 @@
     <!-- main -->
     <main>
 
-
-
         <div class="pl-5 pr-5">
-            <h3 class="pt-5">Senators</h3>
-            <p>
+            <h2 class="pt-5">Attendance</h2>
+            <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each
+                house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls;
+                thus, in most cases, debates continue even if a majority is not present.</p>
 
-                First convened in 1789, the composition and powers of the Senate are established in Article One of
-                the
-                U.S. Constitution. Each state is represented by two senators, regardless of population, who serve
-                staggered six-year terms. The Senate has several exclusive powers not granted to the House,
-                including
-                consenting to treaties as a precondition to their ratification and consenting to or confirming
-                appointments of Cabinet secretaries, federal judges, other federal executive officials, military
-                officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial
-                of
-                federal officials impeached by the House.
-            </p>
-            <br>
+            <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator
+                stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the
+                most formal matters, as a roll-call of all 435 representatives takes quite some time; normally,
+                members vote by electronic device. In the case of a tie, the motion in question fails. In the
+                Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
         </div>
 
-
-        <div id="app">
-            <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out by
-                    clicking on the fiters:</strong><br></div>
-            <div class="d-flex justify-content-center">
-
-                <label for="republicanFilter">click to filter on republicans</label>
-                <input type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
-                <label for="democratFilter">click to filter on democrats</label>
-                <input type="checkbox" value="democratFilter" v-model="isChecked" name="democratFilter">
-                <label for="independentFilter">click to filter on independents</label>
-                <input type="checkbox" value="independentFilter" v-model="isChecked" name="independentFilter">
-
-
-                <!-- v-model="state" -->
-
-
-                <select v-model="selected">
-                    <option>all</option>
-                    <option v-for="option in states" v-bind:value="option">
-                        {{ option }}
-                    </option>
-                </select>
-
-            </div>
-            <br>
-
-
+        <!--Table container-->
+        <div class="table-responsive">
+            <h2 class="text-center pt-5">Senate at a glance</h2>
             <div class="d-flex justify-content-center pb-5">
-                <table class="table table-hover w-75">
+
+                <table class="table table-striped table-hover w-75 ">
+                    <colgroup>
+
+                    </colgroup>
                     <thead>
-
-                        <tr class="underline">
-                            <th id="thstijl1">
-                                Senator
-                            </th>
-
-                            <th id="thstijl2">
-                                Party
-                            </th>
-                            <th id="thstijl3">
-                                State
-                            </th>
-                            <th id="thstijl4">
-                                Years in office
-                            </th>
-                            <th id="thstijl5">
-                                %votes w/party
-                            </th>
+                        <tr>
+                            <th class="w-25">Party</th>
+                            <th class="w-25">Number of Reps</th>
+                            <th class="w-25">% Voted with Prty</th>
                         </tr>
                     </thead>
-                    <tbody id="table-data">
-                        <tr v-for="member in filteredMembers" class="table-row"
-                            :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
-                            <th scope="row">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}
-                            </th>
-                            <td>{{ member.party}}</td>
-                            <td>{{ member.state}}</td>
-                            <td>{{ member.seniority}}</td>
-                            <td>{{ member.votes_with_party_pct}}</td>
-                        </tr>
-
+                    <tbody>
 
                     </tbody>
                 </table>
             </div>
+
+            <h2 class="text-center">Least Engaged (Bottom 10% Attendance)</h2>
+
+            <div class="d-flex justify-content-center pb-5">
+                <table class="table table-striped table-hover w-75 pt-3">
+                    <thead>
+                        <tr>
+                            <th class="w-25">Name</th>
+                            <th class="w-25">Number of Missed Votes</th>
+                            <th class="w-25"> % Missed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="text-center">Most Engaged (Top 10% Attendance)</h2>
+            <div class="d-flex justify-content-center pb-5">
+                <table class="table table-striped table-hover w-75 ">
+                    <thead>
+                        <tr>
+                            <th class="w-25">Name</th>
+                            <th class="w-25">Number of Missed Votes</th>
+                            <th class="w-25">% Missed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     </main>

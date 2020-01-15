@@ -1,5 +1,8 @@
 let url = "https://api.propublica.org/congress/v1/113/senate/members.json"
 
+let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
+let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
+
 
 const app = new Vue({
     el: "#app",
@@ -14,7 +17,19 @@ const app = new Vue({
 
     },
     created() {
-        this.fetchData()
+        let windowLocation = window.location.href
+
+        if (windowLocation.includes("house")) {
+          console.log("test")
+          this.fetchData(houseUrl)
+        }
+        if (windowLocation.includes("senate")) {
+          console.log("test")
+          this.fetchData(senateUrl)
+        }
+        
+
+        
 
     },
 
@@ -25,7 +40,7 @@ const app = new Vue({
             let filteredMembersArray = []
             console.log(this.selected)
             for (i = 0; i < members.length; i++) {
-                
+
                 if (this.selected === members[i].state || this.selected === "all") {
 
 
@@ -102,7 +117,7 @@ const app = new Vue({
 
 
 
-        async fetchData() {
+        async fetchData(url) {
 
             this.members = await fetch(url, {
                     method: 'GET',
