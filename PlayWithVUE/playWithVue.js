@@ -23,10 +23,11 @@ const app = new Vue({
 
             let members = this.members
             let filteredMembersArray = []
-
+            console.log(this.selected)
             for (i = 0; i < members.length; i++) {
-                if (this.selected === members[i].state || this.selected !== "all") {
-                    
+                
+                if (this.selected === members[i].state || this.selected === "all") {
+
 
                     if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
                         filteredMembersArray.push(members[i])
@@ -45,8 +46,8 @@ const app = new Vue({
                     }
 
                 }
-                console.log(this.selected)
-                
+
+
             }
             return filteredMembersArray;
         },
@@ -67,45 +68,6 @@ const app = new Vue({
 
         },
 
-        filter() {
-
-
-
-
-
-            let members = this.members
-            let filteredMembersArray = []
-
-
-            for (i = 0; i < members.length; i++) {
-
-
-                if (members[i].party === "R" && this.isChecked.includes("republicanFilter")) {
-                    filteredMembersArray.push(members[i])
-
-
-                }
-                if (members[i].party === "D" && this.isChecked.includes("democratFilter")) {
-                    filteredMembersArray.push(members[i])
-
-
-                }
-                if (members[i].party === "I" && this.isChecked.includes("independentFilter")) {
-                    filteredMembersArray.push(members[i])
-
-                }
-
-            }
-
-
-            this.filteredMembers = filteredMembersArray
-
-
-
-
-
-
-        },
 
         createDropdowns() {
             let members = this.members
