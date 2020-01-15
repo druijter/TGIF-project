@@ -224,10 +224,13 @@
                             </th>
                         </tr>
                     </thead>
+
+                    <!-- {{member.url}} -->
+
                     <tbody id="table-data">
                         <tr v-for="member in filteredMembers" class="table-row"
                             :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
-                            <th scope="row">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}
+                            <th scope="row"><a v-bind:href="member.url">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}</a>
                             </th>
                             <td>{{ member.party}}</td>
                             <td>{{ member.state}}</td>
