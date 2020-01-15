@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <title>Play around with VUE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .rep {
+            background: red;
+        }
+
+        .dem {
+            background: green;
+        }
+
+        .ind {
+            background: yellow;
+        }
+
+        th {
+            width: 20%;
+            padding: 5%;
+        }
+
+        label {
+            margin-right: 2%;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm bg-info navbar-light">
+        <div>
+            <div>
+                <a class="navbar-brand" href="#"><img alt="logo" style="width:80px;"
+                        src="/home/daan/Desktop/Ubiqum/tgifVUE/transparency.jpg">tgif</a>
+            </div>
+
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown"><a class="nav-link"
+                        href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/home.html">Home</a></li>
+
+                <li>
+
+
+                    <!-- Congress 113 -->
+                    <ul class="navbar-nav">
+
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#link1" id="navbardrop" data-toggle="dropdown">
+                                Congress 113
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/senate-dataVUE.html">Senate</a>
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/house-dataVUE.html">House</a>
+
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </li>
+
+
+                <!-- attendence -->
+
+                <li>
+
+
+
+                    <ul class="navbar-nav">
+
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#link1" id="navbardrop" data-toggle="dropdown">
+                                Attendance
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/senate-attendanceVUE.html">Senate</a>
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/house-attendanceVUE.html">House</a>
+
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </li>
+
+
+                <!-- party loyalty -->
+
+
+                <li>
+
+
+
+                    <ul class="navbar-nav">
+
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#link1" id="navbardrop" data-toggle="dropdown">
+                                Party loyalty
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/senate-party-loyaltyVUE.html">Senate</a>
+                                <a class="nav-link"
+                                    href="/home/daan/Desktop/Ubiqum/tgifVUE/PlayWithVUE/house-party-loyaltyVUE.html">House</a>
+
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </li>
+
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- main -->
+    <main id="mainContent">
+
+
+
+        <div class="pl-5 pr-5">
+            <h3 class="pt-5">Senators</h3>
+            <p>
+
+                First convened in 1789, the composition and powers of the Senate are established in Article One of
+                the
+                U.S. Constitution. Each state is represented by two senators, regardless of population, who serve
+                staggered six-year terms. The Senate has several exclusive powers not granted to the House,
+                including
+                consenting to treaties as a precondition to their ratification and consenting to or confirming
+                appointments of Cabinet secretaries, federal judges, other federal executive officials, military
+                officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial
+                of
+                federal officials impeached by the House.
+            </p>
+            <br>
+        </div>
+
+
+        <div id="app">
+            <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out by
+                    clicking on the fiters:</strong><br></div>
+            <div class="d-flex justify-content-center">
+
+                <label for="republicanFilter">click to filter on republicans</label>
+                <input type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
+                <label for="democratFilter">click to filter on democrats</label>
+                <input type="checkbox" value="democratFilter" v-model="isChecked" name="democratFilter">
+                <label for="independentFilter">click to filter on independents</label>
+                <input type="checkbox" value="independentFilter" v-model="isChecked" name="independentFilter">
+
+
+                <!-- v-model="state" -->
+
+
+                <select v-model="selected">
+                    <option>all</option>
+                    <option v-for="option in states" v-bind:value="option">
+                        {{ option }}
+                    </option>
+                </select>
+
+            </div>
+            <br>
+
+
+            <div class="d-flex justify-content-center pb-5">
+                <table class="table table-hover w-75">
+                    <thead>
+
+                        <tr class="underline">
+                            <th id="thstijl1">
+                                Senator
+                            </th>
+
+                            <th id="thstijl2">
+                                Party
+                            </th>
+                            <th id="thstijl3">
+                                State
+                            </th>
+                            <th id="thstijl4">
+                                Years in office
+                            </th>
+                            <th id="thstijl5">
+                                %votes w/party
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-data">
+                        <tr v-for="member in filteredMembers" class="table-row"
+                            :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
+                            <th scope="row">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}
+                            </th>
+                            <td>{{ member.party}}</td>
+                            <td>{{ member.state}}</td>
+                            <td>{{ member.seniority}}</td>
+                            <td>{{ member.votes_with_party_pct}}</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="panel-default bg-primary ">
+
+        <div class="text-center well">
+            <span class="glyphicon glyphicon-copyright-mark"></span> tgifVUE 2019 | All rights Reserved
+        </div>
+
+    </footer>
+    <!-- Footer -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="tablelogicVUE.js"></script>
+
+
+
+
+
+
+</body>
+
+
+</html>
