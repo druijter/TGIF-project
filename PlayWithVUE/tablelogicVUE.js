@@ -21,7 +21,7 @@ const app = new Vue({
         democrats: [],
         independents: [],
         overallVoteStatistics: [],
-        statistics: []
+        statistics: {}
 
 
     },
@@ -37,7 +37,7 @@ const app = new Vue({
             this.fetchData(senateUrl)
         }
 
-        
+
 
 
     },
@@ -76,7 +76,7 @@ const app = new Vue({
             return filteredMembersArray;
         },
 
-       
+
 
 
     },
@@ -84,107 +84,110 @@ const app = new Vue({
 
     methods: {
         executeAttendanceAndLoyaltyFunctions() {
-            
 
 
-                //define some global variables//
-                let senateMembersStatistics = this.members
-              
-              
-                let republicans = []
-                let democrats = []
-                let independents = []
-                let overallVoteStatistics = []
-              
-                let partyMembersObject = this.extractPartyMembers(republicans, democrats, independents)
-                console.log(partyMembersObject)
-              
-              
-                const overallVoteStatisticsObject = this.getOverallVoteStatistics(overallVoteStatistics, senateMembersStatistics)
-              
-              
-              
-                let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
-                  return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
-                })
-              
-              
-              
-              
-              
-                //create most engaged object//
-              
-                let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(function (a, b) {
-                  return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
-                })
-              
-              
-              
-                const percentage = 0.10 * senateMembersStatistics.length
-              
-                let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
-              
-                let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
-              
-                let engagementAndLoyaltyObject = this.returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes)
-              
-              
-              
-                //get overall loyalty statistics
-              
-                this.getOverallLoyaltyStatistics(senateMembersStatistics)
-              
-      
 
-                let statistics = {}
-              
-              console.log(partyMembersObject.democrats.length)
-                statistics.overall = {
-                    party: [
-                      "democrats", "republicans", "independents"  
-                    ],
-              
-                  numberOfRepresentatives: [
-                    partyMembersObject.democrats.length,
-                    partyMembersObject.republicans.length,
-                    partyMembersObject.independents.length
-                  ],
+            //define some global variables//
+            let senateMembersStatistics = this.members
+
+
+            let republicans = []
+            let democrats = []
+            let independents = []
+            let overallVoteStatistics = []
+
+            let partyMembersObject = this.extractPartyMembers(republicans, democrats, independents)
+            console.log(partyMembersObject)
+
+
+            const overallVoteStatisticsObject = this.getOverallVoteStatistics(overallVoteStatistics, senateMembersStatistics)
+
+
+
+            let sortedOnMissedVotesDescending = [...overallVoteStatisticsObject].sort(function (a, b) {
+                return parseFloat(b.missedVotesNum) - parseFloat(a.missedVotesNum);
+            })
+
+
+            console.log(sortedOnMissedVotesDescending)
+
+
+            //create most engaged object//
+
+            let sortedOnMissedVotesAscending = [...overallVoteStatisticsObject].sort(function (a, b) {
+                return parseFloat(a.missedVotesNum) - parseFloat(b.missedVotesNum);
+            })
+
+
+
+            const percentage = 0.10 * senateMembersStatistics.length
+
+            let lastPersonMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage)].missedVotesNum
+
+            let firstPersonOutMissedVotes = sortedOnMissedVotesAscending[Math.round(percentage + 1)].missedVotesNum
+
+            let engagementAndLoyaltyObject = this.returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes)
+
+
+
+            //get overall loyalty statistics
+
+            this.getOverallLoyaltyStatistics(senateMembersStatistics)
+
+
+
+            let statistics = {}
+
+            console.log(partyMembersObject.democrats.length)
+            statistics.glanceTable = [{
+                    party: "democrats",
+                    numberOfRepresentatives: partyMembersObject.democrats.length,
+                    votedWithParty: this.calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1)
+                },
+                {
+                    party: "republicans",
+                    numberOfRepresentatives: partyMembersObject.republicans.length,
+                    votedWithParty: this.calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1)
+                },
+                {
+                    party: "democrats",
+                    numberOfRepresentatives: partyMembersObject.independents.length,
+                    votedWithParty: this.calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
                 }
-              
-                
-              
-                statistics.votedWithParty = [
-                    this.calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1),
-                    this.calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1),
-                    this.calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
-                  ],
-              
-                  statistics.missedVotePerParty = [
-                    this.calculateAveragePerParty(democrats, "missed_votes_pct"),
-                    this.calculateAveragePerParty(republicans, "missed_votes_pct"),
-                    this.calculateAveragePerParty(independents, "missed_votes_pct")
-                  ]
-              
-              
-              
-                statistics.leastEngaged = engagementAndLoyaltyObject.engagement.leastEngaged
-              
-                statistics.mostEngaged = engagementAndLoyaltyObject.engagement.mostEngaged
-              
-                statistics.leastLoyalSenate = engagementAndLoyaltyObject.loyalty.leastLoyal
-              
-                statistics.mostLoyalSenate = engagementAndLoyaltyObject.loyalty.mostLoyal
-              
-              console.log(statistics)
-              this.statistics = statistics
-              
-            
-              
-              
+            ]
+
+
+
+            console.log(statistics.glanceTable)
+
+
+            statistics.missedVotePerParty = [
+                this.calculateAveragePerParty(democrats, "missed_votes_pct"),
+                this.calculateAveragePerParty(republicans, "missed_votes_pct"),
+                this.calculateAveragePerParty(independents, "missed_votes_pct")
+            ]
+
+
+
+            statistics.leastEngaged = engagementAndLoyaltyObject.engagement.leastEngaged
+            console.log(statistics.leastEngaged)
+
+            statistics.mostEngaged = engagementAndLoyaltyObject.engagement.mostEngaged
+
+            statistics.leastLoyal = engagementAndLoyaltyObject.loyalty.leastLoyal
+
+            statistics.mostLoyal = engagementAndLoyaltyObject.loyalty.mostLoyal
+
+            console.log(statistics)
+            this.statistics = statistics
+
+
+
+
             // this.extractPartyMembers()
             // this.calculateAveragePerParty()
-            
-            
+
+
             // let members = this.members
             // console.log(members)
             // let test = []
@@ -233,31 +236,31 @@ const app = new Vue({
         extractPartyMembers() {
             // console.log(republicans)
 
-            let republicans =[]
-            let democrats =[]
-              let independents =[]
+            let republicans = []
+            let democrats = []
+            let independents = []
 
             let senateMembers = this.members
             for (i = 0; i < senateMembers.length; i++) {
-          
-          
-              if (senateMembers[i].party === "R")
-                republicans.push(senateMembers[i])
-          
-              if (senateMembers[i].party === "D")
-                democrats.push(senateMembers[i])
-          
-              if (senateMembers[i].party === "I")
-                independents.push(senateMembers[i])
-          
+
+
+                if (senateMembers[i].party === "R")
+                    republicans.push(senateMembers[i])
+
+                if (senateMembers[i].party === "D")
+                    democrats.push(senateMembers[i])
+
+                if (senateMembers[i].party === "I")
+                    independents.push(senateMembers[i])
+
             }
             return {
-              republicans,
-              democrats,
-              independents
-          
+                republicans,
+                democrats,
+                independents
+
             }
-          },
+        },
 
         // //general function to calculate the average per party//
         calculateAveragePerParty(partyTypeArray, datatype) {
@@ -318,64 +321,68 @@ const app = new Vue({
         returnEngagement(senateMembersStatistics, sortedOnMissedVotesDescending, sortedOnMissedVotesAscending, percentage, lastPersonMissedVotes) {
 
             let overallLoyaltyStatisticsObject = this.getOverallLoyaltyStatistics(senateMembersStatistics)
-          
-          
+
+
             //now sort the array ascending and descending//
             let sortedOnVotesNumAscending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-              return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
+                return parseFloat(a.partyVotesNum) - parseFloat(b.partyVotesNum);
             })
-          
+
             let sortedOnVotesNumDescending = [...overallLoyaltyStatisticsObject].sort(function (a, b) {
-              return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
+                return parseFloat(b.partyVotesNum) - parseFloat(a.partyVotesNum);
             })
-          
+
             let leastEngaged = [...sortedOnMissedVotesDescending].slice(0, (Math.round(percentage + 1)))
+            console.log(sortedOnMissedVotesDescending)
+
+
             let mostEngaged = [...sortedOnMissedVotesAscending].slice(0, (Math.round(percentage + 1)))
-          
+
             //variables for party loyalty//
             let leastLoyal = [...sortedOnVotesNumAscending].slice(0, (Math.round(percentage + 1)))
             let mostLoyal = [...sortedOnVotesNumDescending].slice(0, (Math.round(percentage + 1)))
-          
+
             for (i = (Math.round(percentage) + 1); i < senateMembersStatistics.length - (Math.round(percentage)); i++) {
-              if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
-          
-                leastEngaged.push({
-                  "name": `${sortedOnMissedVotesDescending[i].name}`,
-                  "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
-                  "missedPct": sortedOnMissedVotesDescending[i].missedPct
-                })
-                mostEngaged.push({
-                  "name": `${sortedOnMissedVotesAscending[i].name}`,
-                  "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
-                  "missedPct": sortedOnMissedVotesAscending[i].missedPct
-                })
-                mostLoyal.push({
-                  "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-                  "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-                  "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
-                })
-                leastLoyal.push({
-                  "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
-                  "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
-                  "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
-                })
-          
-              } else {
-                break
-              }
+                if (lastPersonMissedVotes === sortedOnMissedVotesAscending[i].missedVotesNum) {
+
+                    leastEngaged.push({
+                        "name": `${sortedOnMissedVotesDescending[i].name}`,
+                        "missedVotesNum": sortedOnMissedVotesDescending[i].missedVotesNum,
+                        "missedPct": sortedOnMissedVotesDescending[i].missedPct
+                    })
+                    mostEngaged.push({
+                        "name": `${sortedOnMissedVotesAscending[i].name}`,
+                        "missedVotesNum": sortedOnMissedVotesAscending[i].missedVotesNum,
+                        "missedPct": sortedOnMissedVotesAscending[i].missedPct
+                    })
+                    mostLoyal.push({
+                        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+                        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+                        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct.toFixed(1)
+                    })
+                    leastLoyal.push({
+                        "name": `${senateMembersStatistics[i].first_name} ${(senateMembersStatistics[i].middle_name || " ")}  ${senateMembersStatistics[i].last_name}`,
+                        "partyVotesNum": `${((senateMembersStatistics[i].votes_with_party_pct)/100)*senateMembersStatistics[i].total_votes}`,
+                        "partyVotesPct": senateMembersStatistics[i].votes_with_party_pct
+                    })
+
+
+                } else {
+                    break
+                }
             }
-            
+
             return {
-              engagement: {
-                leastEngaged: leastEngaged,
-                mostEngaged: mostEngaged
-              },
-              loyalty: {
-                leastLoyal: leastLoyal,
-                mostLoyal: mostLoyal
-              }
+                engagement: {
+                    leastEngaged: leastEngaged,
+                    mostEngaged: mostEngaged
+                },
+                loyalty: {
+                    leastLoyal: leastLoyal,
+                    mostLoyal: mostLoyal
+                }
             }
-          },
+        },
 
         //Fetch the data from the Propublica website//
         async fetchData(url) {

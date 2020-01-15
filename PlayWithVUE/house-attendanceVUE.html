@@ -154,63 +154,82 @@
                 Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
         </div>
 
+
         <div id="app">
-        <!--Table container-->
-        <div class="table-responsive">
-            <h2 class="text-center pt-5">Senate at a glance</h2>
-            <div class="d-flex justify-content-center pb-5">
+            <!--Table container-->
+            <div class="table-responsive">
+                <h2 class="text-center pt-5">Senate at a glance</h2>
+                <div class="d-flex justify-content-center pb-5">
 
-                <table class="table table-striped table-hover w-75 ">
-                    <colgroup>
+                    <table class="table table-striped table-hover w-75 ">
+                        <colgroup>
 
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th class="w-25">Party</th>
-                            <th class="w-25">Number of Reps</th>
-                            <th class="w-25">% Voted with Prty</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="w-25">Party</th>
 
-                    </tbody>
-                </table>
+                                <th class="w-25">Number of Reps</th>
+                                <th class="w-25">% Voted with Prty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr v-for="glance in statistics.glanceTable" class="table-row">
+                                <td>{{glance.party}}</td>
+                                <td>{{glance.numberOfRepresentatives}}</td>
+                                <td>{{glance.votedWithParty}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 class="text-center">Least Engaged (Bottom 10% Attendance)</h2>
+
+                <div class="d-flex justify-content-center pb-5">
+                    <table class="table table-striped table-hover w-75 pt-3">
+                        <thead>
+                            <thead>
+                                <tr>
+                                    <th class="w-25">Name</th>
+                                    <th class="w-25">Number of Missed Votes</th>
+                                    <th class="w-25"> % Missed</th>
+                                </tr>
+                            </thead>
+
+                        </thead>
+                        <tbody>
+                            <tr v-for="leastEngaged in statistics.leastEngaged" class="table-row">
+                                <td>{{leastEngaged.name}}</td>
+                                <td>{{leastEngaged.missedVotesNum}}</td>
+                                <td>{{leastEngaged.missedPct}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 class="text-center">Most Engaged (Top 10% Attendance)</h2>
+                <div class="d-flex justify-content-center pb-5">
+                    <table class="table table-striped table-hover w-75 ">
+                        <thead>
+                            <tr>
+                                <th class="w-25">Name</th>
+                                <th class="w-25">Number of Missed Votes</th>
+                                <th class="w-25">% Missed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="mostEngaged in statistics.mostEngaged" class="table-row">
+                                <td>{{mostEngaged.name}}</td>
+                                <td>{{mostEngaged.missedVotesNum}}</td>
+                                <td>{{mostEngaged.missedPct}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <h2 class="text-center">Least Engaged (Bottom 10% Attendance)</h2>
-
-            <div class="d-flex justify-content-center pb-5">
-                <table class="table table-striped table-hover w-75 pt-3">
-                    <thead>
-                        <tr>
-                            <th class="w-25">Name</th>
-                            <th class="w-25">Number of Missed Votes</th>
-                            <th class="w-25"> % Missed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 class="text-center">Most Engaged (Top 10% Attendance)</h2>
-            <div class="d-flex justify-content-center pb-5">
-                <table class="table table-striped table-hover w-75 ">
-                    <thead>
-                        <tr>
-                            <th class="w-25">Name</th>
-                            <th class="w-25">Number of Missed Votes</th>
-                            <th class="w-25">% Missed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
         </div>
     </main>
 
