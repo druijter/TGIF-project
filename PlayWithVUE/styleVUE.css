@@ -11,6 +11,15 @@ body {
     text-align: center;
 }
 
+#nodatashown {
+    background-color:red;
+    color: white;
+    font-size: 32px;
+    padding-top: 10vh;
+    height: 100vh;
+    text-align: center;
+}
+
 a {
     color: black;
 }

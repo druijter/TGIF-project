@@ -200,9 +200,6 @@
                     <input type="checkbox" id="independentFilter" value="independentFilter" v-model="isChecked" name="independentFilter">
 
 
-                    <!-- v-model="state" -->
-
-
                     <select v-model="selected">
                         <option>all</option>
                         <option v-for="option in states" v-bind:value="option">
@@ -238,9 +235,12 @@
                             </tr>
                         </thead>
 
-                        <!-- {{member.url}} -->
+                    
 
                         <tbody id="table-data">
+
+                            
+
                             <tr v-for="member in filteredMembers" class="table-row"
                                 :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
                                 <th scope="row"><a v-bind:href="member.url">{{ member.first_name}}
@@ -251,12 +251,18 @@
                                 <td>{{ member.seniority}}</td>
                                 <td>{{ member.votes_with_party_pct}}</td>
                             </tr>
-
+                            
 
                         </tbody>
                     </table>
+                   
                 </div>
-        
+
+                
+                <empty-table v-if="nodata">
+                
+              
+                </empty-table>
         
     </div>
     </main>

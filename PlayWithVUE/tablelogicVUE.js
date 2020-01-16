@@ -7,6 +7,10 @@ Vue.component('loading-screen', {
     template: '<div id="loading">Loading...</div>'
   })
 
+  Vue.component('empty-table', {
+    template: '<div id="nodatashown">No members shown.</div>'
+  })
+
 const app = new Vue({
     el: "#app",
     data: {
@@ -19,6 +23,7 @@ const app = new Vue({
         selected: "all",
         test: [],
         isLoading: true,
+        nodata: false,
 
         //global variables necessary for the attendance and loyalty functions//
         republicans: [],
@@ -52,6 +57,7 @@ const app = new Vue({
 
     computed: {
         filteredMembers() {
+            this.nodataFunction()
 
             let members = this.members
             let filteredMembersArray = []
@@ -86,7 +92,6 @@ const app = new Vue({
 
 
 
-
     },
 
 
@@ -95,9 +100,9 @@ const app = new Vue({
     
     {
         showLoader (situation){
-            console.log("hi")  
+              
             this.isLoading = situation
-            console.log(situation)  
+             
           },
         executeAttendanceAndLoyaltyFunctions() {
 
@@ -254,7 +259,7 @@ const app = new Vue({
 
 
         extractPartyMembers() {
-            // console.log(republicans)
+            
 
             let republicans = []
             let democrats = []
@@ -404,6 +409,19 @@ const app = new Vue({
                 }
             }
         },
+
+        //add a loader for empty senate and house tables//
+        nodataFunction(){
+            this.nodata = false
+            console.log("hisdsdsd")
+            console.log(this.isChecked.includes("republicanFilter"), this.isChecked.includes("democratFilter"), this.isChecked.includes("independentFilter"))
+            
+
+            if (this.isChecked.includes("democratFilter")===false&&this.isChecked.includes("republicanFilter")===false&&this.isChecked.includes("independentFilter")===false){
+                console.log("afkfhdflkdhlfkslhj")
+                this.nodata = true
+        }
+    },
 
         //Fetch the data from the Propublica website//
         async fetchData(url) {

@@ -198,7 +198,7 @@
                 <input type="checkbox" value="independentFilter" v-model="isChecked" name="independentFilter">
 
 
-                <!-- v-model="state" -->
+           
 
 
                 Filter on state<select v-model="selected">
@@ -237,8 +237,9 @@
                     <tbody id="table-data">
                         <tr v-for="member in filteredMembers" class="table-row"
                             :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
-                            <th scope="row">{{ member.first_name}} {{(member.middle_name || "")}}
-                                {{ member.last_name }}</th>
+                            <th scope="row"><a v-bind:href="member.url">{{ member.first_name}}
+                                {{(member.middle_name || "")}} {{ member.last_name }}</a>
+                        </th>
                             <td>{{ member.party}}</td>
                             <td>{{ member.state}}</td>
                             <td>{{ member.seniority}}</td>
@@ -249,8 +250,12 @@
                     </tbody>
                 </table>
             </div>
+            <!-- add a loader for empty senate and house tables -->
 
-            <!-- </loading-screen> -->
+            <empty-table v-if="nodata">
+                
+              
+            </empty-table>
         </div>
     </main>
 
