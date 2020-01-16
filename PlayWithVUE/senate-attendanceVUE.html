@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleVUE.css">
 
     <style>
         th {
@@ -155,6 +156,11 @@
         </div>
 
         <div id="app">
+            <!-- Add a loader -->
+            <loading-screen v-if="isLoading">
+
+
+            </loading-screen>
             <!--Table container-->
             <div class="table-responsive">
                 <h2 class="text-center pt-5">Senate at a glance</h2>
@@ -167,18 +173,18 @@
                         <thead>
                             <tr>
                                 <th class="w-25">Party</th>
-                               
+
                                 <th class="w-25">Number of Reps</th>
                                 <th class="w-25">% Voted with Prty</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             <tr v-for="glance in statistics.glanceTable" class="table-row">
-                            <td>{{glance.party}}</td>
-                            <td>{{glance.numberOfRepresentatives}}</td>
-                            <td>{{glance.votedWithParty}}</td>
-                        </tr>
+                                <td>{{glance.party}}</td>
+                                <td>{{glance.numberOfRepresentatives}}</td>
+                                <td>{{glance.votedWithParty}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -195,7 +201,7 @@
                                     <th class="w-25"> % Missed</th>
                                 </tr>
                             </thead>
-                            
+
                         </thead>
                         <tbody>
                             <tr v-for="leastEngaged in statistics.leastEngaged" class="table-row">

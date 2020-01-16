@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+}
+
+#loading {
+    background-color: #63ab97;
+    color: white;
+    font-size: 32px;
+    padding-top: 10vh;
+    height: 100vh;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+.rep {
+    background: red;
+}
+
+.dem {
+    background: green;
+}
+
+.ind {
+    background: yellow;
+}
+
+th {
+    width: 20%;
+    padding: 5%;
+}
+
+label {
+    margin-right: 2%;
+}

@@ -14,29 +14,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleVUE.css">
 
     <style>
-        .rep {
-            background: red;
-        }
-
-        .dem {
-            background: green;
-        }
-
-        .ind {
-            background: yellow;
-        }
-
+     
+     
+     
         th {
             width: 20%;
             padding: 5%;
         }
-
+   
         label {
+            margin-left:0%;
+            margin-right: 0%;
+            margin-bottom:-0.5rem;
+        }
+   
+        input {
             margin-right: 2%;
         }
-    </style>
+   
+        select {
+            margin-left:0%;
+        }
+    
+       </style>
 
 </head>
 
@@ -155,6 +158,8 @@
 
 
 
+
+
         <div class="pl-5 pr-5">
             <h3 class="pt-5">Senators</h3>
             <p>
@@ -175,75 +180,85 @@
 
 
         <div id="app">
-            <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out by
-                    clicking on the fiters:</strong><br></div>
-            <div class="d-flex justify-content-center">
 
-                <label for="republicanFilter">click to filter on republicans</label>
-                <input type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
-                <label for="democratFilter">click to filter on democrats</label>
-                <input type="checkbox" value="democratFilter" v-model="isChecked" name="democratFilter">
-                <label for="independentFilter">click to filter on independents</label>
-                <input type="checkbox" value="independentFilter" v-model="isChecked" name="independentFilter">
+                 <!-- Add a loader -->
+                 <loading-screen v-if="isLoading">
+                
+              
+                </loading-screen>
 
+           
+                <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out
+                        by clicking on the filters:</strong><br></div>
+                <div class="d-flex justify-content-center">
 
-                <!-- v-model="state" -->
-
-
-                <select v-model="selected">
-                    <option>all</option>
-                    <option v-for="option in states" v-bind:value="option">
-                        {{ option }}
-                    </option>
-                </select>
-
-            </div>
-            <br>
+                    <label for="republicanFilter">click to filter on republicans</label>
+                    <input type="checkbox" id="republicanFilter" value="republicanFilter" v-model="isChecked" name="republicanFilter">
+                    <label for="democratFilter">click to filter on democrats</label>
+                    <input type="checkbox" id="democratFilter" value="democratFilter" v-model="isChecked" name="democratFilter">
+                    <label for="independentFilter">click to filter on independents</label>
+                    <input type="checkbox" id="independentFilter" value="independentFilter" v-model="isChecked" name="independentFilter">
 
 
-            <div class="d-flex justify-content-center pb-5">
-                <table class="table table-hover w-75">
-                    <thead>
-
-                        <tr class="underline">
-                            <th id="thstijl1">
-                                Senator
-                            </th>
-
-                            <th id="thstijl2">
-                                Party
-                            </th>
-                            <th id="thstijl3">
-                                State
-                            </th>
-                            <th id="thstijl4">
-                                Years in office
-                            </th>
-                            <th id="thstijl5">
-                                %votes w/party
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <!-- {{member.url}} -->
-
-                    <tbody id="table-data">
-                        <tr v-for="member in filteredMembers" class="table-row"
-                            :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
-                            <th scope="row"><a v-bind:href="member.url">{{ member.first_name}} {{(member.middle_name || "")}} {{ member.last_name }}</a>
-                            </th>
-                            <td>{{ member.party}}</td>
-                            <td>{{ member.state}}</td>
-                            <td>{{ member.seniority}}</td>
-                            <td>{{ member.votes_with_party_pct}}</td>
-                        </tr>
+                    <!-- v-model="state" -->
 
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <select v-model="selected">
+                        <option>all</option>
+                        <option v-for="option in states" v-bind:value="option">
+                            {{ option }}
+                        </option>
+                    </select>
 
+                </div>
+                <br>
+
+
+                <div class="d-flex justify-content-center pb-5">
+                    <table class="table table-hover w-75">
+                        <thead>
+
+                            <tr class="underline">
+                                <th id="thstijl1">
+                                    Senator
+                                </th>
+
+                                <th id="thstijl2">
+                                    Party
+                                </th>
+                                <th id="thstijl3">
+                                    State
+                                </th>
+                                <th id="thstijl4">
+                                    Years in office
+                                </th>
+                                <th id="thstijl5">
+                                    %votes w/party
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <!-- {{member.url}} -->
+
+                        <tbody id="table-data">
+                            <tr v-for="member in filteredMembers" class="table-row"
+                                :class="{rep : member.party == 'R', dem : member.party == 'D', ind : member.party == 'I'}">
+                                <th scope="row"><a v-bind:href="member.url">{{ member.first_name}}
+                                        {{(member.middle_name || "")}} {{ member.last_name }}</a>
+                                </th>
+                                <td>{{ member.party}}</td>
+                                <td>{{ member.state}}</td>
+                                <td>{{ member.seniority}}</td>
+                                <td>{{ member.votes_with_party_pct}}</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+        
+        
+    </div>
     </main>
 
     <!-- Footer -->

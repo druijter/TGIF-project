@@ -3,6 +3,9 @@ let url = "https://api.propublica.org/congress/v1/113/senate/members.json"
 let senateUrl = "https://api.propublica.org/congress/v1/113/senate/members.json";
 let houseUrl = "https://api.propublica.org/congress/v1/113/house/members.json"
 
+Vue.component('loading-screen', {
+    template: '<div id="loading">Loading...</div>'
+  })
 
 const app = new Vue({
     el: "#app",
@@ -15,6 +18,7 @@ const app = new Vue({
         states: [],
         selected: "all",
         test: [],
+        isLoading: true,
 
         //global variables necessary for the attendance and loyalty functions//
         republicans: [],
@@ -25,6 +29,10 @@ const app = new Vue({
 
 
     },
+  
+       
+          
+   
     created() {
         let windowLocation = window.location.href
 
@@ -82,7 +90,15 @@ const app = new Vue({
     },
 
 
-    methods: {
+    methods: 
+       
+    
+    {
+        showLoader (situation){
+            console.log("hi")  
+            this.isLoading = situation
+            console.log(situation)  
+          },
         executeAttendanceAndLoyaltyFunctions() {
 
 
@@ -95,7 +111,7 @@ const app = new Vue({
             let democrats = []
             let independents = []
             let overallVoteStatistics = []
-
+            
             let partyMembersObject = this.extractPartyMembers(republicans, democrats, independents)
             console.log(partyMembersObject)
 
@@ -134,15 +150,19 @@ const app = new Vue({
 
             this.getOverallLoyaltyStatistics(senateMembersStatistics)
 
-
+             democrats = this.extractPartyMembers().democrats
+             republicans = this.extractPartyMembers().republicans
+             independents = this.extractPartyMembers().independents
 
             let statistics = {}
 
-            console.log(partyMembersObject.democrats.length)
+            console.log(this.democrats)
             statistics.glanceTable = [{
+
                     party: "democrats",
                     numberOfRepresentatives: partyMembersObject.democrats.length,
                     votedWithParty: this.calculateAveragePerParty(democrats, "votes_with_party_pct").toFixed(1)
+                    
                 },
                 {
                     party: "republicans",
@@ -150,7 +170,7 @@ const app = new Vue({
                     votedWithParty: this.calculateAveragePerParty(republicans, "votes_with_party_pct").toFixed(1)
                 },
                 {
-                    party: "democrats",
+                    party: "independents",
                     numberOfRepresentatives: partyMembersObject.independents.length,
                     votedWithParty: this.calculateAveragePerParty(independents, "votes_with_party_pct").toFixed(1)
                 }
@@ -276,6 +296,7 @@ const app = new Vue({
             }
 
             let average = total / (partyTypeArray.length)
+            console.log(average, total, partyTypeArray.length)
 
             total = null
             if (!isNaN(average)) {
@@ -386,7 +407,7 @@ const app = new Vue({
 
         //Fetch the data from the Propublica website//
         async fetchData(url) {
-
+            this.showLoader(true)
             this.members = await fetch(url, {
                     method: 'GET',
                     withCredentials: true,
@@ -396,12 +417,15 @@ const app = new Vue({
                         'Content-Type': 'application/json'
                     }
                 })
-                .then(response => response.json())
+                .then(response => response.json()
+                
+                )
+              
                 .then(data => {
                     return data.results[0].members
                 })
                 .catch(error => console.log(error))
-
+                  this.showLoader(false)
             this.createDropdowns()
             this.executeAttendanceAndLoyaltyFunctions()
 

@@ -14,33 +14,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="styleVUE.css">
     <style>
-        .rep {
-            background: red;
-        }
+     
+     
+     
+     th {
+         width: 20%;
+         padding: 5%;
+     }
 
-        .dem {
-            background: green;
-        }
+     label {
+         margin-left:0%;
+         margin-right: 0%;
+         margin-bottom:-0.5rem;
+     }
 
-        .ind {
-            background: yellow;
-        }
+     input {
+         margin-right: 2%;
+     }
 
-        th {
-            width: 20%;
-            padding: 5%;
-        }
-
-        label {
-            margin-right: 2%;
-        }
+     select {
+         margin-left:0%;
+     }
+ 
     </style>
-
 </head>
 
-
+  
 
 <body>
     <!-- navbar -->
@@ -178,23 +179,30 @@
 
 
         <div id="app">
+
+            <!-- Add a loader -->
+            <loading-screen v-if="isLoading">
+
+
+            </loading-screen>
+            <!-- <loading-screen v-if="!isLoading"> -->
             <div class="d-flex justify-content-center"> <strong>Filter the table per party or filter some group out by
-                    clicking on the fiters:</strong><br></div>
+                    clicking on the filters:</strong><br></div>
             <div class="d-flex justify-content-center">
 
-                <label for="republicanFilter">click to filter on republicans</label>
+                click to filter on republicans<label for="republicanFilter"></label>
                 <input type="checkbox" value="republicanFilter" v-model="isChecked" name="republicanFilter">
-                <label for="democratFilter">click to filter on democrats</label>
+                click to filter on democrats<label for="democratFilter"></label>
                 <input type="checkbox" value="democratFilter" v-model="isChecked" name="democratFilter">
-                <label for="independentFilter">click to filter on independents</label>
+                click to filter on independents<label for="independentFilter"></label>
                 <input type="checkbox" value="independentFilter" v-model="isChecked" name="independentFilter">
 
 
                 <!-- v-model="state" -->
 
 
-                <select v-model="selected">
-                    <option>all</option>
+                Filter on state<select v-model="selected">
+                      <option>all</option>
                     <option v-for="option in states" v-bind:value="option">
                         {{ option }}
                     </option>
@@ -241,10 +249,11 @@
                     </tbody>
                 </table>
             </div>
-        </div>
 
+            <!-- </loading-screen> -->
+        </div>
     </main>
-    
+
     <!-- Footer -->
     <footer class="panel-default bg-primary ">
 
